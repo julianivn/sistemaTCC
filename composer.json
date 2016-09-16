@@ -8,5 +8,7 @@
             "email": "edersoares@me.com"
         }
     ],
-    "require": {}
+    "require": {
+        "silex/silex": "~2.0"
+    }
 }
