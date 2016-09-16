@@ -13,23 +13,17 @@ $app = new Silex\Application();
 // ATENÇÃO: utilizar apenas em ambiente de desenvolvimento
 $app['debug'] = true;
 
+// Registrando serviços
+$app->register(new Silex\Provider\TwigServiceProvider(), ['twig.path' => __DIR__ . '/../src/View/']);
+
 // Define a rota para a raiz do site quando o método for GET
-$app->get('/', function () {
-    return "sistemaTCC\n";
+$app->get('/', function () use ($app) {
+    return $app['twig']->render('index.twig');
 });
 
 // Exemplos de rotas
-$app->get('/creditos/', function () {
-    return "Créditos: Alunos do Curso de Ciência da Computação\n";
-});
-$app->get('/aluno/{nome}/', function ($nome) {
-    return "O nome do aluno é {$nome}\n";
-});
-$app->get('/login/', function () {
-    return "Login\n";
-});
-$app->post('/login/', function (Request $request) {
-    return new Response('Obrigado pela visita: ' . $request->get('nome') . "\n", 201);
+$app->get('/creditos/', function (Silex\Application $app) {
+    return $app['twig']->render('creditos.twig');
 });
 
 // Dispara a aplicação
