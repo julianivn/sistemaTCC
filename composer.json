@@ -1,0 +1,12 @@
+{
+    "name": "ulbra-gravatai/sistema-tcc",
+    "description": "Sistema para Controle e Acompanhamento de Trabalhos de Conclusão de Curso",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Eder Soares",
+            "email": "edersoares@me.com"
+        }
+    ],
+    "require": {}
+}
