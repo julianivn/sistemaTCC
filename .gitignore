@@ -1,3 +1,4 @@
 /doc/eder/
 /composer.lock
 /vendor/
+.DS_Store

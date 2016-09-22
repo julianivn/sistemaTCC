@@ -1,0 +1,148 @@
+/* MENU BARS */
+
+.navbar-system .btn-hamburguer {
+    cursor: pointer;
+    padding: 37px 0;
+    display: inline-block;
+    line-height: 90px;
+    white-space: nowrap;
+    margin-left: 15px;
+}
+
+.navbar-system .btn-hamburguer span {
+    position: relative;
+    display: block;
+    width: 27px;
+    height: 5px;
+    background: #FFF;
+    transition: all .2s ease-in-out;
+}
+
+.navbar-system .btn-hamburguer span:before, .navbar-system .btn-hamburguer span:after {
+    position: absolute;
+    background: #FFF;
+    content: '';
+    width: 27px;
+    height: 5px;
+    transition: all .2s ease-in-out;
+}
+
+.navbar-system .btn-hamburguer span:before {
+    top: -10px;
+}
+
+.navbar-system .btn-hamburguer span:after {
+    top: 10px;
+}
+
+.navbar-system .btn-hamburguer.active span {
+    background: transparent;
+}
+
+.navbar-system .btn-hamburguer.active span:before {
+    transform: rotate(45deg) translate(4px, 10px);
+}
+
+.navbar-system .btn-hamburguer.active span:after {
+    transform: rotate(-45deg) translate(4px, -10px);
+}
+
+
+/* FIM MENU BARS */
+
+
+/* MENU SIDE-NAV */
+
+.navbar-toggle-js {
+    width: 300px;
+    height: calc(100% - 60px);
+    top: 80px;
+    left: 0;
+    position: fixed;
+    pointer-events: none;
+    display: block;
+    z-index: 10;
+}
+
+.navbar-toggle-js:before {
+    width: 100%;
+    height: 100%;
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.navbar-toggle-js .header-navbar {
+    width: 100%;
+    height: 260px;
+    background-color: #004262;
+}
+
+.navbar-toggle-js .navbar-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-color: #393e46;
+    transform: translateX(-102%);
+    transition: transform 0.3s cubic-bezier(0, 0, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar-container {
+    background: blue
+}
+
+.navbar-visible {
+    pointer-events: auto;
+}
+
+.navbar-visible .navbar-container {
+    transform: none;
+}
+
+.navbar-visible:before {
+    opacity: 1;
+}
+
+.side-show {
+    margin-left: 300px;
+}
+
+
+/*MENU SIDE-NAV - UL*/
+
+.navbar-content {
+    flex: 1;
+    list-style: none;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 0px;
+}
+
+.navbar-content li {
+    border-bottom: 1px solid #454545;
+}
+
+.navbar-content li a {
+    display: block;
+    padding: 20px 20px 20px 59px;
+    color: #a6a6a6;
+    font-weight: 100;
+}
+
+.navbar-content li a:hover {
+    background-color: #454545;
+    text-decoration: none;
+    color: #FFF;
+}
+
+
+/* FIM MENU SIDE-NAV - UL */
+
+
+/* FIM MENU SIDE-NAV */
