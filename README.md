@@ -14,6 +14,10 @@ Para colaborar você deve primeiro clonar o projeto do [GitHub](https://github.c
 git clone https://github.com/Ulbra-Gravatai/sistemaTCC.git
 cd sistemaTCC
 ```
+Entre na brach de desenvolvimento:
+```
+git checkout dev
+```
 Então, você deve utilizar o [Composer](https://getcomposer.org) para instalar as dependências:
 ```
 composer install
