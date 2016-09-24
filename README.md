@@ -81,6 +81,7 @@ sistemaTCC
 |    |-- /twig
 |    |-- autoload.php
 |
+|-- .editorconfig
 |-- .bowerrc
 |-- .gitignore
 |-- bower.json
