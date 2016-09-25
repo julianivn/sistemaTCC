@@ -1,0 +1,22 @@
+{
+    "name": "ulbra-gravatai/sistema-tcc",
+    "description": "Sistema para Controle e Acompanhamento de Trabalhos de Conclusão de Curso",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Eder Soares",
+            "email": "edersoares@me.com"
+        }
+    ],
+    "require": {
+        "silex/silex": "~2.0",
+        "twig/twig": "^1.24",
+        "doctrine/orm": "^2.5",
+        "symfony/yaml": "^3.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "SistemaTCC\\": "src/SistemaTCC/"
+        }
+    }
+}

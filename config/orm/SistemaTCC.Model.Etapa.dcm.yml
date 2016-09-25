@@ -1,0 +1,37 @@
+SistemaTCC\Model\Etapa:
+    type: entity
+    table: etapa
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: IDENTITY
+    fields:
+        nome:
+            type: string
+            length: 25
+        dataInicio:
+            type: datetime
+        dataFim:
+            type: datetime
+        peso:
+            type: float
+        ordem:
+            type: integer
+        enviarEmailAdministrador:
+            type: boolean
+        enviarEmailBanca:
+            type: boolean
+        enviarEmailOrientador:
+            type: boolean
+    manyToOne:
+        semestre:
+            targetEntity: Semestre
+            joinColumn:
+                name: semestre_id
+                referencedColumnName: id
+        etapaTipo:
+            targetEntity: EtapaTipo
+            joinColumn:
+                name: etapa_tipo_id
+                referencedColumnName: id

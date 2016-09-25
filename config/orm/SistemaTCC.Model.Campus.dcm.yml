@@ -1,0 +1,12 @@
+SistemaTCC\Model\Campus:
+    type: entity
+    table: campus
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: IDENTITY
+    fields:
+        nome:
+            type: string
+            length: 25

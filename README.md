@@ -14,7 +14,7 @@ Para colaborar você deve primeiro clonar o projeto do [GitHub](https://github.c
 git clone https://github.com/Ulbra-Gravatai/sistemaTCC.git
 cd sistemaTCC
 ```
-Entre na brach de desenvolvimento:
+Entre na branch de desenvolvimento:
 ```
 git checkout dev
 ```
@@ -81,6 +81,7 @@ sistemaTCC
 |    |-- /twig
 |    |-- autoload.php
 |
+|-- .editorconfig
 |-- .bowerrc
 |-- .gitignore
 |-- bower.json
@@ -88,6 +89,10 @@ sistemaTCC
 |-- LICENCE
 |-- README.md
 ```
+
+## .editorconfig para não zoar o código
+Padrão de código é uma maneira eficiente de organizar as coisas. E isso é o que vamos fazer com o ``.editorconfig``. Ele serve para manter consistente o estilo do código em diferentes editores e IDEs.
+Dúvidas dê uma olhada no site [http://editorconfig.org/](http://editorconfig.org/).
 
 ## Criando sua branch
 Para começar a brincar, crie sua própria branch para não haver problemas na hora de fazer um git push, lembre-se de substituir <seu_nome> por você sabe o que...

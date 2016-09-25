@@ -1,0 +1,17 @@
+<?php
+
+namespace SistemaTCC\Controller;
+
+use Silex\Application;
+
+class IndexController {
+
+    public function indexAction(Application $app) {
+        return $app['twig']->render('index/index.twig');
+    }
+
+    public function creditosAction(Application $app) {
+        return $app['twig']->render('index/creditos.twig');
+    }
+
+}

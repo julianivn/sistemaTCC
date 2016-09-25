@@ -1,0 +1,5 @@
+/doc/eder/
+/composer.lock
+/vendor/
+.DS_Store
+doc/analysis/Modelagem/Diagrama.mwb.bak
