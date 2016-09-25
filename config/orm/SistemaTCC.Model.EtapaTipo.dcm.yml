@@ -1,0 +1,12 @@
+SistemaTCC\Model\EtapaTipo:
+    type: entity
+    table: etapa_tipo
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: IDENTITY
+    fields:
+        nome:
+            type: string
+            length: 25
