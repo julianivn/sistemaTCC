@@ -29,6 +29,12 @@ Após os passos acima, atualmente você terá a seguinte estrutura de diretório
 ```
 sistemaTCC
 |
+|-- /config
+|   |-- /orm
+|   |-- banco-de-dados.sql
+|   |-- bootstrap.php
+|   |-- cli-config.php
+|
 |-- /doc
 |   |-- /analysis
 |
@@ -99,6 +105,8 @@ Para começar a brincar, crie sua própria branch para não haver problemas na h
 ```
 git checkout -b <seu_nome>
 ```
+## Banco de dados
+Foi adicionado o arquivo config/banco-de-dados.sql, basta importa-lo para o MySQL e modificar o arquivo src/SistemaTCC/Provider/DoctrineOrmServiceProvider.php com as informações do seu banco de dados local.
 
 ## Brincadeira!
 Agora sim, a brincadeira pode começar!
