@@ -36,7 +36,7 @@ class AlunoController {
     public function find(Application $app, Request $request, $id) {
 
         if (null === $aluno = $app['orm']->find('\SistemaTCC\Model\Aluno', (int) $id))
-            return new Response('O aluno não existe.', Response::HTTP_BAD_REQUEST);
+            return new Response('O aluno não existe.', Response::HTTP_NOT_FOUND);
 
         return new Response($aluno->getPessoa()->getNome());
     }

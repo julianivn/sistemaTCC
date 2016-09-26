@@ -34,7 +34,7 @@ class ProfessorController {
     public function find(Application $app, Request $request, $id) {
 
         if (null === $professor = $app['orm']->find('\SistemaTCC\Model\Professor', (int) $id))
-            new Response('O professor não existe.', Response::HTTP_BAD_REQUEST);
+            new Response('O professor não existe.', Response::HTTP_NOT_FOUND);
 
         return new Response($professor->getPessoa()->getNome());
     }
