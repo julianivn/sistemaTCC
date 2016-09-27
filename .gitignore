@@ -1,5 +1,7 @@
 /doc/eder/
 /composer.lock
+/composer.phar
+/composer_setup.php
 /vendor/
 .DS_Store
 doc/analysis/Modelagem/Diagrama.mwb.bak

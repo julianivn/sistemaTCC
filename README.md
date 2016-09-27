@@ -1,6 +1,10 @@
 # sistemaTCC
 Sistema para Controle e Acompanhamento de Trabalhos de Conclusão de Curso
 
+## Documentação adicional
+* [Instalação das Dependências](doc/ambiente/DEPENDENCIES.md)
+* [Criação de Ambiente com VirtualBox](doc/ambiente/AMBIENTE.md)
+
 ## Pré-requisitos
 * [Git](https://git-scm.com)
 * [PHP](http://php.net) 5.5
@@ -122,3 +126,5 @@ Em seguida colocaremos como utilizar
 * [GitHub](https://github.com)
 * [MySQL](https://www.mysql.com)
 * [Bower](http://bower.io)
+
+
