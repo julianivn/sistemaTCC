@@ -5,12 +5,12 @@
 * Fazer o download do VirtualBox: https://www.virtualbox.org/wiki/Downloads
  * Instalar o virtual box, ao abrir a interface, clicar em "novo"
 * Escolher o nome da VM e selecionar a opção "Criar novo disco rígido virtual agora" 
-![img01](img/AD-01.png)
+![img01](img/ad-01.png)
 * Na próxima tela, crie o disco virtual com as configurações desejadas
 * Ir em Configurações da VM, Armazenamento, Controladora: IDE e escolher a imagem do Ubuntu 
-![img02](img/AD-02.PNG)
+![img02](img/ad-02.PNG)
 * Em Rede, selecione a opção Modo Bridge 
-![img03](img/AD-03.png)
+![img03](img/ad-03.png)
 * Inicie a VM para iniciar a configuração do servidor
 * Selecione a linguagem ingles e depois Install Ubuntu Server
 * Em "Select your Location", selecion other, após, South America e Brazil
@@ -19,7 +19,7 @@
 * A próxima tela é a mais importante, você deve selecionar a opção do teclado com 'ç'
 * Escolha o nome do servidor
 * Escolha o nome do usuario, escolhi user1 
-![img04](img/AD-04.png)
+![img04](img/ad-04.png)
 * Na próxima tela deixe o mesmo nome.
 * Escolha a senha
 * Selecione "No" para encriptar o /home
@@ -37,7 +37,7 @@
 * Após logar, use o comando sudo -i e digite a senha do user1
 * Agora você está logado como root e pode estragar sua VM!
 * Execute o comando ifconfig, veja seu IP e use o Putty para se logar 
-![img05](img/AD-05.png)
+![img05](img/ad-05.png)
 * Logue utilizando o user1 e após logar use o comando sudo -i
 
 ## Instalação do Apache
