@@ -21,5 +21,6 @@ $ php composer.phar install
 ## Editor Config
 
 Acessar http://editorconfig.org/
+
 Instalar o plugin de acordo com o editor que deseja utilizar.
 
