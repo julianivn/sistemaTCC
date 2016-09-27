@@ -8,7 +8,7 @@
 ![img01](img/ad-01.png)
 * Na próxima tela, crie o disco virtual com as configurações desejadas
 * Ir em Configurações da VM, Armazenamento, Controladora: IDE e escolher a imagem do Ubuntu 
-![img02](img/ad-02.PNG)
+![img02](img/ad-02.png)
 * Em Rede, selecione a opção Modo Bridge 
 ![img03](img/ad-03.png)
 * Inicie a VM para iniciar a configuração do servidor
