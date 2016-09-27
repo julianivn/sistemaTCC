@@ -1,6 +1,7 @@
 # Instalando dependências
 
 Abaixo as instruções para instalação das dependências.
+
 As instruções estão baseadas em sistemas *nix
 
 ## PHP Composer
