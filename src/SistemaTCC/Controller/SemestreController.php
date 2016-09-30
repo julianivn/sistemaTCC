@@ -70,8 +70,8 @@ class SemestreController {
         return 'Index Semestre';
     }
 
-    public function cadastrarAction() {
-        return 'Cadastrar Semestre';
+    public function cadastrarAction(Application $app) {
+        return $app['twig']->render('semestre/cadastrar.twig');
     }
 
     public function editarAction() {

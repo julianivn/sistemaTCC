@@ -1,0 +1,12 @@
+.title-header-tabs {
+  display: inline-block;
+}
+.btn-header-tabs {
+  border: none;
+  background: transparent;
+  float: right;
+  margin: 5px;
+}
+.page-header {
+  padding: 5px 0px 9px 5px;
+}

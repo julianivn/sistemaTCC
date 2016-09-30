@@ -3,10 +3,13 @@
   <head>
     <meta charset="utf-8">
     <title>SistemaTCC</title>
-    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="app/index/main.css">
-    <link rel="stylesheet" href="app/shared/nav-side.css">
+    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/lib/sweetalert/dist/sweetalert.css">
+    <link rel="stylesheet" href="/app/index/main.css">
+    <link rel="stylesheet" href="/app/shared/nav-side.css">
+	{% block styles %}
+	{% endblock %}
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   </head>
   <body>
@@ -40,12 +43,16 @@
       </aside>
       <div class="container col-md-12">
         <div class="content col-md-9 content-move-js">
-          <!-- conteudo -->
+          {% block content %}
+		  {% endblock %}
         </div>
       </div>
     </div>
-    <script src="lib/jquery/dist/jquery.min.js"></script>
-    <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="app/shared/nav-side.js"></script>
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="/lib/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="/app/shared/nav-side.js"></script>
+	{% block scripts %}
+	{% endblock %}
   </body>
 </html>

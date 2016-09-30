@@ -1,0 +1,119 @@
+{% extends 'index/index.twig' %}
+{% block styles %}
+<link rel="stylesheet" href="/app/semestre/style.css">
+{% endblock %}
+{% block content %}
+<form>
+  <div class="page-header">
+    <h1>Cadastrar semestre</h1>
+  </div>
+  <div class="form-group">
+    <label for="Campus">Campus</label>
+    <input type="text" class="form-control" id="campus" placeholder="Ex.: Gravataí">
+  </div>
+  <div class="form-group">
+    <label for="ano">Ano</label>
+    <input type="password" class="form-control" id="ano" placeholder="Ex.: 2016" maxlength="4">
+  </div>
+  <div class="form-group">
+    <label for="semestre">Semestre</label>
+    <select class="form-control" id="semestre">
+      <option>1</option>
+      <option>2</option>
+    </select>
+  </div>
+  <div class="content-etapas">
+  	<ul class="nav nav-tabs">
+    	<li class="active">
+			<a data-toggle="tab"href="#tcc1">TCC1</a>
+		</li>
+		<li>
+			<a data-toggle="tab" href="#tcc2">TCC2</a>
+		</li>
+  	</ul>
+	<div class="col-md-12">
+	  <div class="tab-content clearfix">
+	    <div class="tab-pane active" id="tcc1">
+		  <table id="tcc1" class="table table-hover">
+		    <thead>
+			  <tr>
+			    <th>
+				  <h4 class="title-header-tabs">Número de etapas</h4>
+				    <button type="button" name="adicionar etapas" class="btn-header-tabs">
+				      <i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
+				    </button>
+				</th>
+			  </tr>
+			</thead>
+			<tbody class="lista-etapa-js">
+			  <tr>
+			    <td data-id="1">
+				  <span class="name-etapa">Etapa 1</span>
+				  <button type="button" name="adicionar etapas" class="btn-header-tabs btn-excluir-etapa">
+				    <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
+				  </button>
+				  <button type="button" name="adicionar etapas" class="btn-header-tabs btn-editar-etapa">
+				    <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
+				  </button>
+				</td>
+			  </tr>
+			</tbody>
+		  </table>
+		</div>
+		<div class="tab-pane" id="tcc2">
+		  <table id="tcc1" class="table table-hover">
+		    <thead>
+			  <tr>
+			    <th>
+				  <h4 class="title-header-tabs">Número de etapas</h4>
+				    <button type="button" name="adicionar etapas" class="btn-header-tabs">
+				      <i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
+				    </button>
+				</th>
+			  </tr>
+			</thead>
+			<tbody class="lista-etapa-js">
+			  <tr>
+  			    <td data-id="2">
+  				  <span class="name-etapa">Etapa 1</span>
+  				  <button type="button" name="adicionar etapas" class="btn-header-tabs btn-excluir-etapa">
+  				    <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
+  				  </button>
+  				  <button type="button" name="adicionar etapas" class="btn-header-tabs btn-editar-etapa">
+  				    <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
+  				  </button>
+  				</td>
+  			  </tr>
+			  <tr>
+			    <td data-id="3">
+				  <span class="name-etapa">Etapa 2</span>
+				  <button type="button" name="adicionar etapas" class="btn-header-tabs btn-excluir-etapa">
+				    <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
+				  </button>
+				  <button type="button" name="adicionar etapas" class="btn-header-tabs btn-editar-etapa">
+				    <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
+				  </button>
+				</td>
+			  </tr>
+			  <tr>
+			    <td data-id="4">
+				  <span class="name-etapa">Etapa 3</span>
+				  <button type="button" name="adicionar etapas" class="btn-header-tabs btn-excluir-etapa">
+				    <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
+				  </button>
+				  <button type="button" name="adicionar etapas" class="btn-header-tabs btn-editar-etapa">
+				    <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
+				  </button>
+				</td>
+			  </tr>
+			</tbody>
+		  </table>
+		</div>
+	  </div>
+	</div>
+  </div>
+</form>
+{% endblock %}
+{% block scripts %}
+<script src="/app/semestre/index.js"></script>
+{% endblock %}
