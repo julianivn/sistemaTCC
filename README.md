@@ -18,8 +18,6 @@ Para colaborar você deve primeiro clonar o projeto do [GitHub](https://github.c
 ```
 git clone https://github.com/Ulbra-Gravatai/sistemaTCC.git
 cd sistemaTCC
-
-
 ```
 Entre na branch de desenvolvimento:
 ```
