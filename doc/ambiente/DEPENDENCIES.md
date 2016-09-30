@@ -11,6 +11,7 @@ https://getcomposer.org/download/
 ```bash
 $ wget https://getcomposer.org/installer
 $ mv installer composer-setup.php
+$ php composer-setup.php
 $ rm composer-setup.php
 ```
 
