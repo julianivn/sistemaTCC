@@ -2,6 +2,7 @@
   'use strict';
 
   const $lista = $('.lista-etapa-js');
+  const $btnCadSemestre = $('#btn-cadastrar-semestre');
   const url = '/semestre/deletar/';
 
   const swalExcluir = {
@@ -27,6 +28,20 @@
     closeOnCancel: false
   }
 
+
+  $btnCadSemestre.on('click', function(e){
+    e.preventDefault();
+
+    const body = {
+      campus: 'campus',
+      ano: 'ano',
+      semestre: '',
+      tcc1: [121, 143],
+      tcc2: [123,232,232,232]
+    }
+  })
+
+
   $lista.on('click', '.btn-excluir-etapa', function(e){
     e.preventDefault();
     const etapaId = $(this).parent().data('id');
@@ -44,13 +59,19 @@
 
         request.done(function(data){
           swal("Deletado!", "A etapa foi deletada com sucesso!", "success");
+          setTimeout(function(){
+            location.reload();
+          }, 2000);
         });
 
         request.fail(function(data){
           swal("Erro!", "Erro ao deletar a etapa, tente novamente", "error");
         });
       } else {
-    	    swal("Cancelado", "A etapa não foi deletada!", "error");
+        swal("Cancelado", "A etapa não foi deletada!", "error");
+        setTimeout(function(){
+          location.reload();
+        }, 2000);
       }
     });
   });

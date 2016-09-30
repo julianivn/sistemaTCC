@@ -40,13 +40,18 @@ html, body {
     color: #FFF;
 }
 
+.menu-header {
+  margin-right: 10px;
+}
+
 
 /* FIM HEADER */
 
 .content {
-    top: 80px;
-    height: calc(100vh - 120px);
-    margin: 20px auto;
-    float: none;
+    width: 80%;
+    height: auto;
+    margin: 100px auto 20px;
     background-color: #FFFFFF;
+    padding: 10px;
+    overflow: hidden;
 }
