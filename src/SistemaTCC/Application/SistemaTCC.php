@@ -15,6 +15,8 @@ class SistemaTCC extends Application {
 
         $app = $this;
 
+		Request::enableHttpMethodParameterOverride();
+
         $app['debug'] = true;
 
         // Provider
