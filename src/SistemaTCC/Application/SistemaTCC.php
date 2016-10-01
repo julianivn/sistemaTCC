@@ -2,7 +2,7 @@
 
 namespace SistemaTCC\Application;
 
-use Symfony\Componenet\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Request;
 use Silex\Application;
 use Silex\Provider\TwigServiceProvider;
 use SistemaTCC\Provider\DoctrineOrmServiceProvider;
