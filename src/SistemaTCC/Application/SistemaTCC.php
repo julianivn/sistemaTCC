@@ -2,7 +2,7 @@
 
 namespace SistemaTCC\Application;
 
-use Symfony\Componenet\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Request;
 use Silex\Application;
 use Silex\Provider\TwigServiceProvider;
 use SistemaTCC\Provider\DoctrineOrmServiceProvider;
@@ -14,6 +14,8 @@ class SistemaTCC extends Application {
         parent::__construct();
 
         $app = $this;
+
+		Request::enableHttpMethodParameterOverride();
 
         $app['debug'] = true;
 
