@@ -9,6 +9,8 @@ use SistemaTCC\Provider\DoctrineOrmServiceProvider;
 
 class SistemaTCC extends Application {
 
+	use Application\UrlGeneratorTrait;
+
     public function __construct() {
 
         parent::__construct();
@@ -24,7 +26,7 @@ class SistemaTCC extends Application {
         $app->register(new TwigServiceProvider(), ['twig.path' => __DIR__ . '/../View/']);
 
         // Controller
-        $app->get('/', "\\SistemaTCC\\Controller\\IndexController::indexAction");
+        $app->get('/', "\\SistemaTCC\\Controller\\IndexController::indexAction")->bind('/');
         $app->get('/creditos/', "\\SistemaTCC\\Controller\\IndexController::creditosAction");
         $app->get('/login/', "\\SistemaTCC\\Controller\\IndexController::creditosAction");
 
