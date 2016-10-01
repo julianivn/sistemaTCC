@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="./lib/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="./app/index/main.css">
     <link rel="stylesheet" href="./app/shared/nav-side.css">
+    <!-- styles -->
+	  {% block styles %}
+	  {% endblock %}
+    <!-- /styles -->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   </head>
   <body>
@@ -19,7 +23,7 @@
         <div class="navbar-header">
           <a href="#" class="navbar-brand">SistemaTCC</a>
         </div>
-        <div class="col-md-4 pull-right">
+        <div class="pull-right menu-header">
           <ul class="nav navbar-top-links navbar-right">
             <li><span class="username-js">Fulano da Silva</span></li>
             <li><a href="#" ><i class="fa fa-cog fa-lg" aria-hidden="true"></i></a></li>
@@ -39,8 +43,8 @@
           </ul>
         </nav>
       </aside>
-      <div class="container col-md-12">
-        <div class="content col-md-9 content-move-js">
+      <div class="container">
+        <div class="content content-move-js">
           <!-- conteudo -->
           {% block content %}
           {% endblock %}
@@ -48,8 +52,13 @@
         </div>
       </div>
     </div>
-    <script src="lib/jquery/dist/jquery.min.js"></script>
-    <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="app/shared/nav-side.js"></script>
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/lib/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="/app/shared/nav-side.js"></script>
+    <!-- scripts -->
+	  {% block scripts %}
+	  {% endblock %}
+    <!-- /scripts -->
   </body>
 </html>
