@@ -2,6 +2,7 @@
 Sistema para Controle e Acompanhamento de Trabalhos de Conclusão de Curso
 
 ## Documentação adicional
+* [Como utilizar o GitHub](https://docs.google.com/document/d/1tkLoMl36GVBOLx65DFY7RL-ss-EARA5kiWxK7eJA0Hs/)
 * [Instalação das Dependências](doc/ambiente/DEPENDENCIES.md)
 * [Criação de Ambiente com VirtualBox](doc/ambiente/AMBIENTE.md)
 
@@ -126,5 +127,3 @@ Em seguida colocaremos como utilizar
 * [GitHub](https://github.com)
 * [MySQL](https://www.mysql.com)
 * [Bower](http://bower.io)
-
-

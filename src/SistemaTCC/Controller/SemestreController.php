@@ -21,8 +21,13 @@ class SemestreController {
         $semestre->setTipo($request->get('tipo'));
         $semestre->setCampus($campus);
 
-        $app['orm']->persist($semestre);
-        $app['orm']->flush();
+        try {
+            $app['orm']->persist($semestre);
+            $app['orm']->flush();
+        }
+        catch (\Exception $e) {
+            return new Response($e->getMessage(), Response::HTTP_BAD_REQUEST);
+        }
 
         return 'Semestre criado com ID #' . $semestre->getId();
     }
@@ -38,9 +43,14 @@ class SemestreController {
         $semestre->setTipo($request->get('tipo'));
         $semestre->setCampus($campus);
 
-        $app['orm']->flush();
+        try {
+            $app['orm']->flush();
+        }
+        catch (\Exception $e) {
+            return new Response($e->getMessage(), Response::HTTP_BAD_REQUEST);
+        }
 
-        return 'Semestre alterado';
+        return new Response('Semestre editado com sucesso.', Response::HTTP_OK);
     }
 
     public function del(Application $app, Request $request, $id) {
@@ -48,22 +58,23 @@ class SemestreController {
         $semestre = new Semestre();
         $semestre = $app['orm']->find('\\SistemaTCC\\Model\\Semestre', $request->get('id'));
 
-        $app['orm']->remove($semestre);
-        $app['orm']->flush();
+        try {
+            $app['orm']->remove($semestre);
+            $app['orm']->flush();
+        }
+        catch (\Exception $e) {
+            return new Response($e->getMessage(), Response::HTTP_BAD_REQUEST);
+        }
 
-        return 'Semestre excluído';
+        return new Response('Semestre excluído com sucesso.', Response::HTTP_OK);
     }
 
     public function find(Application $app, Request $request, $id) {
 
-        $semestre = new Semestre();
-        $campus = $app['orm']->find('\\SistemaTCC\\Model\\Campus', $request->get('campus')); // Gravataí
+        if (null === $semestre = $app['orm']->find('\SistemaTCC\Model\Semestre', (int) $id))
+            return new Response('O semestre não existe.', Response::HTTP_NOT_FOUND);
 
-        $semestre->setNome($request->get('nome'));
-        $semestre->setDataInicio(new DateTime($request->get('dataInicio')));
-        $semestre->setDataFim(new DateTime($request->get('dataFim')));
-        $semestre->setTipo($request->get('tipo'));
-        $semestre->setCampus($campus);
+        return new Response($semestre->getNome());
     }
 
     public function indexAction() {
