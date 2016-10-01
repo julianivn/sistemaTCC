@@ -1,0 +1,11 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+
+<ul>
+	{% for professor in professores %}
+	<li>{{ professor.getPessoa().getNome() }} ({{ professor.getId() }}) <a href="./professor/excluir/{{ professor.getId() }}/">Excluir</a></li>
+	{% endfor %}
+</ul>
+
+{% endblock %}

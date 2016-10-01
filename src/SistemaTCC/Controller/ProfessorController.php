@@ -81,20 +81,30 @@ class ProfessorController {
         return 'Index Professor';
     }
 
-    public function cadastrarAction() {
-        return 'Cadastrar Professor';
+    public function cadastrarAction(Application $app) {
+        return $app['twig']->render('professor/cadastrar.twig');
     }
 
     public function editarAction() {
         return 'Editar Professor';
     }
 
-    public function excluirAction() {
-        return 'Excluir Professor';
+    public function excluirAction(Application $app, $id) {
+
+        $professor = $app['orm']->find('SistemaTCC\Model\Professor', $id);
+
+        return $app['twig']->render('professor/excluir.twig', [
+            'professor' => $professor
+        ]);
     }
 
-    public function listarAction() {
-        return 'Listar Professor';
+    public function listarAction(Application $app) {
+
+        $professores = $app['orm']->getRepository('SistemaTCC\Model\Professor')->findAll();
+
+        return $app['twig']->render('professor/listar.twig', [
+            'professores' => $professores
+        ]);
     }
 
 }

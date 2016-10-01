@@ -39,7 +39,7 @@ class SistemaTCC extends Application {
         $app->get('/professor/', "\\SistemaTCC\\Controller\\ProfessorController::indexAction");
         $app->get('/professor/cadastrar/', "\\SistemaTCC\\Controller\\ProfessorController::cadastrarAction");
         $app->get('/professor/editar/', "\\SistemaTCC\\Controller\\ProfessorController::editarAction");
-        $app->get('/professor/excluir/', "\\SistemaTCC\\Controller\\ProfessorController::excluirAction");
+        $app->get('/professor/excluir/{id}/', "\\SistemaTCC\\Controller\\ProfessorController::excluirAction");
         $app->get('/professor/listar/', "\\SistemaTCC\\Controller\\ProfessorController::listarAction");
 
         $app->get('/semestre/', "\\SistemaTCC\\Controller\\SemestreController::indexAction");
