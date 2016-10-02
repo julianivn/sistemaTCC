@@ -1,0 +1,273 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"els",
+				"else"
+			],
+			[
+				"log",
+				"loginarray"
+			],
+			[
+				"hr",
+				"href"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/wamp/www/sistemaTCC/public/css/login.css",
+		"/C/wamp/www/sistemaTCC/public/index.html",
+		"/C/wamp/www/sistemaTCC/public/index.php",
+		"/C/wamp/www/sistemaTCC/public/lib/bootstrap/dist/css/bootstrap.css",
+		"/C/wamp/www/sistemaTCC/vendor/autoload.php",
+		"/C/wamp/www/sistemaTCC/.gitignore",
+		"/C/wamp/www/sistemaTCC/public/sistemaTCC",
+		"/C/wamp/www/add_vhost.php",
+		"/C/wamp/www/index.php",
+		"/C/Users/Filipe/Pendrive/faculdade/ALG3/G1/Aulas/Cifra de cezar - Cópia.c",
+		"/C/wamp/www/MF/register.html",
+		"/C/wamp/www/MF/conection.php",
+		"/C/wamp/www/MF/register.php",
+		"/C/wamp/www/MF/dash.php",
+		"/C/wamp/www/eventos/cadastra.php",
+		"/C/wamp/www/MF/tabela de login.sql",
+		"/C/wamp/www/MF/processos/register.php",
+		"/C/wamp/www/MF/processos/conection.php",
+		"/C/wamp/www/MF/index.html",
+		"/D/www/MestresFamiliares/cadastro.php",
+		"/C/wamp/www/MF/login.html",
+		"/C/wamp/www/MestresFamiliares/home.php",
+		"/C/wamp/www/MestresFamiliares/teste.php",
+		"/C/wamp/www/MestresFamiliares/valida.php",
+		"/C/wamp/www/MestresFamiliares/seguranca.php",
+		"/C/wamp/www/MestresFamiliares/index.html",
+		"/C/wamp/www/MestresFamiliares/cadastro.php",
+		"/C/wamp/www/MestresFamiliares/cadastro.html",
+		"/C/wamp/www/MestresFamiliares/tabela usuário.sql",
+		"/C/wamp/bin/apache/apache2.4.9/conf/httpd.conf",
+		"/C/Users/Filipe/Desktop/admin/cadastra.php",
+		"/C/Users/Filipe/Desktop/admin/valida.php",
+		"/C/Users/Filipe/Desktop/seguranca.php",
+		"/C/Users/Filipe/Desktop/admin/seguranca.php",
+		"/C/Users/Filipe/Desktop/cadastra.php",
+		"/C/Users/Filipe/Desktop/recupera.php",
+		"/C/Users/Filipe/Downloads/DadosEstaca.php",
+		"/C/Users/Filipe/Downloads/seleciona1.php",
+		"/C/Users/Filipe/Downloads/log.php",
+		"/C/wamp/www/eventos/seguranca.php",
+		"/C/wamp/www/eventos/tabela clientes.sql",
+		"/C/Users/Filipe/Downloads/conexao.inc",
+		"/C/wamp/www/eventos/entre.html",
+		"/C/wamp/bin/apache/apache2.4.18/conf/httpd.conf",
+		"/C/wamp64/www/eventos/cadastra.php",
+		"/C/wamp64/www/eventos/admin/seguranca.php",
+		"/C/wamp64/www/eventos/admin/valida.php",
+		"/C/wamp64/www/eventos/admin/cadastra.php",
+		"/C/wamp64/www/eventos/tabela clientes.sql",
+		"/C/wamp64/www/eventos/valida.php",
+		"/C/wamp64/www/eventos/seguranca.php",
+		"/C/wamp64/www/index.php",
+		"/C/Users/Filipe/Downloads/bootstrap-3.3.6-dist/bootstrap-3.3.6-dist/css/bootstrap.css.map",
+		"/C/wamp64/www/MestresFamiliares/cadastro.html",
+		"/C/wamp64/www/MestresFamiliares/cadastro.php",
+		"/C/wamp64/www/MestresFamiliares/seguranca.php",
+		"/C/wamp64/www/MestresFamiliares/index.html",
+		"/C/Users/Filipe/Downloads/index.html",
+		"/C/wamp64/www/MestresFamiliares/home.php",
+		"/C/wamp64/www/MestresFamiliares/valida.php",
+		"/C/wamp64/www/MestresFamiliares/index2.html",
+		"/C/wamp64/bin/apache/apache2.4.18/conf/httpd.conf",
+		"/C/wamp64/logs/apache_error.log",
+		"/C/wamp64/alias/phpmyadmin.conf",
+		"/C/wamp/bin/apache/apache2.4.18/bin/php.ini",
+		"/C/Users/Filipe/Desktop/hosts"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"row",
+			"container",
+			"letra",
+			"usuario",
+			"login",
+			"iCheck",
+			"connect",
+			"../../",
+			"../../..",
+			"../..",
+			"password",
+			"username",
+			"nome",
+			"value",
+			" onfocus=\"this.value=''\"",
+			"user",
+			"USER",
+			"pagina",
+			"paginaLo",
+			"reservados",
+			"denied",
+			"directory /",
+			"require all",
+			"onlineoffline",
+			"# onlineoffline",
+			"# onlineoffline tag - don't remove",
+			"$suppress_localhost = true;fals",
+			"listen ",
+			"port ",
+			"port",
+			"80"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "index.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
