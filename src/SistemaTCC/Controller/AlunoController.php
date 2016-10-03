@@ -98,8 +98,9 @@ class AlunoController {
         return 'Excluir Aluno';
     }
 
-    public function listarAction() {
-        return 'Listar Aluno';
-    }
+	public function listarAction(Application $app) {
+		$alunos = array();
+		return $app['twig']->render('aluno/listar.twig', array('alunos' => $alunos));
+	}
 
 }

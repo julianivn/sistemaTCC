@@ -1,0 +1,36 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+	<h1>Manter Aluno</h1>
+	<div class="row">
+		<div class="col-xs-12">
+			<form>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Matricula</th>
+							<th>Aluno</th>
+							<th>Editar</th>
+							<th>Excluir</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for aluno in alunos %}
+							<tr>
+								<td>{{ aluno.matricula }}</td>
+								<td>{{ aluno.nome }}</td>
+								<td><input formaction="public/aluno/{{ aluno.id }}/" formmethod="">Editar</a></td>
+								<td><input formaction="public/aluno/{{ aluno.id }}/" formmethod="DELETE">x</a></td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</form>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12">
+			<a href="public/aluno/inserir" class="btn btn-default">Cadastrar Aluno</a>
+		</div>
+	</div>
+{% endblock %}
