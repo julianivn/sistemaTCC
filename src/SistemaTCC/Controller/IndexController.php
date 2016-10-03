@@ -7,7 +7,7 @@ use Silex\Application;
 class IndexController {
 
     public function indexAction(Application $app) {
-        return $app['twig']->render('index/index.twig');
+        return $app['twig']->render('login/index.twig');
     }
 
     public function creditosAction(Application $app) {
