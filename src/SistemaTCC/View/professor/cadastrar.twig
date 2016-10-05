@@ -1,26 +1,65 @@
 {% extends "layout.twig" %}
 
 {% block content %}
+
 <div class="container">
 	<h1>Incluir Professor</h1>
+	<div class="row">
+		<form action="" method="POST">
+			<div class="col-md-5 col-sm-12 ">
+				<div class="form-group" >
+					<label>Nome: <br/>
+					<input type="text" name="nome" size="35"></label>
+				</div>
+				<div class="form-group" >
+					<label>e-mail:<br/>
+					<input type="email" name="e-mail" size="35"></label>
+				</div>
+				<div class="form-group" >
+					<fieldset>
+						<legend>Assinatura:</legend>
+						<h2>Aqui vai a assinatura. </h2>
+					</fieldset>
+				</div>
+				<div class="form-group" >
+					<label><input class="form-control" type="submit" name="assinaura" value="Enviar Imagem"></label>
+				</div>
 
-	<form action="" method="POST">
-		<div class="row">
-			<label>Nome: </label>
-			<input type="text" name="Nome">
-		</div>
-		<div class="row">
-			<label>e-mail: </label>
-			<input type="text" name="e-mail">
-		</div>
-		<div class="row">
-			<label>Áreas de interesse: </label>
-		</div>
+			</div>
+			<div class="col-md-5 col-sm-12">
+			<div class="form-group" >
+					<label>Telefone:<br/>
+					<input type="text" name="telefone" size="35"></label>
+				</div>
+				<div class="form-group" >
+					<label>Sexo:
+						<select name="sexo" >
+							<option value="feminino">Feminino</option>
+							<option value="Masculino">Masculino</option>
+						</select>
+					</label>
+				</div>
+				<div class="form-group" >
+					<label>
+						Áreas de interesse:<br/>
+						<select multiple="multiple" size="4">
+							 <option value="redesi">Redes de Computadores I</option>
+							 <option value="redesii">Redes de Computadores II</option>
+							 <option value="Algoritmosi">Algoritmos de programação I</option>
+							 <option value="Algoritmosii">Algoritmos de programação II</option>
+							 <option value="Algoritmosiii">Algoritmos de programação III</option>
+							 <option value="Outros">Outros</option>
+						</select>
+					</label>
+				</div>
 
-
-
-	</form>
-
+				<div class="form-group" >
+					<label><input class="form-control" type="submit" name="cadastrar" value="Cadastrar"></label>
+				</div>
+			</div>
+			AN
+		</form>
+	</div>
 </div>
 
 
