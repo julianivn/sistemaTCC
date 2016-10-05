@@ -81,8 +81,9 @@ class ProfessorController {
         return 'Index Professor';
     }
 
-    public function cadastrarAction() {
-        return 'Cadastrar Professor';
+    public function cadastrarAction(Application $app) {
+        return $app['twig']->render('professor/cadastrar.twig');
+        //return 'Cadastrar Professor';
     }
 
     public function editarAction() {
