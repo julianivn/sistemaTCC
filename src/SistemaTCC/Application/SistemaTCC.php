@@ -2,18 +2,22 @@
 
 namespace SistemaTCC\Application;
 
-use Symfony\Componenet\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Request;
 use Silex\Application;
 use Silex\Provider\TwigServiceProvider;
 use SistemaTCC\Provider\DoctrineOrmServiceProvider;
 
 class SistemaTCC extends Application {
 
+	use Application\UrlGeneratorTrait;
+
     public function __construct() {
 
         parent::__construct();
 
         $app = $this;
+
+		Request::enableHttpMethodParameterOverride();
 
         $app['debug'] = true;
 
@@ -22,7 +26,7 @@ class SistemaTCC extends Application {
         $app->register(new TwigServiceProvider(), ['twig.path' => __DIR__ . '/../View/']);
 
         // Controller
-        $app->get('/', "\\SistemaTCC\\Controller\\IndexController::indexAction");
+        $app->get('/', "\\SistemaTCC\\Controller\\IndexController::indexAction")->bind('/');
         $app->get('/creditos/', "\\SistemaTCC\\Controller\\IndexController::creditosAction");
         $app->get('/login/', "\\SistemaTCC\\Controller\\IndexController::creditosAction");
 
