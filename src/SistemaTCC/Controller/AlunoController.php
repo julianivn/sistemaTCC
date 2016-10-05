@@ -99,7 +99,9 @@ class AlunoController {
     }
 
 	public function listarAction(Application $app) {
-		$alunos = array();
+		$sql = 'SELECT a.id, a.matricula, p.nome FROM \SistemaTCC\Model\Aluno a JOIN a.pessoa p';
+		$query = $app['orm']->createQuery($sql);
+		$alunos = $query->getResult();
 		return $app['twig']->render('aluno/listar.twig', array('alunos' => $alunos));
 	}
 
