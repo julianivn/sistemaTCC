@@ -1,0 +1,104 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+<h2>Editar aluno:</h2>
+
+			<form action="" method="">
+
+				<div class="row">
+					<div class="col-md-5 col-md-offset-1">
+						<div class="form-group">
+							<label for="nome" class ="control-label">Nome completo</label>
+							<input type="text" class="form-control " placeholder="Nome" name="nome" value="{{ aluno.getPessoa().getNome() }}">
+						</div>
+					</div>
+					<div class="col-md-5">
+						<div class="form-group">
+							<label for="telefone" class ="control-label">Telefone</label>
+							<input type="text" class="form-control" placeholder="Telefone" name="telefone" value="{{ aluno.getPessoa().getTelefone() }}">
+						</div>
+					</div>
+				</div>
+
+				<br>
+				<div class="row">
+					<div class="col-md-5 col-md-offset-1">
+						<div class="form-group">
+							<label for="cgu" class ="control-label">CGU</label>
+							<input type="number" class="form-control" placeholder="CGU" name="cgu" value="{{ aluno.getCgu() }}">
+						</div>
+					</div>
+					<div class="col-md-5">
+						<div class="form-group">
+							<label for="sexo" class ="control-label">Sexo</label>
+							<select class="form-control" name="sexo">
+								<option value="1" {{ aluno.getPessoa().getSexo() == 1 ? 'selected' : '' }}>Masculino</option>
+								<option value="2" {{ aluno.getPessoa().getSexo() == 2 ? 'selected' : '' }}>Feminino</option>
+							</select>
+						</div>
+					</div>
+				</div>
+
+				<br>
+				<div class="row">
+					<div class="col-md-5 col-md-offset-1">
+						<div class="form-group">
+							<label for="matricula" class ="control-label">Número de matrícula</label>
+							<input type="number" class="form-control " placeholder="Nº matricula" name="matricula" value="{{ aluno.getMatricula() }}">
+						</div>
+					</div>
+					<div class="col-md-5">
+						<div class="form-group">
+							<label for="email" class ="control-label">E-mail</label>
+							<input type="email" class="form-control" placeholder="Email" name="email" value="{{ aluno.getPessoa().getEmail() }}">
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-5 col-md-offset-1" >
+						<label for="disciplina" class ="control-label">Disciplinas Matriculadas</label>
+						<div class="well" style="max-height: 240px;overflow: auto;min-height: 240px;">
+
+							<ul class="list-group checked-list-box">
+								<!--Código PHP para preencher a lista com as disciplinas do aluno-->
+								<li class="list-group-item">Exemplo1</li>
+								<li class="list-group-item">Exemplo2</li>
+								<li class="list-group-item">Exemplo3</li>
+								<li class="list-group-item">Exemplo4</li>
+								<li class="list-group-item">Exemplo5</li>
+								<li class="list-group-item">Exemplo1</li>
+								<li class="list-group-item">Exemplo2</li>
+								<li class="list-group-item">Exemplo3</li>
+								<li class="list-group-item">Exemplo4</li>
+								<li class="list-group-item">Exemplo5</li>
+							</ul>
+
+						</div>
+					</div>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
+					<div class="col-md-3 col-md-offset-2">
+						<button type="submit" class="btn btn-primary btn-block">Salvar</button>
+					</div>
+
+
+				</div>
+
+
+
+
+
+			</form>
+
+		  <!--Fim conteudo-->
+{% endblock %}
