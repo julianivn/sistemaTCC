@@ -89,12 +89,19 @@ class SemestreController {
         return 'Editar Semestre';
     }
 
-    public function excluirAction() {
-        return 'Excluir Semestre';
+    public function excluirAction(Application $app, $id) {
+        $semestre = $app['orm']->find('SistemaTCC\Model\Semestre', $id);
+        return $app['twig']->render('semestre/excluir.twig', [
+            'semestre' => $semestre
+        ]);
     }
 
-    public function listarAction() {
-        return 'Listar Semestre';
+    public function listarAction(Application $app) {
+        $semestre = $app['orm']->getRepository('SistemaTCC\Model\semestre')->findAll();
+
+        return $app['twig']->render('semestre/listar.twig', [
+            'semestre' => $semestre
+        ]);
     }
 
 }

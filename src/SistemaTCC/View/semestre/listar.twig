@@ -1,0 +1,11 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+
+<ul>
+	{% for semestre in semestre %}
+	<li>{{ semestre.getNome() }} {{ semestre.getInicio() }} {{ semestre.getFim() }} ({{ semestre.getId() }}) <a href="./semestre/excluir/{{ semestre.getId() }}/">Excluir</a></li>
+	{% endfor %}
+</ul>
+
+{% endblock %}

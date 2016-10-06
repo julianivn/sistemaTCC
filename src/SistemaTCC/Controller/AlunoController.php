@@ -94,8 +94,11 @@ class AlunoController {
         return 'Editar Aluno';
     }
 
-    public function excluirAction() {
-        return 'Excluir Aluno';
+    public function excluirAction(Application $app, $id) {
+        $aluno = $app['orm']->find('SistemaTCC\Model\Aluno', $id);
+        return $app['twig']->render('aluno/excluir.twig', [
+            'aluno' => $aluno
+        ]);
     }
 
     public function listarAction() {

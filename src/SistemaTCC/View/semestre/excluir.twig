@@ -1,0 +1,14 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+<form action="./semestre/{{ semestre.getId() }}/" method="post">
+
+	<p>
+		Tem certeza que deseja excluir o semestre?
+	</p>
+
+	<button type="submit">Excluir</button>
+
+	<input type="hidden" name="_method" value="DELETE">
+</form>
+{% endblock %}

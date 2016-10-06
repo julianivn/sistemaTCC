@@ -33,7 +33,7 @@ class SistemaTCC extends Application {
         $app->get('/aluno/', "\\SistemaTCC\\Controller\\AlunoController::indexAction");
         $app->get('/aluno/cadastrar/', "\\SistemaTCC\\Controller\\AlunoController::cadastrarAction");
         $app->get('/aluno/editar/', "\\SistemaTCC\\Controller\\AlunoController::editarAction");
-        $app->get('/aluno/excluir/', "\\SistemaTCC\\Controller\\AlunoController::excluirAction");
+        $app->get('/aluno/excluir/{id}', "\\SistemaTCC\\Controller\\AlunoController::excluirAction");
         $app->get('/aluno/listar/', "\\SistemaTCC\\Controller\\AlunoController::listarAction");
 
         $app->get('/professor/', "\\SistemaTCC\\Controller\\ProfessorController::indexAction");
@@ -45,7 +45,7 @@ class SistemaTCC extends Application {
         $app->get('/semestre/', "\\SistemaTCC\\Controller\\SemestreController::indexAction");
         $app->get('/semestre/cadastrar/', "\\SistemaTCC\\Controller\\SemestreController::cadastrarAction");
         $app->get('/semestre/editar/', "\\SistemaTCC\\Controller\\SemestreController::editarAction");
-        $app->get('/semestre/excluir/', "\\SistemaTCC\\Controller\\SemestreController::excluirAction");
+        $app->get('/semestre/excluir/{id}', "\\SistemaTCC\\Controller\\SemestreController::excluirAction");
         $app->get('/semestre/listar/', "\\SistemaTCC\\Controller\\SemestreController::listarAction");
 
         $app->post('/semestre/', "\\SistemaTCC\\Controller\\SemestreController::add");
