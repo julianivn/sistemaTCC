@@ -79,8 +79,8 @@ class AlunoController {
             return new Response($e->getMessage(), Response::HTTP_BAD_REQUEST);
         }
 
-        return new Response('Aluno excluído com sucesso.', Response::HTTP_OK);
-    }
+		return new Response(json_encode(array('Aluno excluído com sucesso.')), Response::HTTP_OK);
+	}
 
     public function indexAction() {
         return 'Index Aluno';

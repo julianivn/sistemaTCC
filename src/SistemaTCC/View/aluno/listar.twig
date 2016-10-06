@@ -1,37 +1,44 @@
 {% extends "layout.twig" %}
-
+{% block styles %}
+	<link rel="stylesheet" href="./lib/sweetalert/dist/sweetalert.css">
+{% endblock %}
 {% block content %}
 	<h1>Manter Aluno</h1>
 	<div class="row">
 		<div class="col-xs-12">
-			<form action="aluno/" method="get">
-				<table class="table table-striped">
-					<thead>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th width="100px">Matricula</th>
+						<th>Aluno</th>
+						<th width="150px">Ação</th>
+					</tr>
+				</thead>
+				<tbody class="lista-aluno-js">
+					{% for aluno in alunos %}
+						{#<form action="aluno/{{ aluno.id }}/" method="post">
+						<input type="hidden" name="_method" value="DELETE">#}
 						<tr>
-							<th width="100px">Matricula</th>
-							<th>Aluno</th>
-							<th width="150px">Ação</th>
+							<td>{{ aluno.matricula }}</td>
+							<td>{{ aluno.nome }}</td>
+							<td data-id="{{ aluno.id }}">
+								<a href="aluno/editar/{{ aluno.id }}/" class="btn btn-warning btn-xs" ><i class="fa fa-pencil fa-lg" aria-hidden="true"></i> Editar</a>
+								<button type="button" class="btn btn-danger btn-xs btn-excluir-aluno"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i> Excluir</button>
+							</td>
 						</tr>
-					</thead>
-					<tbody>
-						{% for aluno in alunos %}
-							<tr>
-								<td>{{ aluno.matricula }}</td>
-								<td>{{ aluno.nome }}</td>
-								<td>
-									<input type="submit" class="btn btn-warning btn-xs" name="editar" value="Editar" formaction="aluno/editar/" >
-									<input type="submit" class="btn btn-danger btn-xs" name="excluir" value="Excluir" formaction="aluno/{{ aluno.id }}/" formmethod="DELETE">
-								</td>
-							</tr>
-						{% endfor %}
-					</tbody>
-				</table>
-			</form>
+						{#</form>#}
+					{% endfor %}
+				</tbody>
+			</table>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-xs-12">
-			<a href="aluno/inserir" class="btn btn-success pull-right">Cadastrar Aluno</a>
+			<a href="aluno/cadastrar" class="btn btn-success pull-right"><span class="glyphicon glyphicon-plus"></span> Cadastrar Aluno</a>
 		</div>
 	</div>
+
+{% endblock %}
+{% block scripts %}
+	<script src="./app/aluno/listar.js"></script>
 {% endblock %}
