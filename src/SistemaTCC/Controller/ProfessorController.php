@@ -61,7 +61,7 @@ class ProfessorController {
 
         $errors = $this->validacao($app, $dados);
         if (count($errors) > 0) {
-            return new Response(json_encode($errors), Response::HTTP_BAD_REQUEST);
+            return $app->json($errors, 400);
         }
 
         $pessoa = new \SistemaTCC\Model\Pessoa();
@@ -79,10 +79,9 @@ class ProfessorController {
             $app['orm']->flush();
         }
         catch (\Exception $e) {
-            return new Response($e->getMessage(), Response::HTTP_BAD_REQUEST);
+            return $app->json([$e->getMessage()], 400);
         }
-
-        return new Response(json_encode(['success' => 'Professor cadastrado com sucesso.']), Response::HTTP_CREATED);
+        return $app->json(['success' => 'Professor cadastrado com sucesso.'], 201);
     }
 
     public function find(Application $app, Request $request, $id) {
@@ -106,7 +105,7 @@ class ProfessorController {
         ];
         $errors = $this->validacao($app, $dados);
         if (count($errors) > 0) {
-            return new Response(json_encode($errors), Response::HTTP_BAD_REQUEST);
+            return $app->json($errors, 400);
         }
 
         $pessoa = $professor->getPessoa();
@@ -120,26 +119,23 @@ class ProfessorController {
             $app['orm']->flush();
         }
         catch (\Exception $e) {
-            return new Response($e->getMessage(), Response::HTTP_BAD_REQUEST);
+            return $app->json([$e->getMessage()], 400);
         }
-
-        return new Response(json_encode(['success' => 'Professor editado com sucesso.']), Response::HTTP_CREATED);
+        return $app->json(['success' => 'Professor editado com sucesso.']);
     }
 
     public function del(Application $app, Request $request, $id) {
 
         if (null === $professor = $app['orm']->find('\SistemaTCC\Model\Professor', (int) $id))
-            return new Response(json_encode([ 'error' => 'O professor não existe.']), Response::HTTP_NOT_FOUND);
-
+            return $app->json([ 'error' => 'O professor não existe.'], 400);
         try {
             $app['orm']->remove($professor);
             $app['orm']->flush();
         }
         catch (\Exception $e) {
-            return new Response(json_encode([$e->getMessage()]), Response::HTTP_BAD_REQUEST);
+            return $app->json([$e->getMessage()], 400);
         }
-
-        return new Response(json_encode(['success' => 'Professor excluído com sucesso.']), Response::HTTP_OK);
+        return $app->json(['success' => 'Professor excluído com sucesso.']);
     }
 
     public function indexAction(Application $app, Request $request) {
