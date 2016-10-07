@@ -79,8 +79,8 @@ class AlunoController {
             return new Response($e->getMessage(), Response::HTTP_BAD_REQUEST);
         }
 
-        return new Response('Aluno excluído com sucesso.', Response::HTTP_OK);
-    }
+		return new Response(json_encode(array('Aluno excluído com sucesso.')), Response::HTTP_OK);
+	}
 
     public function indexAction() {
         return 'Index Aluno';
@@ -98,8 +98,11 @@ class AlunoController {
         return 'Excluir Aluno';
     }
 
-    public function listarAction() {
-        return 'Listar Aluno';
-    }
+	public function listarAction(Application $app) {
+		$sql = 'SELECT a.id, a.matricula, p.nome FROM \SistemaTCC\Model\Aluno a JOIN a.pessoa p';
+		$query = $app['orm']->createQuery($sql);
+		$alunos = $query->getResult();
+		return $app['twig']->render('aluno/listar.twig', array('alunos' => $alunos));
+	}
 
 }
