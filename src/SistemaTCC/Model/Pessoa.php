@@ -139,4 +139,3 @@ class Pessoa
         return $this->sexo;
     }
 }
-
