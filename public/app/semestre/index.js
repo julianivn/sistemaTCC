@@ -5,9 +5,10 @@
   const $btnCadSemestre = $('#btn-cadastrar-semestre');
   const url = '/semestre/deletar/';
 
-  const swalExcluir = {
+
+  const SwalExcluir = {
     title: "Você tem certeza?",
-    text: "Excluindo essa etapa não será possível recuperá-la",
+    text: "Após a exclusão não será possível recuperá-lo!",
     type: "warning",
     showCancelButton: true,
     confirmButtonColor: "#DD6B55",
@@ -17,7 +18,7 @@
     closeOnCancel: false
   }
 
-  const swalEditar = {
+  const SwalEditar = {
     title: "Editar essa etapa?",
     type: "warning",
     showCancelButton: true,
@@ -27,7 +28,6 @@
     closeOnConfirm: false,
     closeOnCancel: false
   }
-
 
   $btnCadSemestre.on('click', function(e){
     e.preventDefault();
