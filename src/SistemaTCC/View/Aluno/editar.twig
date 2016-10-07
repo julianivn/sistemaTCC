@@ -9,13 +9,13 @@
 					<div class="col-md-5 col-md-offset-1">
 						<div class="form-group">
 							<label for="nome" class ="control-label">Nome completo</label>
-							<input type="text" class="form-control " placeholder="Nome" name="nome" value="{{ aluno.getPessoa().getNome() }}">
+							<input type="text" class="form-control " placeholder="Nome" name="nome" value="{{ values.nome }}">
 						</div>
 					</div>
 					<div class="col-md-5">
 						<div class="form-group">
 							<label for="telefone" class ="control-label">Telefone</label>
-							<input type="text" class="form-control" placeholder="Telefone" name="telefone" value="{{ aluno.getPessoa().getTelefone() }}">
+							<input type="text" class="form-control" placeholder="Telefone" name="telefone" value="{{ values.telefone }}">
 						</div>
 					</div>
 				</div>
@@ -25,16 +25,16 @@
 					<div class="col-md-5 col-md-offset-1">
 						<div class="form-group">
 							<label for="cgu" class ="control-label">CGU</label>
-							<input type="number" class="form-control" placeholder="CGU" name="cgu" value="{{ aluno.getCgu() }}">
+							<input type="number" class="form-control" placeholder="CGU" name="cgu" value="{{ values.cgu }}">
 						</div>
 					</div>
 					<div class="col-md-5">
 						<div class="form-group">
 							<label for="sexo" class ="control-label">Sexo</label>
 							<select class="form-control" name="sexo">
-								<option value="1" {{ aluno.getPessoa().getSexo() == 1 ? 'selected' : '' }}>Masculino</option>
-								<option value="2" {{ aluno.getPessoa().getSexo() == 2 ? 'selected' : '' }}>Feminino</option>
-							</select>
+ +								<option value="1" {{ values.sexo == true ? 'selected' : '' }}>Masculino</option>
+ +								<option value="0" {{ values.sexo == false ? 'selected' : '' }}>Feminino</option>
+ +							</select>
 						</div>
 					</div>
 				</div>
@@ -44,13 +44,13 @@
 					<div class="col-md-5 col-md-offset-1">
 						<div class="form-group">
 							<label for="matricula" class ="control-label">Número de matrícula</label>
-							<input type="number" class="form-control " placeholder="Nº matricula" name="matricula" value="{{ aluno.getMatricula() }}">
+							<input type="number" class="form-control " placeholder="Nº matricula" name="matricula" value="{{ values.matricula }}">
 						</div>
 					</div>
 					<div class="col-md-5">
 						<div class="form-group">
 							<label for="email" class ="control-label">E-mail</label>
-							<input type="email" class="form-control" placeholder="Email" name="email" value="{{ aluno.getPessoa().getEmail() }}">
+							<input type="email" class="form-control" placeholder="Email" name="email" value="{{ values.email }}">
 						</div>
 					</div>
 				</div>
@@ -100,5 +100,5 @@
 
 			</form>
 
-		  <!--Fim conteudo-->
+
 {% endblock %}

@@ -90,7 +90,7 @@ class AlunoController {
         return 'Cadastrar Aluno';
     }
 
-    public function editarAction(Application $app) {
+    public function editarAction(Application $app, Request $request, $id) {
         // isso é o cara que pega os dados do banco, mas
         $db = $app['orm']->getRepository('\SistemaTCC\Model\Aluno');
         // o metodo 'find' passando um 'id' retorna um objeto do tipo Aluno
@@ -100,7 +100,20 @@ class AlunoController {
         if (!$aluno) {
             return $app->redirect('/aluno/listar');
         }
-		return $app['twig']->render('aluno/editar.twig', ['aluno' => $aluno]);
+
+		$dadosParaView = [
+			'values' => [
+			'nome'		=> $aluno->getPessoa()->getNome(),
+			'telefone'	=> $aluno->getPessoa()->getTelefone(),
+			'email'		=> $aluno->getPessoa()->getEmail(),
+			'sexo'		=> $aluno->getPessoa()->getSexo(),
+			'cgu'		=> $aluno->getCgu(),
+			'matricula'	=> $aluno->getMatricula()
+		      ],
+		];
+
+
+		return $app['twig']->render('aluno/editar.twig', $dadosParaView);
     }
 
     public function excluirAction() {
