@@ -49,10 +49,11 @@
 }
 .login-title
 {
-    color: #555;
-    font-size: 18px;
+    color: #FFF;
+    font-size: 32px;
     font-weight: 400;
     display: block;
+    text-shadow: 1px 2px 6px #484848;
 }
 .profile-img
 {
@@ -72,6 +73,9 @@
 {
     display: block;
     margin-top: 10px;
+}
+.content-login{
+  margin-top: 100px;
 }
 .centro {
     position:fixed;
