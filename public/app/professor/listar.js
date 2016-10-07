@@ -1,8 +1,8 @@
 $(function() {
 
     var $lista = $('#lista-js');
-    var url = '/professor/';
-    var urlListar = '/professor/listar';
+    var url = './professor/';
+    var urlListar = './professor/listar';
 
     function ajax(id) {
         var request = $.ajax({

@@ -2,8 +2,8 @@ $(function() {
 
     const $form = $('#form-js');
     const itemID = $form.find('#id').val();
-    const restURL = '/professor/';
-    const listaURL = '/professor/listar';
+    const restURL = './professor/';
+    const listaURL = './professor/listar';
 
     function verifyErrors(err) {
         const errors = err || {};
