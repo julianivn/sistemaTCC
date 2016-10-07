@@ -63,7 +63,7 @@ class AlunoController {
             return new Response($e->getMessage(), Response::HTTP_BAD_REQUEST);
         }
 
-        return new Response('Aluno editado com sucesso.', Response::HTTP_OK);
+         return new Response(json_encode(['success' => 'Aluno cadastrado com sucesso.']), Response::HTTP_OK);
     }
 
     public function del(Application $app, Request $request, $id) {
@@ -102,6 +102,7 @@ class AlunoController {
         }
 
 		$dadosParaView = [
+			'id'=>$id,
 			'values' => [
 			'nome'		=> $aluno->getPessoa()->getNome(),
 			'telefone'	=> $aluno->getPessoa()->getTelefone(),
