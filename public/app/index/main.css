@@ -48,10 +48,10 @@ html, body {
 /* FIM HEADER */
 
 .content {
-    width: 100%;
+    width: 80%;
     height: auto;
     margin: 100px auto 20px;
     background-color: #FFFFFF;
-    padding: 20px;
+    padding: 10px;
     overflow: hidden;
 }
