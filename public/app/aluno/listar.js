@@ -10,10 +10,10 @@ var swalExcluir = {
   closeOnCancel: false
 };
 var $lista = $('.lista-aluno-js');
-$lista.on('click', '.btn-excluir-aluno', function (e) {
+$lista.on('click', '.excluir-aluno-js', function (e) {
   e.preventDefault();
 
-  var alunoId = $(this).parent().data('id');
+  var alunoId = $(this).data('id');
 
   if (!alunoId)
     return false;
@@ -26,18 +26,14 @@ $lista.on('click', '.btn-excluir-aluno', function (e) {
         dataType: 'json'
       });
       request.done(function (data) {
-        swal("Deletado!", "O Aluno foi deletado com sucesso!", "sucess");
-        setTimeout(function () {
-          location.reload();
-        }, 2000);
-      }).fail(function (data) {
+        swal("Deletado!", "O Aluno foi deletado com sucesso!", "success");
+        $('#aluno-' + alunoId).remove();
+      });
+      request.fail(function (data) {
         swal("Erro!", "Erro ao deletar o aluno, tente novamente", "error");
       });
     } else {
       swal("Cancelado!", "O Aluno não foi deletado!", "error");
-      setTimeout(function () {
-        location.reload();
-      }, 2000);
     }
   });
 });
