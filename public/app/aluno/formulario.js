@@ -7,7 +7,7 @@ $(function() {
 
     function verifyErrors(err) {
         const errors = err || {};
-      
+
         $.each(['nome', 'email', 'telefone', 'cgu', 'matricula', 'sexo'], function(key, value) {
             const message = errors[value] || false;
             const element = $form.find('#' + value);
