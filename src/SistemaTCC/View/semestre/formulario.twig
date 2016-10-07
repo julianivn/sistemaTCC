@@ -49,10 +49,10 @@
 				</th>
 			  </tr>
 			</thead>
-			<tbody class="lista-etapa-js">
-                {% for etapa in values.etapa_1 %}
-                    <tr>
-                        <td data-id="{{ etapa.id }}">
+			<tbody id="etapa-tcc1-js" class="lista-etapa-js">
+                {% for etapa in values.etapa_tcc1 %}
+                    <tr data-id="{{ etapa.id }}">
+                        <td>
                             <span class="name-etapa">{{ etapa.nome }}</span>
                             <button type="button" name="excluir etapa" class="btn-header-tabs btn-excluir-etapa pull-right">
                               <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
@@ -78,10 +78,10 @@
 				</th>
 			  </tr>
 			</thead>
-			<tbody class="lista-etapa-js">
-                {% for etapa in values.etapa_2 %}
-                    <tr>
-                        <td data-id="{{ etapa.id }}">
+			<tbody id="etapa-tcc2-js" class="lista-etapa-js">
+                {% for etapa in values.etapa_tcc2 %}
+                    <tr data-id="{{ etapa.id }}">
+                        <td>
                             <span class="name-etapa">{{ etapa.nome }}</span>
                             <button type="button" name="excluir etapas" class="btn-header-tabs btn-excluir-etapa pull-right">
                               <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>

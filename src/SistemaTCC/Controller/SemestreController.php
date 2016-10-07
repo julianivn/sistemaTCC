@@ -88,16 +88,8 @@ class SemestreController {
                 'campus' 	=> '',
                 'ano'     	=> '',
                 'semestre'  => '',
-				'etapa_1'	=> [
-					['id' => '1', 'nome' => 'Etapa11'],
-					['id' => '2', 'nome' => 'Etapa22'],
-					['id' => '3', 'nome' => 'Etapa33']
-				],
-				'etapa_2'	=> [
-					['id' => '4', 'nome' => 'Etapa44'],
-					['id' => '5', 'nome' => 'Etapa55'],
-					['id' => '6', 'nome' => 'Etapa66']
-				],
+				    'etapa_tcc1'	=> [],
+				    'etapa_tcc2'	=> [],
             ],
         ];
         return $app['twig']->render('semestre/formulario.twig', $dadosParaView);
@@ -106,22 +98,22 @@ class SemestreController {
     public function editarAction(Application $app, Request $request) {
 		$dadosParaView = [
             'titulo' => 'Editar Semestre',
-			'id'	=> '111',
+			      'id'	   => '111',
             'values' => [
                 'campus' 	=> 'Gravataí',
                 'ano'     	=> '2016',
                 'semestre'  => '2',
-				'etapa_1'	=> [
-					['id' => '1', 'nome' => 'Etapa11'],
-					['id' => '2', 'nome' => 'Etapa22'],
-					['id' => '3', 'nome' => 'Etapa33']
-				],
-				'etapa_2'	=> [
-					['id' => '4', 'nome' => 'Etapa44'],
-					['id' => '5', 'nome' => 'Etapa55'],
-					['id' => '6', 'nome' => 'Etapa66']
-				],
-            ],
+				    'etapa_tcc1'	=> [
+					      ['id' => '1', 'nome' => 'Etapa11'],
+					      ['id' => '2', 'nome' => 'Etapa22'],
+					      ['id' => '3', 'nome' => 'Etapa33']
+				    ],
+				    'etapa_tcc2'	=> [
+					      ['id' => '4', 'nome' => 'Etapa44'],
+					      ['id' => '5', 'nome' => 'Etapa55'],
+					      ['id' => '6', 'nome' => 'Etapa66']
+				    ],
+          ],
         ];
         return $app['twig']->render('semestre/formulario.twig', $dadosParaView);
     }

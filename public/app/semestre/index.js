@@ -6,11 +6,9 @@
   const $btnSalvarEtapa = $('#btn-salvar-etapa-js');
   const url = '/semestre/deletar/';
 
-
   function init(){
     $('.datepicker').datepicker();
   }
-
   init();
 
   const swalExcluir = {
@@ -38,13 +36,31 @@
 
   $formSemestre.on('submit', function(e){
     e.preventDefault();
+    // const id = ('#id-semestre').val();
+    const body = {
+      campus: $formSemestre.find('#campus').val(),
+      ano: $formSemestre.find('#ano').val(),
+      semestre: $formSemestre.find('#semestre').val(),
+      etapa_tcc1: pushEtapa($('#etapa-tcc1-js').children()),
+      etapa_tcc2: pushEtapa($('#etapa-tcc2-js').children()),
+    }
+    
+    function pushEtapa(elem){
+      let arr = [];
+      $.each(elem, function(index, e){
+        arr.push(e.dataset.id);
+      });
+      return arr;
+    }
+
+    console.log(body);
 
   });
 
 
   $lista.on('click', '.btn-excluir-etapa', function(e){
     e.preventDefault();
-    const etapaId = $(this).parent().data('id');
+    const etapaId = $(this).parent().parent().data('id');
 
     if(!etapaId) return false;
 
@@ -78,7 +94,7 @@
 
   $lista.on('click', '.btn-editar-etapa', function(e){
     e.preventDefault();
-    const etapaId = $(this).parent().data('id');
+    const etapaId = $(this).parent().parent().data('id');
     $('#id-etapa').val(etapaId);
   });
 
