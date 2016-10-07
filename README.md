@@ -5,6 +5,7 @@ Sistema para Controle e Acompanhamento de Trabalhos de Conclusão de Curso
 * [Como utilizar o GitHub](https://docs.google.com/document/d/1tkLoMl36GVBOLx65DFY7RL-ss-EARA5kiWxK7eJA0Hs/)
 * [Instalação das Dependências](doc/ambiente/DEPENDENCIES.md)
 * [Criação de Ambiente com VirtualBox](doc/ambiente/AMBIENTE.md)
+* [Vídeo da aula de 30/09](https://www.youtube.com/watch?v=HI7b83x1xB8)
 
 ## Pré-requisitos
 * [Git](https://git-scm.com)
