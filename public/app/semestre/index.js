@@ -2,11 +2,18 @@
   'use strict';
 
   const $lista = $('.lista-etapa-js');
-  const $btnCadSemestre = $('#btn-cadastrar-semestre');
+  const $formSemestre = $('#form-js');
+  const $btnSalvarEtapa = $('#btn-salvar-etapa-js');
   const url = '/semestre/deletar/';
 
 
-  const SwalExcluir = {
+  function init(){
+    $('.datepicker').datepicker();
+  }
+
+  init();
+
+  const swalExcluir = {
     title: "Você tem certeza?",
     text: "Após a exclusão não será possível recuperá-lo!",
     type: "warning",
@@ -18,7 +25,7 @@
     closeOnCancel: false
   }
 
-  const SwalEditar = {
+  const swalEditar = {
     title: "Editar essa etapa?",
     type: "warning",
     showCancelButton: true,
@@ -29,17 +36,10 @@
     closeOnCancel: false
   }
 
-  $btnCadSemestre.on('click', function(e){
+  $formSemestre.on('submit', function(e){
     e.preventDefault();
 
-    const body = {
-      campus: 'campus',
-      ano: 'ano',
-      semestre: '',
-      tcc1: [121, 143],
-      tcc2: [123,232,232,232]
-    }
-  })
+  });
 
 
   $lista.on('click', '.btn-excluir-etapa', function(e){
@@ -79,16 +79,11 @@
   $lista.on('click', '.btn-editar-etapa', function(e){
     e.preventDefault();
     const etapaId = $(this).parent().data('id');
-
-    if(!etapaId) return false;
-
-    swal(swalEditar,
-    function(isConfirm){
-      if (isConfirm) {
-
-      } else {
-    	  swal("Cancelado", "A etapa não foi editada!", "error");
-      }
-    });
+    $('#id-etapa').val(etapaId);
   });
+
+  $btnSalvarEtapa.on('click', function(e){
+    e.preventDefault();
+    alert('vai salvar');
+  })
 })();
