@@ -6,8 +6,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Silex\Application;
 use Silex\Provider\TwigServiceProvider;
 use SistemaTCC\Provider\DoctrineOrmServiceProvider;
+use Silex\Provider\ValidatorServiceProvider;
 
 class SistemaTCC extends Application {
+
+	use Application\UrlGeneratorTrait;
 
     public function __construct() {
 
@@ -23,21 +26,24 @@ class SistemaTCC extends Application {
         $this->register(new DoctrineOrmServiceProvider());
         $app->register(new TwigServiceProvider(), ['twig.path' => __DIR__ . '/../View/']);
 
+        // Validator
+        $app->register(new ValidatorServiceProvider());
+
         // Controller
-        $app->get('/', "\\SistemaTCC\\Controller\\IndexController::indexAction");
+        $app->get('/', "\\SistemaTCC\\Controller\\IndexController::indexAction")->bind('/');
         $app->get('/creditos/', "\\SistemaTCC\\Controller\\IndexController::creditosAction");
         $app->get('/login/', "\\SistemaTCC\\Controller\\IndexController::creditosAction");
 
         $app->get('/aluno/', "\\SistemaTCC\\Controller\\AlunoController::indexAction");
         $app->get('/aluno/cadastrar/', "\\SistemaTCC\\Controller\\AlunoController::cadastrarAction");
-        $app->get('/aluno/editar/', "\\SistemaTCC\\Controller\\AlunoController::editarAction");
+        $app->get('/aluno/editar/{id}', "\\SistemaTCC\\Controller\\AlunoController::editarAction");
         $app->get('/aluno/excluir/', "\\SistemaTCC\\Controller\\AlunoController::excluirAction");
         $app->get('/aluno/listar/', "\\SistemaTCC\\Controller\\AlunoController::listarAction");
 
         $app->get('/professor/', "\\SistemaTCC\\Controller\\ProfessorController::indexAction");
         $app->get('/professor/cadastrar/', "\\SistemaTCC\\Controller\\ProfessorController::cadastrarAction");
-        $app->get('/professor/editar/', "\\SistemaTCC\\Controller\\ProfessorController::editarAction");
-        $app->get('/professor/excluir/', "\\SistemaTCC\\Controller\\ProfessorController::excluirAction");
+        $app->get('/professor/editar/{id}', "\\SistemaTCC\\Controller\\ProfessorController::editarAction");
+        // $app->get('/professor/excluir/', "\\SistemaTCC\\Controller\\ProfessorController::excluirAction");
         $app->get('/professor/listar/', "\\SistemaTCC\\Controller\\ProfessorController::listarAction");
 
         $app->get('/semestre/', "\\SistemaTCC\\Controller\\SemestreController::indexAction");

@@ -1,0 +1,35 @@
+{% extends 'layout.twig' %}
+{% block content %}
+    <h3>{{ titulo }}</h3>
+    <a href="/professor/cadastrar" class="btn btn-success">Cadastrar Novo</a>
+    <table class="table">
+        <thead>
+            <tr>
+              <th>Nome</th>
+              <th>E-mail</th>
+              <th>Telefone</th>
+              <th>Editar</th>
+              <th>Excluir</th>
+            </tr>
+        </thead>
+        <tbody id="lista-js">
+            {% for professor in professores %}
+            <tr>
+                <td>{{ professor.getPessoa().getNome() }}</td>
+                <td>{{ professor.getPessoa().getEmail() }}</td>
+                <td>{{ professor.getPessoa().getTelefone() }}</td>
+                <td>
+                    <a href="/professor/editar/{{ professor.getId() }}" class="btn btn-primary">Editar</a>
+                </td>
+                <td>
+                    <button data-id="{{ professor.getId() }}" class="excluir btn btn-danger">Excluir</button>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+{% block scripts %}
+<script src="/app/professor/listar.js"></script>
+{% endblock %}

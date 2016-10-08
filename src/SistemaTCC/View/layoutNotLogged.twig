@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <base href="{{ app.url('/') }}">
+    <title>SistemaTCC</title>
+    <link rel="stylesheet" href="./lib/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./app/index/main.css">
+    <link rel="stylesheet" href="./app/login/login.css">
+    <link rel="stylesheet" href="./app/shared/nav-side.css">
+    <!-- styles -->
+	  {% block styles %}
+	  {% endblock %}
+    <!-- /styles -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  </head>
+  <body>
+    <div class="main">
+      <div class="container">
+        <!-- <div class="content content-move-js"> -->
+          <!-- conteudo -->
+          {% block content %}
+          {% endblock %}
+          <!-- /conteudo -->
+        <!-- </div> -->
+      </div>
+    </div>
+    <script src="./lib/jquery/dist/jquery.min.js"></script>
+    <script src="./lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="./lib/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="./app/shared/nav-side.js"></script>
+    <!-- scripts -->
+	  {% block scripts %}
+	  {% endblock %}
+    <!-- /scripts -->
+  </body>
+</html>
