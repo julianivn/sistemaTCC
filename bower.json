@@ -1,5 +1,5 @@
 {
-  "name": "sistemaTCC",
+  "name": "sistematcc",
   "homepage": "https://github.com/Ulbra-Gravatai/sistemaTCC",
   "authors": [
     "Everton Nunes <everton.code@gmail.com>"
@@ -12,11 +12,13 @@
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests",
+    "public/lib"
   ],
   "dependencies": {
     "bootstrap": "^3.3.7",
     "font-awesome": "fontawesome#^4.6.3",
-    "sweetalert": "^1.1.3"
+    "sweetalert": "^1.1.3",
+    "bootstrap-datepicker": "^1.6.4"
   }
 }
