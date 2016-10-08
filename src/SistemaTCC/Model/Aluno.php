@@ -110,4 +110,3 @@ class Aluno
         return $this->pessoa;
     }
 }
-

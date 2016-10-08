@@ -63,7 +63,7 @@ class AlunoController {
             return new Response($e->getMessage(), Response::HTTP_BAD_REQUEST);
         }
 
-        return new Response('Aluno editado com sucesso.', Response::HTTP_OK);
+         return new Response(json_encode(['success' => 'Aluno cadastrado com sucesso.']), Response::HTTP_OK);
     }
 
     public function del(Application $app, Request $request, $id) {
@@ -90,8 +90,31 @@ class AlunoController {
         return 'Cadastrar Aluno';
     }
 
-    public function editarAction() {
-        return 'Editar Aluno';
+    public function editarAction(Application $app, Request $request, $id) {
+        // isso é o cara que pega os dados do banco, mas
+        $db = $app['orm']->getRepository('\SistemaTCC\Model\Aluno');
+        // o metodo 'find' passando um 'id' retorna um objeto do tipo Aluno
+        // $aluno === Aluno.php, usa os metodos get
+        $aluno = $db->find($id);
+        // se nao existir o aluno, ele retorna null, ai redireciona
+        if (!$aluno) {
+            return $app->redirect('/aluno/listar');
+        }
+
+		$dadosParaView = [
+			'id'=>$id,
+			'values' => [
+			'nome'		=> $aluno->getPessoa()->getNome(),
+			'telefone'	=> $aluno->getPessoa()->getTelefone(),
+			'email'		=> $aluno->getPessoa()->getEmail(),
+			'sexo'		=> $aluno->getPessoa()->getSexo(),
+			'cgu'		=> $aluno->getCgu(),
+			'matricula'	=> $aluno->getMatricula()
+		      ],
+		];
+
+
+		return $app['twig']->render('aluno/editar.twig', $dadosParaView);
     }
 
     public function excluirAction() {
