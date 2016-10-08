@@ -5,7 +5,7 @@
 <div class="container">
 	<h1>Incluir Professor</h1>
 	<div class="row">
-		<form action="" method="POST">
+		<form action="professor" method="POST">
 			<div class="col-md-5 col-sm-12 ">
 				<div class="form-group">
 					<label>	Nome: <br/>
@@ -15,19 +15,6 @@
 					<label>e-mail:<br/>
 					<input type="email" name="e-mail" size="35"></label>
 				</div>
-				<div class="form-group" >
-					<label>
-						Assinatura:
-						<h2>Aqui vai a assinatura. </h2>
-					</label>
-
-				</div>
-				<div class="form-group" >
-					<label><input class="form-control" type="submit" name="assinaura" value="Enviar Imagem"></label>
-				</div>
-			</div>
-
-			<div class="col-md-5 col-sm-12">
 				<div class="form-group" >
 					<label>Telefone:<br/>
 					<input type="text" name="telefone" size="35"></label>
@@ -40,20 +27,17 @@
 						</select>
 					</label>
 				</div>
-				<div class="form-group" >
-					<label>
-						Áreas de interesse:<br/>
-						<select multiple="multiple" size="4">
-							 <option value="redesi">Redes de Computadores I</option>
-							 <option value="redesii">Redes de Computadores II</option>
-							 <option value="Algoritmosi">Algoritmos de programação I</option>
-							 <option value="Algoritmosii">Algoritmos de programação II</option>
-							 <option value="Algoritmosiii">Algoritmos de programação III</option>
-							 <option value="Outros">Outros</option>
-						</select>
-					</label>
-				</div>
 
+			</div>
+
+			<div class="col-md-5 col-sm-12">
+						<h4>Áreas de interesse:</h4>
+						<div class="form-group"><label><input type="checkbox" name="interesse" value="redesi" >Redes de Computadores I</label></div>
+						<div class="form-group"><label><input type="checkbox" name="interesse" value="redesii" >Redes de Computadores II</label></div>
+						<div class="form-group"><label><input type="checkbox" name="interesse" value="Algoritmosi" >Algoritmos de programação I</label></div>
+						<div class="form-group"><label><input type="checkbox" name="interesse" value="Algoritmosii" >Algoritmos de programação II</label></div>
+						<div class="form-group"><label><input type="checkbox" name="interesse" value="Algoritmosiii" >Algoritmos de programação III</label></div>
+						<div class="form-group"><label><input type="checkbox" name="interesse" value="Outros" >Outros</label></div>
 				<div class="form-group" >
 					<label><input class="form-control" type="submit" name="cadastrar" value="Cadastrar"></label>
 				</div>
