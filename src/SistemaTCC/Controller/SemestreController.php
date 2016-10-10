@@ -36,15 +36,15 @@ class SemestreController {
             ],
             'tipo' => [
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
-                new Assert\Type([
-                        'type'    => 'integer',
-                        'message' => 'O valor {{ value }} não é um {{ type }} válido.',
-                    ]),
+                new Assert\Regex([
+                    'pattern' => '/^[1|2]$/',
+                    'message' => 'Não é um tipo válido'
+                ]),
             ],
             'campus' => [
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
                 new Assert\Type([
-                        'type'    => 'integer',
+                        'type'    => 'numeric',
                         'message' => 'O valor {{ value }} não é um {{ type }} válido.',
                     ]),
             ],
@@ -65,8 +65,8 @@ class SemestreController {
             'nome'       => $request->get('nome'),
             'dataInicio' => $request->get('dataInicio'),
             'dataFim'    => $request->get('dataFim'),
-            'tipo'       => (int)$request->get('tipo'),
-            'campus'     => (int)$request->get('campus'),
+            'tipo'       => $request->get('tipo'),
+            'campus'     => $request->get('campus'),
         ];
 
         $errors = $this->validacao($app, $dados);
@@ -101,20 +101,29 @@ class SemestreController {
 
     public function edit(Application $app, Request $request, $id) {
 
-        $semestre = $app['orm']->find('\\SistemaTCC\\Model\\Semestre', $request->get('id'));
+        $semestre = $app['orm']->find('\\SistemaTCC\\Model\\Semestre', $id);
         if (!$semestre) {
           return $app->json(['semestre' => 'Não existe semestre cadastrado'], 400);
         }
-          $campus = $app['orm']->find('\\SistemaTCC\\Model\\Campus', $request->get('campus'));
-        if (!$campus) {
-            return $app->json(['campus' => 'Não existe campus cadastrado'], 400);
-        }
+
+        $dados = [
+            'nome'       => $request->get('nome'),
+            'dataInicio' => $request->get('dataInicio'),
+            'dataFim'    => $request->get('dataFim'),
+            'tipo'       => $request->get('tipo'),
+            'campus'     => $request->get('campus'),
+        ];
 
         $errors = $this->validacao($app, $dados);
         if (count($errors) > 0) {
             return $app->json($errors, 400);
-        }  
-      
+        }
+
+        $campus = $app['orm']->find('\\SistemaTCC\\Model\\Campus', $request->get('campus'));
+        if (!$campus) {
+            return $app->json(['campus' => 'Não existe campus cadastrado'], 400);
+        }
+
         $semestre->setNome($request->get('nome'));
         $semestre->setDataInicio(new DateTime($request->get('dataInicio')));
         $semestre->setDataFim(new DateTime($request->get('dataFim')));
@@ -127,7 +136,7 @@ class SemestreController {
         catch (\Exception $e) {
             return $app->json(['semestre' => $e->getMessage()], 400);
         }
-        return $app->json(['semestre' => 'Semestre alterado com sucesso']);  
+        return $app->json(['semestre' => 'Semestre alterado com sucesso']);
     }
 
     public function del(Application $app, Request $request, $id) {
@@ -136,12 +145,12 @@ class SemestreController {
         if (!$semestre) {
             return $app->json(['semestre' => 'Não existe semestre cadastrado'], 400);
         }
-        
+
         try {
             $app['orm']->remove($semestre);
             $app['orm']->flush();
         }
-        catch (\Exception $e) { 
+        catch (\Exception $e) {
           return $app->json(['semestre' => $e->getMessage()], 400);
         }
         return $app->json(['semestre' => 'Semestre excluido com sucesso']);
@@ -171,7 +180,7 @@ class SemestreController {
              ],
         ];
         return $app['twig']->render('semestre/formulario.twig', $dadosParaView);
-    }  
+    }
     public function editarAction() {
       $dadosParaView = [
             'titulo' => 'Editar Semestre',
