@@ -93,10 +93,10 @@ class SemestreController {
             $app['orm']->flush();
         }
         catch (\Exception $e) {
-            return new Response($e->getMessage(), Response::HTTP_BAD_REQUEST);
+            return $app->json(['semestre' => $e->getMessage()], 400);
         }
 
-        return 'Semestre criado com ID #' . $semestre->getId();
+        return $app->json(['semestre' => 'Semestre criado com sucesso']);
     }
 
     public function edit(Application $app, Request $request, $id) {
@@ -125,10 +125,9 @@ class SemestreController {
             $app['orm']->flush();
         }
         catch (\Exception $e) {
-            return new Response($e->getMessage(), Response::HTTP_BAD_REQUEST);
+            return $app->json(['semestre' => $e->getMessage()], 400);
         }
-
-        return new Response('Semestre editado com sucesso.', Response::HTTP_OK);
+        return $app->json(['semestre' => 'Semestre alterado com sucesso']);  
     }
 
     public function del(Application $app, Request $request, $id) {
@@ -145,7 +144,7 @@ class SemestreController {
         catch (\Exception $e) { 
           return $app->json(['semestre' => $e->getMessage()], 400);
         }
-        return new Response('Semestre excluído com sucesso.', Response::HTTP_OK);
+        return $app->json(['semestre' => 'Semestre excluido com sucesso']);
     }
 
     public function find(Application $app, Request $request, $id) {
@@ -160,12 +159,40 @@ class SemestreController {
         return 'Index Semestre';
     }
 
-    public function cadastrarAction() {
-        return 'Cadastrar Semestre';
-    }
-
+    public function cadastrarAction(Application $app) {
+        $dadosParaView = [
+             'titulo' => 'Cadastrar Semestre',
+             'values' => [
+                 'campus'   => '',
+                 'ano'      => '',
+                 'semestre'  => '',
+            'etapa_tcc1'  => [],
+            'etapa_tcc2'  => [],
+             ],
+        ];
+        return $app['twig']->render('semestre/formulario.twig', $dadosParaView);
+    }  
     public function editarAction() {
-        return 'Editar Semestre';
+      $dadosParaView = [
+            'titulo' => 'Editar Semestre',
+            'id'     => '111',
+            'values' => [
+                'campus'    => 'Gravataí',
+                'ano'       => '2016',
+                'semestre'  => '2',
+            'etapa_tcc1'  => [
+                ['id' => '1', 'nome' => 'Etapa11'],
+                ['id' => '2', 'nome' => 'Etapa22'],
+                ['id' => '3', 'nome' => 'Etapa33']
+            ],
+            'etapa_tcc2'  => [
+                ['id' => '4', 'nome' => 'Etapa44'],
+                ['id' => '5', 'nome' => 'Etapa55'],
+                ['id' => '6', 'nome' => 'Etapa66']
+            ],
+          ],
+        ];
+        return $app['twig']->render('semestre/formulario.twig', $dadosParaView);
     }
 
     public function excluirAction() {
