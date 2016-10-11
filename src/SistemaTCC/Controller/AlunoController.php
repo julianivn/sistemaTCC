@@ -7,9 +7,70 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class AlunoController {
+	
+	private function validacao($app, $dados) {
+        $asserts = [
+            'nome' => [
+                new Assert\NotBlank(['message' => 'Preencha esse campo']),
+                new Assert\Regex([
+                    'pattern' => '/^[a-zA-ZÀ-ú ]+$/i',
+                    'message' => 'Seu nome deve possuir apenas letras'
+                ]),
+                new Assert\Length([
+                    'min' => 3,
+                    'max' => 50,
+                    'minMessage' => 'Seu nome precisa possuir pelo menos {{ limit }} caracteres',
+                    'maxMessage' => 'Seu nome não deve possuir mais que {{ limit }} caracteres',
+                ])
+            ],
+            'email' => [
+                new Assert\NotBlank(['message' => 'Preencha esse campo']),
+                new Assert\Email([
+                    'message' => 'Esse e-mail é inválido',
+                ])
+            ],
+            'telefone' => [
+                new Assert\NotBlank(['message' => 'Preencha esse campo']),
+            ],
+            'sexo' => [
+                new Assert\NotBlank(['message' => 'Preencha esse campo']),
+            ],
+			'cgu' => [
+                new Assert\NotBlank(['message' => 'Preencha esse campo']),
+            ],
+			'matricula' => [
+                new Assert\NotBlank(['message' => 'Preencha esse campo']),
+            ],
+
+        ];
+        $constraint = new Assert\Collection($asserts);
+        $errors = $app['validator']->validate($dados, $constraint);
+        $retorno = [];
+        if (count($errors)) {
+            foreach ($errors as $error) {
+                $key = preg_replace("/[\[\]]/", '', $error->getPropertyPath());
+                $retorno[$key] = $error->getMessage();
+            }
+        }
+        return $retorno;
+    }
+
 
     public function add(Application $app, Request $request) {
 
+        $dados = [
+            'nome'      => $request->get('nome'),
+            'email'     => $request->get('email'),
+            'telefone'  => $request->get('telefone'),
+            'sexo'      => $request->get('sexo'),
+			'cgu'		=> $request->get('cgu'),
+			'matricula'	=> $request->get('matricula')
+        ];
+
+        $errors = $this->validacao($app, $dados);
+        if (count($errors) > 0) {
+            return $app->json($errors, 400);
+        }
         $pessoa = new \SistemaTCC\Model\Pessoa();
         $aluno = new \SistemaTCC\Model\Aluno();
 
@@ -82,7 +143,7 @@ class AlunoController {
 		return new Response(json_encode(array('Aluno excluído com sucesso.')), Response::HTTP_OK);
 	}
 
-    public function indexAction() {
+    public function indexAction(Application $app, Request $request) {
         return $app->redirect('../aluno/listar');
     }
 
