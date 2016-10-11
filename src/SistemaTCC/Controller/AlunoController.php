@@ -83,11 +83,22 @@ class AlunoController {
 	}
 
     public function indexAction() {
-        return 'Index Aluno';
+        return $app->redirect('../aluno/listar');
     }
 
     public function cadastrarAction() {
-        return 'Cadastrar Aluno';
+        $dadosParaView = [
+            'titulo' => 'Cadastrar Aluno',
+            'values' => [
+                'nome'      => '',
+                'email'     => '',
+                'telefone'  => '',
+                'sexo'      => '',
+				'cgu'		=> '',
+				'matricula'	=> '',
+            ],
+        ];
+        return $app['twig']->render('aluno/formulario.twig', $dadosParaView);
     }
 
     public function editarAction(Application $app, Request $request, $id) {
@@ -98,7 +109,7 @@ class AlunoController {
         $aluno = $db->find($id);
         // se nao existir o aluno, ele retorna null, ai redireciona
         if (!$aluno) {
-            return $app->redirect('/aluno/listar');
+            return $app->redirect('../aluno/listar');
         }
 
 		$dadosParaView = [
