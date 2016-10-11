@@ -52,9 +52,6 @@ class SistemaTCC extends Application {
         $app->get('/semestre/excluir/', "\\SistemaTCC\\Controller\\SemestreController::excluirAction");
         $app->get('/semestre/listar/', "\\SistemaTCC\\Controller\\SemestreController::listarAction");
 
-        $app->post('/semestre/', "\\SistemaTCC\\Controller\\SemestreController::add");
-        $app->put('/semestre/{id}/', "\\SistemaTCC\\Controller\\SemestreController::edit");
-        $app->delete('/semestre/{id}/', "\\SistemaTCC\\Controller\\SemestreController::del");
 
         // REST Aluno
         $app->post('/aluno/', "\\SistemaTCC\\Controller\\AlunoController::add");
@@ -69,5 +66,12 @@ class SistemaTCC extends Application {
         $app->delete('/professor/{id}/', "\\SistemaTCC\\Controller\\ProfessorController::del");
 
     }
+		$app->get('/enviaretapa/', "\\SistemaTCC\\Controller\\EnviarEtapaController::indexAction");
+		$app->get('/enviaretapa/listar/', "\\SistemaTCC\\Controller\\EnviarEtapaController::listarAction");
+
+		// REST semestre
+		$app->post('/semestre/', "\\SistemaTCC\\Controller\\SemestreController::add");
+		$app->put('/semestre/{id}/', "\\SistemaTCC\\Controller\\SemestreController::edit");
+		$app->delete('/semestre/{id}/', "\\SistemaTCC\\Controller\\SemestreController::del");
 
 }
