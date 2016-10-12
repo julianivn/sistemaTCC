@@ -181,6 +181,7 @@ class SemestreController {
         ];
         return $app['twig']->render('semestre/formulario.twig', $dadosParaView);
     }
+    
     public function editarAction() {
       $dadosParaView = [
             'titulo' => 'Editar Semestre',
