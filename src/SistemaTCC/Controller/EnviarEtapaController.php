@@ -25,8 +25,21 @@ class EnviarEtapaController {
 		return 'Nota Etapa Aluno';
 	}
 
-	public function enviarAction() {
-		return 'Enviar Etapa Aluno';
+	public function enviarAction(Application $app, Request $request, $id) {
+		$db = $app['orm']->getRepository('\SistemaTCC\Model\Etapa');
+		$etapa = $db->find($id);
+		if (!$etapa) {
+			return $app->redirect('../../listar');
+		}
+		$dadosParaView = [
+			'titulo' => 'Enviar Etapa: ' . $etapa->getNome(),
+			'id' => $id,
+			'values' => [
+				'nome' => '',
+				'observacoes' => ''
+			],
+		];
+		return $app['twig']->render('enviaretapa/formulario.twig', $dadosParaView);
 	}
 
 }
