@@ -147,7 +147,7 @@ class AlunoController {
         return $app->redirect('../aluno/listar');
     }
 
-    public function cadastrarAction() {
+    public function cadastrarAction(Application $app, Request $request) {
         $dadosParaView = [
             'titulo' => 'Cadastrar Aluno',
             'values' => [

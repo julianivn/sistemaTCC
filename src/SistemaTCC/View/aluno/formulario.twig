@@ -1,0 +1,52 @@
+{% extends 'layout.twig' %}
+{% block content %}
+    <h3>{{ titulo }}</h3>
+    <form id="form-js">
+        {% if id is defined %}
+        <input type="hidden" name="id" value="{{ id }}" id="id" />
+        {% endif %}
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label class="control-label" for="nome">Nome</label>
+                    <input type="text" class="form-control" name="nome" id="nome" value="{{ values.nome }}">
+                    <span class="help-block"></span>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label class="control-label" for="email">E-mail</label>
+                    <input type="email" class="form-control" name="email" id="email" value="{{ values.email }}">
+                    <span class="help-block"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="form-group">
+                    <label class="control-label" for="telefone">Telefone</label>
+                    <input type="text" class="form-control" name="telefone" id="telefone" value="{{ values.telefone }}">
+                    <span class="help-block"></span>
+                </div>
+            </div>
+            <div class="col-xs-2">
+                <div class="form-group">
+                    <strong class="control-label">Sexo</strong>
+                    <div class="checkbox">
+                        <label for="">
+                            <input type="radio" name="sexo" value="1" id="sexom" {{ values.sexo == 1 ? 'checked' : '' }}> <strong>M</strong>
+                        </label>
+                        <label>
+                            <input type="radio" name="sexo" value="0" id="sexof" {{ values.sexo == 0 ? 'checked' : '' }}> <strong>F</strong>
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg">Salvar</button>
+    </form>
+{% endblock %}
+{% block scripts %}
+<script src="/app/professor/formulario.js"></script>
+{% endblock %}
