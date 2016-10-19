@@ -8,21 +8,26 @@
 		  <h3>Etapas</h3>
 	  </div>
   </div>
-  {% for etapa in etapas %}
-	<div class="row">
-		<div class="col-sm-12 col-xs-12">
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<h5 class="pull-left">{{ etapa.nome }}</h5>
-					<div class="pull-right">
-						<a href="enviaretapa/nota/{{ etapa.id }}/" class="btn btn-primary"><i class="fa fa-info"></i> Nota</a>
-						<a href="enviaretapa/enviar/{{ etapa.id }}/" class="btn btn-warning"><i class="fa fa-send-o"></i> Enviar</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-  {% endfor %}
+  {% if etapas|length > 0 %}
+	{% for etapa in etapas %}
+	  <div class="row">
+		  <div class="col-sm-12 col-xs-12">
+			  <div class="panel panel-default">
+				  <div class="panel-body">
+					  <h5 class="pull-left">{{ etapa.nome }}</h5>
+					  <div class="pull-right">
+						  <a href="enviaretapa/nota/{{ etapa.id }}/" class="btn btn-primary"><i class="fa fa-info"></i> Nota</a>
+						  <a href="enviaretapa/enviar/{{ etapa.id }}/" class="btn btn-warning"><i class="fa fa-send-o"></i> Enviar</a>
+					  </div>
+				  </div>
+			  </div>
+		  </div>
+	  </div>
+	{% endfor %}
+  {% else %}
+	<div class="alert alert-warning" role="alert">Nenhuma etapa encontrada!</div>
+  {% endif %}
+
 {% endblock %}
 {% block scripts %}
 {% endblock %}
