@@ -139,7 +139,7 @@ class ProfessorController {
     }
 
     public function indexAction(Application $app, Request $request) {
-        return $app->redirect('/professor/listar');
+        return $app->redirect('../professor/listar');
     }
 
     public function cadastrarAction(Application $app, Request $request) {
@@ -159,7 +159,7 @@ class ProfessorController {
         $db = $app['orm']->getRepository('\SistemaTCC\Model\Professor');
         $professor = $db->find($id);
         if (!$professor) {
-            return $app->redirect('/professor/listar');
+            return $app->redirect('../professor/listar');
         }
         $dadosParaView = [
             'titulo' => 'Alterando Professor: ' . $professor->getPessoa()->getNome(),
