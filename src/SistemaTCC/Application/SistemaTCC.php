@@ -4,6 +4,8 @@ namespace SistemaTCC\Application;
 
 use Symfony\Component\HttpFoundation\Request;
 use Silex\Application;
+use Silex\Provider\SessionServiceProvider;
+use Silex\Provider\SecurityServiceProvider;
 use Silex\Provider\TwigServiceProvider;
 use SistemaTCC\Provider\DoctrineOrmServiceProvider;
 use Silex\Provider\ValidatorServiceProvider;
@@ -24,6 +26,8 @@ class SistemaTCC extends Application {
 
 		// Provider
 		$this->register(new DoctrineOrmServiceProvider());
+		$this->register(new SessionServiceProvider());
+		$this->register(new SecurityServiceProvider(), ['security.firewalls' => []]);
 		$app->register(new TwigServiceProvider(), ['twig.path' => __DIR__ . '/../View/']);
 
 		// Validator
