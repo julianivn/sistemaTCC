@@ -27,7 +27,16 @@ class SistemaTCC extends Application {
 		// Provider
 		$this->register(new DoctrineOrmServiceProvider());
 		$this->register(new SessionServiceProvider());
-		$this->register(new SecurityServiceProvider(), ['security.firewalls' => []]);
+		$this->register(new SecurityServiceProvider(), ['security.firewalls' => [
+			'admin' => [
+				'pattern' => '^/creditos/',
+				'http' => true,
+				'form' => ['login_path' => '/login', 'check_path' => '/login/check/'],
+				'users' => [
+					'admin' => ['ROLE_ADMIN', '$2y$10$3i9/lVd8UOFIJ6PAMFt8gu3/r5g0qeCJvoSlLCsvMTythye19F77a']
+				]
+			]
+		]]);
 		$app->register(new TwigServiceProvider(), ['twig.path' => __DIR__ . '/../View/']);
 
 		// Validator
