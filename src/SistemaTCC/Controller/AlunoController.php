@@ -194,10 +194,13 @@ class AlunoController {
     }
 
 	public function listarAction(Application $app) {
-		$sql = 'SELECT a.id, a.matricula, p.nome FROM \SistemaTCC\Model\Aluno a JOIN a.pessoa p';
-		$query = $app['orm']->createQuery($sql);
-		$alunos = $query->getResult();
-		return $app['twig']->render('aluno/listar.twig', array('alunos' => $alunos));
-	}
+        $db = $app['orm']->getRepository('\SistemaTCC\Model\Aluno');
+        $alunos = $db->findAll();
+        $dadosParaView = [
+            'titulo' => 'Aluno Listar',
+            'alunos' => $alunos,
+        ];
+        return $app['twig']->render('aluno/listar.twig', $dadosParaView);
+    }
 
 }
