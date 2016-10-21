@@ -36,7 +36,7 @@ class SistemaTCC extends Application {
 		// Controller
 		$app->get('/', "\\SistemaTCC\\Controller\\IndexController::indexAction")->bind('/');
 		$app->get('/creditos/', "\\SistemaTCC\\Controller\\IndexController::creditosAction");
-		$app->get('/login/', "\\SistemaTCC\\Controller\\IndexController::creditosAction");
+		$app->get('/login/', "\\SistemaTCC\\Controller\\IndexController::loginAction");
 
 		$app->get('/aluno/', "\\SistemaTCC\\Controller\\AlunoController::indexAction");
 		$app->get('/aluno/cadastrar/', "\\SistemaTCC\\Controller\\AlunoController::cadastrarAction");
