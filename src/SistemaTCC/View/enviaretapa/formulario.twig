@@ -4,44 +4,45 @@
 {% endblock %}
 
 {% block content %}
-  <div class="row">
-	  <div class="col-sm-12 col-xs-12">
-		  <h3>{{ titulo }}</h3>
-	  </div>
-  </div>
-  <form id="form-js" class="form-default">
-	  {% if id is defined %}
-		<input type="hidden" name="id" value="{{ id }}" id="etapa-id" />
-	  {% endif %}
-	  <div class="row">
-		  <div class="col-xs-12">
-			  <div class="form-group">
-				  <label for="titulo">Nome</label>
-				  <input type="text" class="form-control" id="nome" placeholder="Titulo" value="{{ values.nome }}">
-				  <span class="help-block"></span>
-			  </div>
-		  </div>
-	  </div>
-	  <div class="row">
-		  <div class="col-xs-12">
-			  <div class="form-group">
-				  <label for="observacoes">Observações</label>
-				  <textarea class="form-control" id="observacoes"placeholder="Escreva aqui suas observações" rows="3">{{ values.observacoes }}</textarea>
-				  <span class="help-block"></span>
-			  </div>
-		  </div>
-	  </div>
-	  <div class="row">
-		  <div class="col-xs-12">
-			  <div class="form-group">
-				  <label for="arquivo">Enviar Arquivo</label>
-				  <input type="file" id="arquivo">
-				  <p class="help-block"></p>
-			  </div>
-		  </div>
-	  </div>
-	  <button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-save fa-lg" aria-hidden="true"></i> Salvar</button>
-  </form>
+	<div class="row">
+		<div class="col-sm-12 col-xs-12">
+			<h3>{{ titulo }} <small>{{ subtitulo }}</small></h3>
+		</div>
+	</div>
+	<form id="form-js" class="form-default">
+		{% if id is defined %}
+			<input type="hidden" name="id" value="{{ id }}" id="etapa-id" />
+		{% endif %}
+		<div class="row">
+			<div class="col-xs-4 col-xs-offset-4">
+				<table class="table table-bordered">
+					<thead>
+						<tr><th colspan="2" class="text-center">Datas para Envio</th></tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th class="text-right">Inicio:</th>
+							<td>{{ data_inicio }}</td>
+						</tr>
+						<tr>
+							<th class="text-right">Fim:</th>
+							<td>{{ data_fim }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="form-group">
+					<label for="arquivo">Enviar Arquivo</label>
+					<input type="file" id="arquivo">
+					<p class="help-block"></p>
+				</div>
+			</div>
+		</div>
+		<button type="submit" class="btn btn-primary btn-lg"><i class="fa fa-save fa-lg" aria-hidden="true"></i> Salvar</button>
+	</form>
 {% endblock %}
 
 {% block scripts %}

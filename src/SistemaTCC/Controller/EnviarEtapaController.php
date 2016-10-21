@@ -32,12 +32,12 @@ class EnviarEtapaController {
 			return $app->redirect('../../listar');
 		}
 		$dadosParaView = [
-			'titulo' => 'Enviar Etapa: ' . $etapa->getNome(),
+			'titulo' => 'Enviar Etapa:',
+			'subtitulo' => $etapa->getNome(),
 			'id' => $id,
-			'values' => [
-				'nome' => '',
-				'observacoes' => ''
-			],
+			'data_inicio' => $etapa->getDataInicio()->format('d/m/Y H:i:s'),
+			'data_fim' => $etapa->getDataFim()->format('d/m/Y H:i:s'),
+			'arquivos' => ''
 		];
 		return $app['twig']->render('enviaretapa/formulario.twig', $dadosParaView);
 	}
