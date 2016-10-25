@@ -56,6 +56,51 @@ class AlunoController {
     }
 
 
+    private function validacao($app, $dados) {
+      $asserts = [
+        'nome' => [
+          new Assert\NotBlank(['message' => 'Preencha esse campo']),
+          new Assert\Regex([
+              'pattern' => '/^[a-zA-ZÀ-ú ]+$/i',
+              'message' => 'Seu nome deve possuir apenas letras'
+          ]),
+          new Assert\Length([
+              'min' => 3,
+              'max' => 50,
+              'minMessage' => 'Seu nome precisa possuir pelo menos {{ limit }} caracteres',
+              'maxMessage' => 'Seu nome não deve possuir mais que {{ limit }} caracteres',
+          ])
+        ],
+        'email' => [
+          new Assert\NotBlank(['message' => 'Preencha esse campo']),
+          new Assert\Email([
+            'message' => 'Esse e-mail é inválido',
+          ])
+        ],
+        'telefone' => [
+          new Assert\NotBlank(['message' => 'Preencha esse campo']),
+        ],
+        'sexo' => [
+          new Assert\NotBlank(['message' => 'Preencha esse campo']),
+        ],
+        'matricula' => [
+          new Assert\NotBlank(['message' => 'Preencha esse campo']),
+        ],
+        'cgu' => [
+          new Assert\NotBlank(['message' => 'Preencha esse campo']),
+      ],
+    ];
+    $constraint = new Assert\Collection($asserts);
+    $errors = $app['validator']->validate($dados, $constraint);
+    $retorno = [];
+    if (count($errors)) {
+        foreach ($errors as $error) {
+            $key = preg_replace("/[\[\]]/", '', $error->getPropertyPath());
+            $retorno[$key] = $error->getMessage();
+        }
+    }
+    return $retorno;
+}
     public function add(Application $app, Request $request) {
 
         $dados = [

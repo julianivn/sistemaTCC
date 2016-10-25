@@ -181,6 +181,7 @@ class SemestreController {
         ];
         return $app['twig']->render('semestre/formulario.twig', $dadosParaView);
     }
+
     public function editarAction(Application $app) {
       $dadosParaView = [
             'titulo' => 'Editar Semestre',
@@ -209,8 +210,15 @@ class SemestreController {
         return 'Excluir Semestre';
     }
 
-    public function listarAction() {
-        return 'Listar Semestre';
+    public function listarAction(Application $app) {
+      $sql = 'SELECT a.nome, a.dataInicio, a.dataFim, a.tipo, a.campus FROM \SistemaTCC\Model\Semestre a JOIN a.semestre p';
+      $query = $app['orm']->createQuery($sql);
+      $alunos = $query->getResult();
+      return $app['twig']->render('semestre/listar.twig', array('semestre' => $semestres));
     }
 
+<<<<<<< HEAD
+  }
+=======
 }
+>>>>>>> master
