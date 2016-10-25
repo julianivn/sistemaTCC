@@ -3,12 +3,12 @@ $(function() {
     const $form = $('#form-js');
     const itemID = $form.find('#id').val();
     const restURL = './aluno/';
-    const listaURL = './aluno/listar';
+    const listaURL = './aluno/';
 
     function verifyErrors(err) {
         const errors = err || {};
 
-        $.each(['nome', 'email', 'telefone', 'cgu', 'matricula', 'sexo'], function(key, value) {
+        $.each(['nome', 'email', 'telefone', 'cgu', 'matricula'], function(key, value) {
             const message = errors[value] || false;
             const element = $form.find('#' + value);
             if (message) {
