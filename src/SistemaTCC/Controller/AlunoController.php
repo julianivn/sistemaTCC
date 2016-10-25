@@ -7,6 +7,54 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class AlunoController {
+	
+	private function validacao($app, $dados) {
+        $asserts = [
+            'nome' => [
+                new Assert\NotBlank(['message' => 'Preencha esse campo']),
+                new Assert\Regex([
+                    'pattern' => '/^[a-zA-ZÀ-ú ]+$/i',
+                    'message' => 'Seu nome deve possuir apenas letras'
+                ]),
+                new Assert\Length([
+                    'min' => 3,
+                    'max' => 50,
+                    'minMessage' => 'Seu nome precisa possuir pelo menos {{ limit }} caracteres',
+                    'maxMessage' => 'Seu nome não deve possuir mais que {{ limit }} caracteres',
+                ])
+            ],
+            'email' => [
+                new Assert\NotBlank(['message' => 'Preencha esse campo']),
+                new Assert\Email([
+                    'message' => 'Esse e-mail é inválido',
+                ])
+            ],
+            'telefone' => [
+                new Assert\NotBlank(['message' => 'Preencha esse campo']),
+            ],
+            'sexo' => [
+                new Assert\NotBlank(['message' => 'Preencha esse campo']),
+            ],
+			'cgu' => [
+                new Assert\NotBlank(['message' => 'Preencha esse campo']),
+            ],
+			'matricula' => [
+                new Assert\NotBlank(['message' => 'Preencha esse campo']),
+            ],
+
+        ];
+        $constraint = new Assert\Collection($asserts);
+        $errors = $app['validator']->validate($dados, $constraint);
+        $retorno = [];
+        if (count($errors)) {
+            foreach ($errors as $error) {
+                $key = preg_replace("/[\[\]]/", '', $error->getPropertyPath());
+                $retorno[$key] = $error->getMessage();
+            }
+        }
+        return $retorno;
+    }
+
 
     private function validacao($app, $dados) {
       $asserts = [
@@ -55,6 +103,19 @@ class AlunoController {
 }
     public function add(Application $app, Request $request) {
 
+        $dados = [
+            'nome'      => $request->get('nome'),
+            'email'     => $request->get('email'),
+            'telefone'  => $request->get('telefone'),
+            'sexo'      => $request->get('sexo'),
+			'cgu'		=> $request->get('cgu'),
+			'matricula'	=> $request->get('matricula')
+        ];
+
+        $errors = $this->validacao($app, $dados);
+        if (count($errors) > 0) {
+            return $app->json($errors, 400);
+        }
         $pessoa = new \SistemaTCC\Model\Pessoa();
         $aluno = new \SistemaTCC\Model\Aluno();
 
@@ -127,21 +188,21 @@ class AlunoController {
 		return new Response(json_encode(array('Aluno excluído com sucesso.')), Response::HTTP_OK);
 	}
 
-    public function indexAction() {
-        return 'Index Aluno';
+    public function indexAction(Application $app, Request $request) {
+        return $app->redirect('../aluno/listar');
     }
 
-    public function cadastrarAction(Application $app) {
+    public function cadastrarAction(Application $app, Request $request) {
         $dadosParaView = [
-          'titulo' => 'Cadastrar Aluno',
-          'values' => [
-              'nome' => '',
-              'email' => '',
-              'telefone' => '',
-              'sexo' => '',
-              'matricula' => '',
-              'cgu' => '',
-          ],
+            'titulo' => 'Cadastrar Aluno',
+            'values' => [
+                'nome'      => '',
+                'email'     => '',
+                'telefone'  => '',
+                'sexo'      => '',
+				'cgu'		=> '',
+				'matricula'	=> '',
+            ],
         ];
         return $app['twig']->render('aluno/formulario.twig', $dadosParaView);
     }
@@ -154,7 +215,7 @@ class AlunoController {
         $aluno = $db->find($id);
         // se nao existir o aluno, ele retorna null, ai redireciona
         if (!$aluno) {
-            return $app->redirect('/aluno/listar');
+            return $app->redirect('../aluno/listar');
         }
 
 		$dadosParaView = [
@@ -178,10 +239,13 @@ class AlunoController {
     }
 
 	public function listarAction(Application $app) {
-		$sql = 'SELECT a.id, a.matricula, p.nome FROM \SistemaTCC\Model\Aluno a JOIN a.pessoa p';
-		$query = $app['orm']->createQuery($sql);
-		$alunos = $query->getResult();
-		return $app['twig']->render('aluno/listar.twig', array('alunos' => $alunos));
-	}
+        $db = $app['orm']->getRepository('\SistemaTCC\Model\Aluno');
+        $alunos = $db->findAll();
+        $dadosParaView = [
+            'titulo' => 'Aluno Listar',
+            'alunos' => $alunos,
+        ];
+        return $app['twig']->render('aluno/listar.twig', $dadosParaView);
+    }
 
 }

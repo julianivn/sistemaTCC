@@ -6,3 +6,11 @@
   background: transparent;
   margin: 5px;
 }
+
+.form-default {
+  padding: 5px;
+}
+
+#container-etapas-js {
+  display: none;
+}

@@ -182,7 +182,7 @@ class SemestreController {
         return $app['twig']->render('semestre/formulario.twig', $dadosParaView);
     }
 
-    public function editarAction() {
+    public function editarAction(Application $app) {
       $dadosParaView = [
             'titulo' => 'Editar Semestre',
             'id'     => '111',
@@ -193,7 +193,8 @@ class SemestreController {
             'etapa_tcc1'  => [
                 ['id' => '1', 'nome' => 'Etapa11'],
                 ['id' => '2', 'nome' => 'Etapa22'],
-                ['id' => '3', 'nome' => 'Etapa33']
+                ['id' => '3', 'nome' => 'Etapa33'],
+                ['id' => '4', 'nome' => 'Etapa44']
             ],
             'etapa_tcc2'  => [
                 ['id' => '4', 'nome' => 'Etapa44'],
@@ -216,4 +217,8 @@ class SemestreController {
       return $app['twig']->render('semestre/listar.twig', array('semestre' => $semestres));
     }
 
+<<<<<<< HEAD
   }
+=======
+}
+>>>>>>> master
