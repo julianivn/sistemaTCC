@@ -1,5 +1,7 @@
 $(function() {
 
+    "use strict";
+
     const $form = $('#form-js');
     const itemID = $form.find('#id').val();
     const restURL = './aluno/';
