@@ -88,10 +88,9 @@ class AlunoController {
             $app['orm']->flush();
         }
         catch (\Exception $e) {
-            return new Response($e->getMessage(), Response::HTTP_BAD_REQUEST);
+            return $app->json([$e->getMessage()], 400);
         }
-
-        return new Response('Aluno cadastrado com sucesso.', Response::HTTP_CREATED);
+        return $app->json(['success' => 'Aluno cadastrado com sucesso.'], 201);
     }
 
     public function find(Application $app, Request $request, $id) {
