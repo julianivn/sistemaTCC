@@ -1,5 +1,7 @@
 $(function() {
 
+    "use strict";
+
     const $form = $('#form-js');
     const itemID = $form.find('#id').val();
     const restURL = './aluno/';
@@ -27,7 +29,7 @@ $(function() {
           	matricula: $form.find('#matricula').val(),
             telefone: $form.find('#telefone').val(),
             email: $form.find('#email').val(),
-            sexo: $form.find('#sexo option:selected').val(),
+            sexo: $form.find('[name=sexo]').val(),
           	cgu:  $form.find('#cgu').val(),
         };
 

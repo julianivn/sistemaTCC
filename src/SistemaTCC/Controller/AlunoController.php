@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class AlunoController {
-	
+
 	private function validacao($app, $dados) {
         $asserts = [
             'nome' => [
@@ -45,8 +45,8 @@ class AlunoController {
 
         ];
         $constraint = new Assert\Collection($asserts);
-        $errors = $app['validator']->validate($dados, $constraint);
-        $retorno = [];
+        $errors     = $app['validator']->validate($dados, $constraint);
+        $retorno    = [];
         if (count($errors)) {
             foreach ($errors as $error) {
                 $key = preg_replace("/[\[\]]/", '', $error->getPropertyPath());
@@ -55,7 +55,6 @@ class AlunoController {
         }
         return $retorno;
     }
-
 
     public function add(Application $app, Request $request) {
 
@@ -175,7 +174,7 @@ class AlunoController {
         }
 
 		$dadosParaView = [
-			'id'=>$id,
+			'id' => $id,
 			'values' => [
 			'nome'		=> $aluno->getPessoa()->getNome(),
 			'telefone'	=> $aluno->getPessoa()->getTelefone(),
@@ -183,9 +182,8 @@ class AlunoController {
 			'sexo'		=> $aluno->getPessoa()->getSexo(),
 			'cgu'		=> $aluno->getCgu(),
 			'matricula'	=> $aluno->getMatricula()
-		      ],
+		    ],
 		];
-
 
 		return $app['twig']->render('aluno/editar.twig', $dadosParaView);
     }

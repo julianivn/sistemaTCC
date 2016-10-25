@@ -40,7 +40,22 @@
                             <input type="radio" name="sexo" value="0" id="sexof" {{ values.sexo == 0 ? 'checked' : '' }}> <strong>F</strong>
                         </label>
                     </div>
-
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="form-group">
+                    <label class="control-label" for="CGU">CGU</label>
+                    <input type="text" class="form-control" name="cgu" id="cgu" value="{{ values.cgu }}">
+                    <span class="help-block"></span>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="form-group">
+                    <label class="control-label" for="Matricula">Matricula</label>
+                    <input type="text" class="form-control" name="matricula" id="matricula" value="{{ values.matricula }}">
+                    <span class="help-block"></span>
                 </div>
             </div>
         </div>
@@ -66,4 +81,8 @@
 {% endblock %}
 {% block scripts %}
 <script src="/app/aluno/formulario.js"></script>
+<<<<<<< HEAD
 {% endblock %}
+=======
+{% endblock %}
+>>>>>>> master
