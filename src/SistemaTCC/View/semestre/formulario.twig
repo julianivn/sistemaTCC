@@ -1,208 +1,209 @@
 {% extends 'layout.twig' %}
 {% block styles %}
-<link rel="stylesheet" href="./lib/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
-<link rel="stylesheet" href="./lib/sweetalert/dist/sweetalert.css">
-<link rel="stylesheet" href="./app/semestre/style.css">
+	<link rel="stylesheet" href="./lib/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+	<link rel="stylesheet" href="./lib/sweetalert/dist/sweetalert.css">
+	<link rel="stylesheet" href="./app/semestre/style.css">
 {% endblock %}
 {% block content %}
-<form id="form-js" class="form-default">
-    <h3>{{ titulo }}</h3>
-  <hr>
-  {% if id is defined %}
-    <input type="hidden" name="id" value="{{ id }}" id="id-semestre" />
-  {% endif %}
-  <div class="form-group">
-    <label for="Campus">Campus</label>
-    <input type="text" class="form-control" id="campus" placeholder="Ex.: Gravataí" value="{{ values.campus }}">
-  </div>
-  <div class="form-group">
-    <label for="ano">Ano</label>
-    <input type="text" class="form-control " id="ano" placeholder="Ex.: 2016" maxlength="4" value="{{ values.ano }}">
-  </div>
-  <div class="form-group">
-    <label for="semestre">Semestre</label>
-    <select class="form-control" id="semestre">
-      <option value="1" {{ values.semestre == 1 ? 'selected' : '' }}>1</option>
-      <option value="2" {{ values.semestre == 2 ? 'selected' : '' }}>2</option>
-    </select>
-  </div>
-  <div  class="form-group content-etapas">
-  	<ul class="nav nav-tabs">
-    	<li class="active">
-			<a data-toggle="tab"href="#tcc1">TCC1</a>
-		</li>
-		<li>
-			<a data-toggle="tab" href="#tcc2">TCC2</a>
-		</li>
-  	</ul>
-	<div>
-	  <div class="tab-content clearfix">
-	    <div class="tab-pane active" id="tcc1">
-		  <table class="table table-hover">
-		    <thead>
-			  <tr>
-			    <th>
-				  <h4 class="title-header-tabs">Número de etapas</h4>
-				  <button type="button" name="adicionar etapas" class="btn-header-tabs pull-right" data-toggle="modal" data-target="#addEtapa">
-					<i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
-				  </button>
-				</th>
-			  </tr>
-			</thead>
-			<tbody id="etapa-tcc1-js" class="lista-etapa-js">
-                {% for etapa in values.etapa_tcc1 %}
-                    <tr data-id="{{ etapa.id }}">
-                        <td>
-                            <span class="name-etapa">{{ etapa.nome }}</span>
-                            <button type="button" name="excluir etapa" class="btn-header-tabs btn-excluir-etapa pull-right">
-                              <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
-                            </button>
-                            <button type="button" name="editar etapa" class="btn-header-tabs btn-editar-etapa pull-right"  data-toggle="modal" data-target="#editEtapa">
-                              <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
-                            </button>
-                        </td>
-                    </tr>
-                {% endfor %}
-			</tbody>
-		  </table>
+	<form id="form-js" class="form-default">
+		<h3>{{ titulo }}</h3>
+		<hr>
+		{% if id is defined %}
+			<input type="hidden" name="id" value="{{ id }}" id="id-semestre"/>
+		{% endif %}
+		<div class="form-group">
+			<label for="Campus">Campus</label>
+			<input type="text" class="form-control" id="campus" placeholder="Ex.: Gravataí" value="{{ values.campus }}">
 		</div>
-		<div class="tab-pane" id="tcc2">
-		  <table class="table table-hover">
-		    <thead>
-			  <tr>
-			    <th>
-				  	<h4 class="title-header-tabs">Número de etapas</h4>
-					<button type="button" name="adicionar etapas" class="btn-header-tabs pull-right" data-toggle="modal" data-target="#addEtapa">
-				      <i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
-				    </button>
-				</th>
-			  </tr>
-			</thead>
-			<tbody id="etapa-tcc2-js" class="lista-etapa-js">
-                {% for etapa in values.etapa_tcc2 %}
-                    <tr data-id="{{ etapa.id }}">
-                        <td>
-                            <span class="name-etapa">{{ etapa.nome }}</span>
-                            <button type="button" name="excluir etapas" class="btn-header-tabs btn-excluir-etapa pull-right">
-                              <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
-                            </button>
-                            <button type="button" name="editar etapas" class="btn-header-tabs btn-editar-etapa pull-right" data-toggle="modal" data-target="#editEtapa">
-                              <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
-                            </button>
-                        </td>
-                    </tr>
-                {% endfor %}
-			</tbody>
-		  </table>
+		<div class="form-group">
+			<label for="ano">Ano</label>
+			<input type="text" class="form-control " id="ano" placeholder="Ex.: 2016" maxlength="4" value="{{ values.ano }}">
 		</div>
-	  </div>
-	</div>
-  </div>
-  <div class="form-group">
-    <button id="btn-cadastrar-semestre" type="submit" name="Cadastrar Semestre" class="btn btn-primary btn-lg pull-right ">Salvar</button>
-  </div>
-</form> <!-- Final do form -->
+		<div class="form-group">
+			<label for="semestre">Semestre</label>
+			<select class="form-control" id="semestre">
+				<option value="1" {{ values.semestre == 1 ? 'selected' : '' }}>1</option>
+				<option value="2" {{ values.semestre == 2 ? 'selected' : '' }}>2</option>
+			</select>
+		</div>
+		<div id="container-etapas-js" class="form-group content-etapas">
+			<ul class="nav nav-tabs">
+				<li class="active">
+					<a data-toggle="tab" href="#tcc1">TCC1</a>
+				</li>
+				<li>
+					<a data-toggle="tab" href="#tcc2">TCC2</a>
+				</li>
+			</ul>
+			<div>
+				<div class="tab-content clearfix">
+					<div class="tab-pane active" id="tcc1">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th>
+										<h4 class="title-header-tabs">Número de etapas</h4>
+										<button type="button" name="adicionar etapas" class="btn-header-tabs pull-right" data-toggle="modal" data-target="#addEtapa">
+											<i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
+										</button>
+									</th>
+								</tr>
+							</thead>
+							<tbody id="etapa-tcc1-js" class="lista-etapa-js">
+								{% for etapa in values.etapa_tcc1 %}
+									<tr data-id="{{ etapa.id }}">
+										<td>
+											<span class="name-etapa">{{ etapa.nome }}</span>
+											<button type="button" name="excluir etapa" class="btn-header-tabs btn-excluir-etapa pull-right">
+												<i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
+											</button>
+											<button type="button" name="editar etapa" class="btn-header-tabs btn-editar-etapa pull-right" data-toggle="modal" data-target="#editEtapa">
+												<i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
+											</button>
+										</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+					<div class="tab-pane" id="tcc2">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th>
+										<h4 class="title-header-tabs">Número de etapas</h4>
+										<button type="button" name="adicionar etapas" class="btn-header-tabs pull-right" data-toggle="modal" data-target="#addEtapa">
+											<i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
+										</button>
+									</th>
+								</tr>
+							</thead>
+							<tbody id="etapa-tcc2-js" class="lista-etapa-js">
+								{% for etapa in values.etapa_tcc2 %}
+									<tr data-id="{{ etapa.id }}">
+										<td>
+											<span class="name-etapa">{{ etapa.nome }}</span>
+											<button type="button" name="excluir etapas" class="btn-header-tabs btn-excluir-etapa pull-right">
+												<i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
+											</button>
+											<button type="button" name="editar etapas" class="btn-header-tabs btn-editar-etapa pull-right" data-toggle="modal" data-target="#editEtapa">
+												<i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
+											</button>
+										</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<button id="btn-cadastrar-semestre" type="submit" name="Cadastrar Semestre" class="btn btn-primary btn-lg pull-right ">Salvar e continuar</button>
+		</div>
+	</form>
+	<!-- Final do form -->
 
-<!-- Modal criar etapa -->
-<div class="modal fade" id="addEtapa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title" id="myModalLabel">Cadastrar Etapa</h4>
-      </div>
-      <div class="modal-body">
-        <form id="adicionar-etapa-js">
-			<div class="form-group">
-		      <label for="Campus">Nome</label>
-		      <input type="text" class="form-control" id="nome" placeholder="Ex.: Etapa 01">
-		    </div>
-			<div class="form-group">
-		      <label for="tipo">Tipo</label>
-		      <select class="form-control" id="tipo">
-		        <option value="1">1</option>
-		        <option value="2">2</option>
-		      </select>
-		    </div>
-			<div class="form-group">
-		      <label for="peso">Peso</label>
-		      <input type="text" class="form-control" id="peso" placeholder="Ex.: 6">
-		    </div>
-		    <div class="form-group">
-		      <label for="ano">Data Limite</label>
-		      <input type="text" class="form-control datepicker" id="data-limite" placeholder="Ex.: 10/10/2016">
-		    </div>
-			<div class="form-group">
-		      <label for="ano">Descrição</label>
-		      <input type="text" class="form-control " id="descricao" placeholder="Ex.: Etapa bla bla bla...">
-		    </div>
-			<div class="form-group">
-		      <label for="ano">Data Abertura</label>
-		      <input type="text" class="form-control datepicker" id="data-abertura" placeholder="Ex.: 10/10/2016">
-		    </div>
-        </div>
-      </form>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button id="btn-salvar-etapa-js" type="button" class="btn btn-primary">Salvar</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Modal editar etapa -->
-<div class="modal fade" id="editEtapa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title" id="myModalLabel">Editar Etapa</h4>
-      </div>
-      <div class="modal-body">
-        <form id="editar-etapa-js">
-            <input type="hidden" name="id" id="id-etapa" />
-			<div class="form-group">
-		      <label for="Campus">Nome</label>
-		      <input type="text" class="form-control" id="nome" placeholder="Ex.: Etapa 01">
-		    </div>
-			<div class="form-group">
-		      <label for="tipo">Tipo</label>
-		      <select class="form-control" id="tipo">
-		        <option value="1">1</option>
-		        <option value="2">2</option>
-		      </select>
-		    </div>
-			<div class="form-group">
-		      <label for="peso">Peso</label>
-		      <input type="text" class="form-control" id="peso" placeholder="Ex.: 6">
-		    </div>
-		    <div class="form-group">
-		      <label for="ano">Data Limite</label>
-		      <input type="text" class="form-control datepicker" id="data-limite" placeholder="Ex.: 10/10/2016">
-		    </div>
-			<div class="form-group">
-		      <label for="ano">Descrição</label>
-		      <input type="text" class="form-control " id="descricao" placeholder="Ex.: Etapa bla bla bla...">
-		    </div>
-			<div class="form-group">
-		      <label for="ano">Data Abertura</label>
-		      <input type="text" class="form-control datepicker" id="data-abertura" placeholder="Ex.: 10/10/2016">
-		    </div>
-        </div>
-    </form>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button id="btn-salvar-etapa-js" type="button" class="btn btn-primary">Salvar</button>
-      </div>
-    </div>
-  </div>
-</div>
+	<!-- Modal criar etapa -->
+	<div class="modal fade" id="addEtapa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Cadastrar Etapa</h4>
+				</div>
+				<div class="modal-body">
+					<form id="adicionar-etapa-js">
+						<div class="form-group">
+							<label for="Campus">Nome</label>
+							<input type="text" class="form-control" id="etapa-add-nome" placeholder="Ex.: Etapa 01">
+						</div>
+						<div class="form-group">
+							<label for="tipo">Tipo</label>
+							<select class="form-control" id="etapa-add-tipo">
+								<option value="1">1</option>
+								<option value="2">2</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="peso">Peso</label>
+							<input type="text" class="form-control" id="etapa-add-peso" placeholder="Ex.: 6">
+						</div>
+						<div class="form-group">
+							<label for="ano">Data Limite</label>
+							<input type="text" class="form-control datepicker" id="etapa-add-limite" placeholder="Ex.: 10/10/2016">
+						</div>
+						<div class="form-group">
+							<label for="ano">Descrição</label>
+							<input type="text" class="form-control " id="etapa-add-descricao" placeholder="Ex.: Etapa bla bla bla...">
+						</div>
+						<div class="form-group">
+							<label for="ano">Data Abertura</label>
+							<input type="text" class="form-control datepicker" id="etapa-add-abertura" placeholder="Ex.: 10/10/2016">
+						</div>
+					</div>
+				</form>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button id="btn-salvar-etapa-js" type="button" class="btn btn-primary">Salvar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal editar etapa -->
+	<div class="modal fade" id="editEtapa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Editar Etapa</h4>
+				</div>
+				<div class="modal-body">
+					<form id="editar-etapa-js">
+						<input type="hidden" name="id" id="id-etapa"/>
+						<div class="form-group">
+							<label for="Campus">Nome</label>
+							<input type="text" class="form-control" id="etapa-edit-nome" placeholder="Ex.: Etapa 01">
+						</div>
+						<div class="form-group">
+							<label for="tipo">Tipo</label>
+							<select class="form-control" id="etapa-edit-tipo">
+								<option value="1">1</option>
+								<option value="2">2</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="peso">Peso</label>
+							<input type="text" class="form-control" id="etapa-edit-peso" placeholder="Ex.: 6">
+						</div>
+						<div class="form-group">
+							<label for="ano">Data Limite</label>
+							<input type="text" class="form-control datepicker" id="etapa-edit-limite" placeholder="Ex.: 10/10/2016">
+						</div>
+						<div class="form-group">
+							<label for="ano">Descrição</label>
+							<input type="text" class="form-control " id="etapa-edit-descricao" placeholder="Ex.: Etapa bla bla bla...">
+						</div>
+						<div class="form-group">
+							<label for="ano">Data Abertura</label>
+							<input type="text" class="form-control datepicker" id="etapa-edit-abertura" placeholder="Ex.: 10/10/2016">
+						</div>
+					</div>
+				</form>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button id="btn-alterar-etapa-js" type="button" class="btn btn-primary">Salvar</button>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}
 {% block scripts %}
-<script src="./lib/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-<script src="./lib/sweetalert/dist/sweetalert.min.js"></script>
-<script src="./app/semestre/index.js"></script>
+	<script src="./lib/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+	<script src="./lib/sweetalert/dist/sweetalert.min.js"></script>
+	<script src="./app/semestre/index.js"></script>
 {% endblock %}
