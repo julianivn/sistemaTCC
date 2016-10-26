@@ -1,46 +1,39 @@
-$(function() {
+var swalExcluir = {
+  title: "Você tem certeza?",
+  text: "Após a exclusão não será possível recupera os dados.",
+  type: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#DD6B55",
+  confirmButtonText: "Deletar!",
+  cancelButtonText: "Cancelar!",
+  closeOnConfirm: false,
+  closeOnCancel: false
+};
+var $lista = $('.lista-aluno-js');
+$lista.on('click', '.excluir-aluno-js', function (e) {
+  e.preventDefault();
 
-    var $lista = $('#lista-js');
-    var url = './aluno/';
-    var urlListar = './aluno/listar';
+  var alunoId = $(this).data('id');
 
-    function ajax(id) {
-        var request = $.ajax({
-                url: url + id + '/',
-                type: 'delete',
-                dataType: 'json',
-            });
-        // Caiu aqui deu certo
-        request.done(function(data) {
-            location.href = urlListar;
-            return;
-        });
+  if (!alunoId)
+    return false;
 
-        // Caiu aqui, tem erro
-        request.fail(function(err) {
-            console.log(err);
-            return false;
-        });
+  swal(swalExcluir, function (isConfirm) {
+    if (isConfirm) {
+      var request = $.ajax({
+        url: 'aluno/' + alunoId + '/',
+        type: 'DELETE',
+        dataType: 'json'
+      });
+      request.done(function (data) {
+        swal("Deletado!", "O Aluno foi deletado com sucesso!", "success");
+        $('#aluno-' + alunoId).remove();
+      });
+      request.fail(function (data) {
+        swal("Erro!", "Erro ao deletar o aluno, tente novamente", "error");
+      });
+    } else {
+      swal("Cancelado!", "O Aluno não foi deletado!", "error");
     }
-
-    $lista.on('click', '.excluir', function(event) {
-        event.preventDefault();
-        var id = $(this).data('id');
-        if (!id) {
-            return false;
-        }
-        swal({
-            title: "Deseja mesmo excluir?",
-            text: "Você irá remover esse registro!",
-            type: "error",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Sim, excluir agora!",
-            closeOnConfirm: false },
-            function(){
-                swal("Ok!", "Registro excluido!", "success");
-                ajax(id);
-            });
-    });
-
+  });
 });
