@@ -24,8 +24,8 @@
         <div class="row">
             <div class="col-xs-4">
                 <div class="form-group">
-                    <label class="control-label" for="telefone">Telefone</label>
-                    <input type="text" class="form-control" name="telefone" id="telefone" value="{{ values.telefone }}">
+                    <label class="control-label" for="telefone">Telefone <small>(com DDD)</small></label>
+                    <input type="number" class="form-control" name="telefone" id="telefone" value="{{ values.telefone }}">
                     <span class="help-block"></span>
                 </div>
             </div>
@@ -48,5 +48,5 @@
     </form>
 {% endblock %}
 {% block scripts %}
-<script src="/app/professor/formulario.js"></script>
+<script src="./app/professor/formulario.js"></script>
 {% endblock %}

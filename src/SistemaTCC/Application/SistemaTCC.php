@@ -76,5 +76,4 @@ class SistemaTCC extends Application {
 		$app->put('/semestre/{id}/', "\\SistemaTCC\\Controller\\SemestreController::edit");
 		$app->delete('/semestre/{id}/', "\\SistemaTCC\\Controller\\SemestreController::del");
 	}
-
 }

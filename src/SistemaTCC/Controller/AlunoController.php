@@ -5,9 +5,10 @@ namespace SistemaTCC\Controller;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class AlunoController {
-	
+
 	private function validacao($app, $dados) {
         $asserts = [
             'nome' => [
@@ -44,8 +45,8 @@ class AlunoController {
 
         ];
         $constraint = new Assert\Collection($asserts);
-        $errors = $app['validator']->validate($dados, $constraint);
-        $retorno = [];
+        $errors     = $app['validator']->validate($dados, $constraint);
+        $retorno    = [];
         if (count($errors)) {
             foreach ($errors as $error) {
                 $key = preg_replace("/[\[\]]/", '', $error->getPropertyPath());
@@ -54,7 +55,6 @@ class AlunoController {
         }
         return $retorno;
     }
-
 
     public function add(Application $app, Request $request) {
 
@@ -147,7 +147,7 @@ class AlunoController {
         return $app->redirect('../aluno/listar');
     }
 
-    public function cadastrarAction() {
+    public function cadastrarAction(Application $app, Request $request) {
         $dadosParaView = [
             'titulo' => 'Cadastrar Aluno',
             'values' => [
@@ -174,7 +174,7 @@ class AlunoController {
         }
 
 		$dadosParaView = [
-			'id'=>$id,
+			'id' => $id,
 			'values' => [
 			'nome'		=> $aluno->getPessoa()->getNome(),
 			'telefone'	=> $aluno->getPessoa()->getTelefone(),
@@ -182,9 +182,8 @@ class AlunoController {
 			'sexo'		=> $aluno->getPessoa()->getSexo(),
 			'cgu'		=> $aluno->getCgu(),
 			'matricula'	=> $aluno->getMatricula()
-		      ],
+		    ],
 		];
-
 
 		return $app['twig']->render('aluno/editar.twig', $dadosParaView);
     }
@@ -194,10 +193,13 @@ class AlunoController {
     }
 
 	public function listarAction(Application $app) {
-		$sql = 'SELECT a.id, a.matricula, p.nome FROM \SistemaTCC\Model\Aluno a JOIN a.pessoa p';
-		$query = $app['orm']->createQuery($sql);
-		$alunos = $query->getResult();
-		return $app['twig']->render('aluno/listar.twig', array('alunos' => $alunos));
-	}
+        $db = $app['orm']->getRepository('\SistemaTCC\Model\Aluno');
+        $alunos = $db->findAll();
+        $dadosParaView = [
+            'titulo' => 'Aluno Listar',
+            'alunos' => $alunos,
+        ];
+        return $app['twig']->render('aluno/listar.twig', $dadosParaView);
+    }
 
 }

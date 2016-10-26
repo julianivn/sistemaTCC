@@ -1,48 +1,34 @@
 {% extends "layout.twig" %}
-{% block styles %}
-  <link rel="stylesheet" href="./app/aluno/listar.css">
-{% endblock %}
 {% block content %}
-  <div class="row">
-	  <div class="col-sm-6 col-xs-12">
-		  <h3>Listar Aluno</h3>
-	  </div>
-	  <div class="col-sm-6 col-xs-12">
-		  <a href="aluno/cadastrar" class="btn btn-success btn-aluno-cadastrar"><span class="glyphicon glyphicon-plus"></span> Cadastrar Aluno</a>
-	  </div>
-  </div>
-  <div class="row">
-	  <div class="col-xs-12">
-		  <table class="table table-striped">
-			  <thead>
-				  <tr>
-					  <th width="100px">Matricula</th>
-					  <th>Aluno</th>
-				  </tr>
-			  </thead>
-			  <tbody class="lista-aluno-js">
-				  {% for aluno in alunos %}
-					<tr id="aluno-{{ aluno.id }}">
-						<td>{{ aluno.matricula }}</td>
-						<td>
-							{{ aluno.nome }}
-							<div class="pull-right">
-								<a href="aluno/editar/{{ aluno.id }}/" class="btn btn-primary btn-xs" >
-									<i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
-									<span class="hidden-xs">Editar</span>
-								</a>
-								<button type="button" class="btn btn-danger btn-xs excluir-aluno-js" data-id="{{ aluno.id }}">
-									<i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
-									<span class="hidden-xs">Excluir</span>
-								</button>
-							</div>
-						</td>
-					</tr>
-				  {% endfor %}
-			  </tbody>
-		  </table>
-	  </div>
-  </div>
+    <h3>{{ titulo }}</h3>
+	<a href="/aluno/cadastrar" class="btn btn-success">Cadastrar Novo</a>
+	      <table class="table">
+        <thead>
+            <tr>
+              <th>Nome</th>
+              <th>E-mail</th>
+              <th>Telefone</th>
+              <th>Editar</th>
+              <th>Excluir</th>
+            </tr>
+        </thead>
+        <tbody id="lista-js">
+            {% for aluno in alunos %}
+            <tr>
+                <td>{{ aluno.getPessoa().getNome() }}</td>
+                <td>{{ aluno.getPessoa().getEmail() }}</td>
+                <td>{{ aluno.getPessoa().getTelefone() }}</td>
+                <td>
+                    <a href="/aluno/editar/{{ aluno.getId() }}" class="btn btn-primary">Editar</a>
+                </td>
+                <td>
+                    <button data-id="{{ aluno.getId() }}" class="excluir btn btn-danger">Excluir</button>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
 
 {% endblock %}
 {% block scripts %}
