@@ -217,8 +217,4 @@ class SemestreController {
       return $app['twig']->render('semestre/listar.twig', array('semestre' => $semestres));
     }
 
-<<<<<<< HEAD
-  }
-=======
 }
->>>>>>> master
