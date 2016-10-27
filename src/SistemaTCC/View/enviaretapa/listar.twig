@@ -5,7 +5,7 @@
 {% block content %}
   <div class="row">
 	  <div class="col-sm-12 col-xs-12">
-		  <h3>Etapas</h3>
+		  <h3>{{ titulo }}</h3>
 	  </div>
   </div>
   {% if etapas|length > 0 %}
@@ -17,7 +17,11 @@
 					  <h5 class="pull-left">{{ etapa.nome }}</h5>
 					  <div class="pull-right">
 						  <a href="enviaretapa/nota/{{ etapa.id }}/" class="btn btn-primary"><i class="fa fa-info"></i> Nota</a>
-						  <a href="enviaretapa/enviar/{{ etapa.id }}/" class="btn btn-warning"><i class="fa fa-send-o"></i> Enviar</a>
+						  <a href="enviaretapa/enviar/{{ etapa.id }}/" class="btn btn-warning
+							 {% if etapa.getDataInicio() > data_atual or etapa.getDataFim() < data_atual %}
+							   disabled
+							 {% endif %}
+							 "><i class="fa fa-send-o"></i> Enviar</a>
 					  </div>
 				  </div>
 			  </div>

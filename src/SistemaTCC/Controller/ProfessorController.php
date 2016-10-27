@@ -19,7 +19,7 @@ class ProfessorController {
                 ]),
                 new Assert\Length([
                     'min' => 3,
-                    'max' => 50,
+                    'max' => 25,
                     'minMessage' => 'Seu nome precisa possuir pelo menos {{ limit }} caracteres',
                     'maxMessage' => 'Seu nome não deve possuir mais que {{ limit }} caracteres',
                 ])
