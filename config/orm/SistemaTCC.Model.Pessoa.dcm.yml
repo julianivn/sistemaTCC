@@ -14,7 +14,7 @@ SistemaTCC\Model\Pessoa:
         nome:
             type: string
             nullable: false
-            length: 25
+            length: 255
             options:
                 fixed: false
         email:
