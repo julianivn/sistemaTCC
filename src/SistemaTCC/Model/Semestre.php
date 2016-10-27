@@ -28,11 +28,6 @@ class Semestre
     private $dataFim;
 
     /**
-     * @var integer
-     */
-    private $tipo;
-
-    /**
      * @var \SistemaTCC\Model\Campus
      */
     private $campus;
@@ -118,30 +113,6 @@ class Semestre
     public function getDataFim()
     {
         return $this->dataFim;
-    }
-
-    /**
-     * Set tipo
-     *
-     * @param integer $tipo
-     *
-     * @return Semestre
-     */
-    public function setTipo($tipo)
-    {
-        $this->tipo = $tipo;
-
-        return $this;
-    }
-
-    /**
-     * Get tipo
-     *
-     * @return integer
-     */
-    public function getTipo()
-    {
-        return $this->tipo;
     }
 
     /**
