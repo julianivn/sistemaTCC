@@ -71,6 +71,12 @@ class SistemaTCC extends Application {
 		$app->get('/enviaretapa/enviar/{id}/', "\\SistemaTCC\\Controller\\EnviarEtapaController::enviarAction");
 		$app->get('/enviaretapa/nota/{id}/', "\\SistemaTCC\\Controller\\EnviarEtapaController::notaAction");
 
+		// REST Etapa Status
+		$app->post('/etapa-status/', "SistemaTCC\Controller\EtapaStatusController::add");
+		$app->get('/etapa-status/{id}/', "SistemaTCC\Controller\EtapaStatusController::find");
+		$app->put('/etapa-status/{id}/', "SistemaTCC\Controller\EtapaStatusController::edit");
+		$app->delete('/etapa-status/{id}/', "SistemaTCC\Controller\EtapaStatusController::del");
+
 		// REST semestre
 		$app->post('/semestre/', "\\SistemaTCC\\Controller\\SemestreController::add");
 		$app->put('/semestre/{id}/', "\\SistemaTCC\\Controller\\SemestreController::edit");
