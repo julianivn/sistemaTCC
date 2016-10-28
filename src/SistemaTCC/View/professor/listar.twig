@@ -1,11 +1,22 @@
 {% extends 'layout.twig' %}
+{% block styles %}
+  <link rel="stylesheet" href="./app/professor/listar.css">
+{% endblock %}
 {% block content %}
-    <h3>{{ titulo }}</h3>
-    <a href="/professor/cadastrar" class="btn btn-success">Cadastrar Novo</a>
-    <table class="table">
+	<div class="row">
+		<div class="col-sm-6 col-xs-12">
+			<h3>{{ titulo }}</h3>
+		</div>		
+		<div class="col-sm-6 col-xs-12">
+			<a href="./professor/cadastrar" class="btn btn-success btn-professor-cadastrar"><span class="glyphicon glyphicon-plus"></span> Cadastrar Professor</a>
+		</div>
+	</div>
+	
+	<table class="table">
+	</div>
         <thead>
             <tr>
-              <th>Nome</th>
+              <th width="170px">Nome</th>
               <th>E-mail</th>
               <th>Telefone</th>
               <th>Editar</th>
@@ -31,5 +42,5 @@
 
 {% endblock %}
 {% block scripts %}
-<script src="/app/professor/listar.js"></script>
+<script src="./app/professor/listar.js"></script>
 {% endblock %}

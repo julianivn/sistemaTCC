@@ -53,6 +53,11 @@ class Etapa
     private $enviarEmailOrientador;
 
     /**
+     * @var integer
+     */
+    private $tcc;
+
+    /**
      * @var \SistemaTCC\Model\EtapaTipo
      */
     private $etapaTipo;
@@ -263,6 +268,30 @@ class Etapa
     public function getEnviarEmailOrientador()
     {
         return $this->enviarEmailOrientador;
+    }
+
+    /**
+     * Set tcc
+     *
+     * @param integer $tcc
+     *
+     * @return Etapa
+     */
+    public function setTcc($tcc)
+    {
+        $this->tcc = $tcc;
+
+        return $this;
+    }
+
+    /**
+     * Get tcc
+     *
+     * @return integer
+     */
+    public function getTcc()
+    {
+        return $this->tcc;
     }
 
     /**

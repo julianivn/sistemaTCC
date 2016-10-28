@@ -54,6 +54,10 @@ SistemaTCC\Model\Etapa:
             type: boolean
             nullable: false
             column: enviar_email_orientador
+        tcc:
+            type: integer
+            nullable: false
+            column: tcc
     manyToOne:
         etapaTipo:
             targetEntity: SistemaTCC\Model\EtapaTipo
