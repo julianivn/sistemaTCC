@@ -32,7 +32,6 @@ class Semestre
      */
     private $campus;
 
-
     /**
      * Get id
      *
