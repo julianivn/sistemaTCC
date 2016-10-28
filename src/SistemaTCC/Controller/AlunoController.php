@@ -21,7 +21,7 @@ class AlunoController {
                     'min' => 3,
                     'max' => 255,
                     'minMessage' => 'Seu nome precisa possuir pelo menos {{ limit }} caracteres',
-                    'maxMessage' => 'Seu nome não deve possuir mais que {{ limit }} caracteres',
+                    'maxMessage' => 'Seu nome não deve possuir mais que {{ limit }} caracteres'
                 ])
             ],
             'email' => [
@@ -38,10 +38,22 @@ class AlunoController {
             ],
 			'cgu' => [
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
+                new Assert\Length([
+                     'min' => 0,
+                     'max' => 10,
+                     'minMessage' => 'Seu CGU precisa possuir pelo menos {{ limit }} caracteres',
+                     'maxMessage' => 'Seu CGU não deve possuir mais que {{ limit }} caracteres'
+                ])
             ],
 			'matricula' => [
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
-            ],
+                new Assert\Length([
+                     'min' => 0,
+                     'max' => 10,
+                     'minMessage' => 'Seu CGU precisa possuir pelo menos {{ limit }} caracteres',
+                     'maxMessage' => 'Seu CGU não deve possuir mais que {{ limit }} caracteres'
+                ])    
+            ]
 
         ];
         $constraint = new Assert\Collection($asserts);
