@@ -29,11 +29,6 @@ SistemaTCC\Model\Semestre:
             type: date
             nullable: false
             column: data_fim
-        tipo:
-            type: integer
-            nullable: true
-            options:
-                unsigned: false
     manyToOne:
         campus:
             targetEntity: SistemaTCC\Model\Campus

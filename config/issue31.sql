@@ -1,0 +1,3 @@
+ALTER TABLE etapa ADD tcc INT NOT NULL;
+ALTER TABLE pessoa CHANGE nome nome VARCHAR(255) NOT NULL;
+ALTER TABLE semestre DROP tipo;

@@ -7,6 +7,8 @@ namespace SistemaTCC\Model;
  */
 class EtapaStatus
 {
+	use Serializer\ObjectToJson;
+
     /**
      * @var integer
      */
@@ -52,4 +54,3 @@ class EtapaStatus
         return $this->nome;
     }
 }
-

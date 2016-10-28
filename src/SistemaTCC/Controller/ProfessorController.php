@@ -19,7 +19,7 @@ class ProfessorController {
                 ]),
                 new Assert\Length([
                     'min' => 3,
-                    'max' => 50,
+                    'max' => 255,
                     'minMessage' => 'Seu nome precisa possuir pelo menos {{ limit }} caracteres',
                     'maxMessage' => 'Seu nome não deve possuir mais que {{ limit }} caracteres',
                 ])
@@ -32,6 +32,12 @@ class ProfessorController {
             ],
             'telefone' => [
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
+                new Assert\Length([
+                    'min' => 10,
+                    'max' => 12,
+                    'minMessage' => 'Informe no mínimo {{ limit }} números',
+                    'maxMessage' => 'Informe no máximo {{ limit }} números',
+                ])
             ],
             'sexo' => [
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
