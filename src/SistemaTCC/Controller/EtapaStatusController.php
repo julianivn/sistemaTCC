@@ -67,7 +67,7 @@ class EtapaStatusController {
 			return new JsonResponse('O status não foi encontrado.', JsonResponse::HTTP_NOT_FOUND);
 		}
 
-        return new JsonResponse($etapaStatus->toArray());
+        return new JsonResponse($etapaStatus->toJson());
     }
 
 }
