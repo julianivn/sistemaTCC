@@ -5,8 +5,8 @@
   const $formSemestre = $('#form-js');
   const $btnSalvarEtapa = $('#btn-salvar-etapa-js');
   const $btnAlterarEtapa = $('#btn-alterar-etapa-js');
-  const urlSemestre = '/semestre/';
-  const urlEtapa = '/etapa/';
+  const urlSemestre = './semestre/';
+  const urlEtapa = './etapa/';
 
   function init(){
     const id = $('#id-semestre').val();

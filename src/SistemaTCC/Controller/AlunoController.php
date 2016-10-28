@@ -19,7 +19,7 @@ class AlunoController {
                 ]),
                 new Assert\Length([
                     'min' => 3,
-                    'max' => 50,
+                    'max' => 255,
                     'minMessage' => 'Seu nome precisa possuir pelo menos {{ limit }} caracteres',
                     'maxMessage' => 'Seu nome não deve possuir mais que {{ limit }} caracteres',
                 ])
