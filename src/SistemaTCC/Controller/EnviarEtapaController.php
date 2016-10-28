@@ -65,7 +65,7 @@ class EnviarEtapaController {
 		return $app->json(['success' => 'Arquivo enviado com sucesso.'], 201);
 	}
 
-	public function indexAction(Application $app) {
+	public function indexAction(Application $app, Request $request) {
 		return $app->redirect('../enviaretapa/listar');
 	}
 
