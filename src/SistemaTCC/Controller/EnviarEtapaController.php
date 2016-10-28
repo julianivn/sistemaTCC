@@ -81,8 +81,27 @@ class EnviarEtapaController {
 		return $app['twig']->render('enviaretapa/listar.twig', $dadosParaView);
 	}
 
-	public function notaAction() {
-		return 'Nota Etapa Aluno';
+	public function notaAction(Application $app, Request $request, $id) {
+		$db = $app['orm']->getRepository('\SistemaTCC\Model\EtapaNota');
+		$etapa = $app['orm']->find('\SistemaTCC\Model\Etapa', $id);
+		$etapaEntrega = array();
+		$nota = array();
+		$subtitulo = '';
+		if ($etapa) {
+			$subtitulo = $etapa->getNome();
+			$etapaEntrega = $app['orm']->getRepository('\SistemaTCC\Model\EtapaEntrega')->findOneByEtapa($id);
+			if ($etapaEntrega) {
+				$nota = $db->findBy(array('etapaEntrega' => $etapaEntrega->getId()));
+			}
+		}
+		$dadosParaView = [
+			'titulo' => 'Nota Etapa:',
+			'subtitulo' => $subtitulo,
+			'etapa' => $etapa,
+			'notas' => $nota,
+			'etapa_entrega' => $etapaEntrega
+		];
+		return $app['twig']->render('enviaretapa/nota.twig', $dadosParaView);
 	}
 
 	public function enviarAction(Application $app, Request $request, $id) {
