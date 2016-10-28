@@ -73,6 +73,7 @@ class SistemaTCC extends Application {
 
 		// REST Etapa Status
 		$app->post('/etapa-status/', "SistemaTCC\Controller\EtapaStatusController::add");
+		$app->get('/etapa-status/', "SistemaTCC\Controller\EtapaStatusController::all");
 		$app->get('/etapa-status/{id}/', "SistemaTCC\Controller\EtapaStatusController::find");
 		$app->put('/etapa-status/{id}/', "SistemaTCC\Controller\EtapaStatusController::edit");
 		$app->delete('/etapa-status/{id}/', "SistemaTCC\Controller\EtapaStatusController::del");

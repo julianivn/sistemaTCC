@@ -70,4 +70,16 @@ class EtapaStatusController {
         return new JsonResponse($etapaStatus->toJson());
     }
 
+    public function all(Application $app, Request $request) {
+
+		$repo = $app['orm']->getRepository('SistemaTCC\Model\EtapaStatus');
+		$data = $repo->findBy([], ['nome' => 'ASC']);
+		$resp = [];
+
+		foreach ($data as $item)
+			$resp[] = $item->toJson();
+
+        return new JsonResponse($resp);
+    }
+
 }
