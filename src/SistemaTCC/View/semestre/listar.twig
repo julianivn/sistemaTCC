@@ -1,0 +1,44 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-sm-6 col-xs-12">
+			<h3>{{ titulo }}</h3>
+		</div>		
+		<div class="col-sm-6 col-xs-12">
+			<a href="./semestre/cadastrar" class="btn btn-success btn-semestre-cadastrar"><span class="glyphicon glyphicon-plus"></span> Cadastrar semestre</a>
+		</div>
+	</div>
+	
+	<table class="table">
+	</div>
+        <thead>
+            <tr>
+              <th>Campus</th>
+              <th>Ano</th>
+              <th>Semestre</th>
+              <th>Editar</th>
+              <th>Excluir</th>
+            </tr>
+        </thead>
+        <tbody id="lista-js">
+            {% for semestre in semestres %}
+            <tr>
+                <td>{{ semestre.getPessoa().getNome() }}</td>
+                <td>{{ semestre.getPessoa().getEmail() }}</td>
+                <td>{{ semestre.getPessoa().getTelefone() }}</td>
+                <td>
+                    <a href="/semestre/editar/{{ semestre.getId() }}" class="btn btn-primary">Editar</a>
+                </td>
+                <td>
+                    <button data-id="{{ semestre.getId() }}" class="excluir btn btn-danger">Excluir</button>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+{% block scripts %}
+<script src="./app/semestre/listar.js"></script>
+{% endblock %}
