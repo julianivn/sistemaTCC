@@ -1,0 +1,44 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-sm-6 col-xs-12">
+			<h3>{{ titulo }}</h3>
+		</div>		
+		<div class="col-sm-6 col-xs-12">
+			<a href="./tcc/cadastrar" class="btn btn-success btn-tcc-cadastrar"><span class="glyphicon glyphicon-plus"></span> Cadastrar tcc</a>
+		</div>
+	</div>
+	
+	<table class="table">
+	</div>
+        <thead>
+            <tr>
+              <th>Campus</th>
+              <th>Ano</th>
+              <th>tcc</th>
+              <th>Editar</th>
+              <th>Excluir</th>
+            </tr>
+        </thead>
+        <tbody id="lista-js">
+            {% for tcc in tccs %}
+            <tr>
+                <td>{{ tcc.getPessoa().getNome() }}</td>
+                <td>{{ tcc.getPessoa().getEmail() }}</td>
+                <td>{{ tcc.getPessoa().getTelefone() }}</td>
+                <td>
+                    <a href="/tcc/editar/{{ tcc.getId() }}" class="btn btn-primary">Editar</a>
+                </td>
+                <td>
+                    <button data-id="{{ tcc.getId() }}" class="excluir btn btn-danger">Excluir</button>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+{% block scripts %}
+<script src="./app/tcc/listar.js"></script>
+{% endblock %}

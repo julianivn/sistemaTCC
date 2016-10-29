@@ -51,6 +51,13 @@ class SistemaTCC extends Application {
 		$app->get('/semestre/editar/', "\\SistemaTCC\\Controller\\SemestreController::editarAction");
 		$app->get('/semestre/excluir/', "\\SistemaTCC\\Controller\\SemestreController::excluirAction");
 		$app->get('/semestre/listar/', "\\SistemaTCC\\Controller\\SemestreController::listarAction");
+		
+		$app->get('/tcc/', "\\SistemaTCC\\Controller\\TccController::indexAction");
+		$app->get('/tcc/cadastrar/', "\\SistemaTCC\\Controller\\TccController::cadastrarAction");
+		$app->get('/tcc/editar/', "\\SistemaTCC\\Controller\\TccController::editarAction");
+		$app->get('/tcc/excluir/', "\\SistemaTCC\\Controller\\TccController::excluirAction");
+		$app->get('/tcc/listar/', "\\SistemaTCC\\Controller\\TccController::listarAction");
+
 
 
 		// REST Aluno
