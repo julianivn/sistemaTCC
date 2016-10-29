@@ -32,6 +32,10 @@ class ProfessorController {
             ],
             'telefone' => [
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
+				new Assert\Regex([
+					'pattern' => '/^[0-9]+$/i',
+					'message' => 'Seu telefone deve possuir apenas números'
+				]),
                 new Assert\Length([
                     'min' => 10,
                     'max' => 12,
@@ -61,7 +65,7 @@ class ProfessorController {
         $dados = [
             'nome'      => $request->get('nome'),
             'email'     => $request->get('email'),
-            'telefone'  => $request->get('telefone'),
+            'telefone'  => str_replace(array('(',')',' ','-'),'',$request->get('telefone')),
             'sexo'      => $request->get('sexo')
         ];
 
@@ -75,7 +79,7 @@ class ProfessorController {
 
         $pessoa->setNome($request->get('nome'))
                ->setEmail($request->get('email'))
-               ->setTelefone($request->get('telefone'))
+               ->setTelefone(str_replace(array('(',')',' ','-'),'',$request->get('telefone')))
                ->setSexo($request->get('sexo'));
 
         $professor->setPessoa($pessoa);
@@ -106,7 +110,7 @@ class ProfessorController {
         $dados = [
             'nome'      => $request->get('nome'),
             'email'     => $request->get('email'),
-            'telefone'  => $request->get('telefone'),
+            'telefone'  => str_replace(array('(',')',' ','-'),'',$request->get('telefone')),
             'sexo'      => $request->get('sexo')
         ];
         $errors = $this->validacao($app, $dados);
@@ -118,7 +122,7 @@ class ProfessorController {
 
         $pessoa->setNome($request->get('nome', $pessoa->getNome()))
                ->setEmail($request->get('email', $pessoa->getEmail()))
-               ->setTelefone($request->get('telefone', $pessoa->getTelefone()))
+               ->setTelefone(str_replace(array('(',')',' ','-'),'',$request->get('telefone', $pessoa->getTelefone())))
                ->setSexo($request->get('sexo', $pessoa->getSexo()));
 
         try {
