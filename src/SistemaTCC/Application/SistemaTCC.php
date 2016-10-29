@@ -82,6 +82,24 @@ class SistemaTCC extends Application {
 		$app->post('/semestre/', "\\SistemaTCC\\Controller\\SemestreController::add");
 		$app->put('/semestre/{id}/', "\\SistemaTCC\\Controller\\SemestreController::edit");
 		$app->delete('/semestre/{id}/', "\\SistemaTCC\\Controller\\SemestreController::del");
+		
+		// Twig Extensions
+
+        $app['twig'] = $app->extend('twig', function ($twig, $app) {
+			/**
+			 * Função de extensão do Twig para formatar números de telefone para exibição.
+			 */
+			$fone_format = new \Twig_SimpleFilter('fone_format', function($tel) {
+				$formatado = '';
+				if(strlen($tel)>=10){
+					$formatado = '(' . substr($tel,0,2) . ') ';
+				}
+				$formatado .= substr($tel,2,-4) . '-' . substr($tel,-4);
+				return $formatado;
+			});
+			$twig->addFilter($fone_format);
+			return $twig;
+		});
 	}
 
 }
