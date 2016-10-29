@@ -14,9 +14,9 @@
 	</div>
         <thead>
             <tr>
-              <th>Campus</th>
-              <th>Ano</th>
-              <th>tcc</th>
+              <th>Título</th>
+              <th>Aluno</th>
+              <th>Semestre</th>
               <th>Editar</th>
               <th>Excluir</th>
             </tr>
@@ -24,9 +24,9 @@
         <tbody id="lista-js">
             {% for tcc in tccs %}
             <tr>
-                <td>{{ tcc.getPessoa().getNome() }}</td>
-                <td>{{ tcc.getPessoa().getEmail() }}</td>
-                <td>{{ tcc.getPessoa().getTelefone() }}</td>
+                <td>{{ tcc.getTitulo() }}</td>
+                <td>{{ tcc.getAluno() }}</td>
+                <td>{{ tcc.getSemestre() }}</td>
                 <td>
                     <a href="/tcc/editar/{{ tcc.getId() }}" class="btn btn-primary">Editar</a>
                 </td>

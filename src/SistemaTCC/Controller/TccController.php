@@ -149,7 +149,7 @@ class tccController {
         $db = $app['orm']->getRepository('\SistemaTCC\Model\tcc');
         $tcces = $db->findAll();
         $dadosParaView = [
-            'titulo' => 'tcc Listar',
+            'titulo' => 'Tcc Listar',
             'tccs' => $tccs,
         ];
         return $app['twig']->render('tcc/listar.twig', $dadosParaView);
