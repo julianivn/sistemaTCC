@@ -5,6 +5,7 @@ namespace SistemaTCC\Controller;
 use DateTime;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use SistemaTCC\Model\Campus;
 use SistemaTCC\Model\Semestre;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -158,14 +159,14 @@ class SemestreController {
 
     public function find(Application $app, Request $request, $id) {
 
-        if (null === $semestre = $app['orm']->find('\SistemaTCC\Model\Semestre', (int) $id))
+        if (null === $semestre = $app['orm']->find('\SistemaTCC\Model\semestre', (int) $id))
             return new Response('O semestre não existe.', Response::HTTP_NOT_FOUND);
 
         return new Response($semestre->getNome());
     }
 
-    public function indexAction() {
-        return 'Index Semestre';
+    public function indexAction(Application $app, Request $request) {
+        return $app->redirect('../semestre/listar');
     }
 
     public function cadastrarAction(Application $app) {
@@ -211,10 +212,14 @@ class SemestreController {
     }
 
     public function listarAction(Application $app) {
-      $sql = 'SELECT a.nome, a.dataInicio, a.dataFim, a.tipo, a.campus FROM \SistemaTCC\Model\Semestre a JOIN a.semestre p';
+     $db = $app['orm']->getRepository('\SistemaTCC\Model\Semestre');
       $query = $app['orm']->createQuery($sql);
-      $alunos = $query->getResult();
-      return $app['twig']->render('semestre/listar.twig', array('semestre' => $semestres));
+       $semestres = $db->findAll();
+        $dadosParaView = [
+            'titulo' => 'Semestre Listar',
+            'semestres' => $semestres,
+        ];
+        return $app['twig']->render('semestre/listar.twig', $dadosParaView);
     }
 
 }
