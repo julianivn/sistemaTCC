@@ -18,7 +18,7 @@
 					<div class="col-md-5">
 						<div class="form-group">
 							<label for="telefone" class ="control-label">Telefone</label>
-							<input type="text" class="form-control" id="telefone" placeholder="Telefone" name="telefone" value="{{ values.telefone }}">
+							<input type="text" class="form-control" id="telefone" name="telefone" value="{{ values.telefone }}">
 							<span class="help-block"></span>
 						</div>
 					</div>
@@ -82,5 +82,6 @@
 
 {% endblock %}
 {% block scripts %}
+<script src="./app/shared/maskedinputplugin.js"></script>
 <script src="./app/aluno/formulario.js"></script>
 {% endblock %}
