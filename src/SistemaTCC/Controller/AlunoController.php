@@ -32,6 +32,16 @@ class AlunoController {
             ],
             'telefone' => [
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
+				new Assert\Regex([
+					'pattern' => '/^[0-9]+$/i',
+					'message' => 'Seu telefone deve possuir apenas números'
+				]),
+                new Assert\Length([
+                    'min' => 10,
+                    'max' => 12,
+                    'minMessage' => 'Informe no mínimo {{ limit }} números',
+                    'maxMessage' => 'Informe no máximo {{ limit }} números',
+                ])
             ],
             'sexo' => [
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
@@ -73,7 +83,7 @@ class AlunoController {
         $dados = [
             'nome'      => $request->get('nome'),
             'email'     => $request->get('email'),
-            'telefone'  => $request->get('telefone'),
+            'telefone'  => str_replace(array('(',')',' ','-'),'',$request->get('telefone')),
             'sexo'      => $request->get('sexo'),
 			'cgu'		=> $request->get('cgu'),
 			'matricula'	=> $request->get('matricula')
@@ -88,7 +98,7 @@ class AlunoController {
 
         $pessoa->setNome($request->get('nome'))
                ->setEmail($request->get('email'))
-               ->setTelefone($request->get('telefone'))
+               ->setTelefone(str_replace(array('(',')',' ','-'),'',$request->get('telefone')))
                ->setSexo($request->get('sexo'));
 
         $aluno->setMatricula($request->get('matricula'))
@@ -122,7 +132,7 @@ class AlunoController {
 
         $pessoa->setNome($request->get('nome', $pessoa->getNome()))
                ->setEmail($request->get('email', $pessoa->getEmail()))
-               ->setTelefone($request->get('telefone', $pessoa->getTelefone()))
+               ->setTelefone(str_replace(array('(',')',' ','-'),'',$request->get('telefone', $pessoa->getTelefone())))
                ->setSexo($request->get('sexo', $pessoa->getSexo()));
 
         $aluno->setMatricula($request->get('matricula', $aluno->getMatricula()))

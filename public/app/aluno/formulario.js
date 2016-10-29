@@ -7,6 +7,8 @@ $(function() {
     const restURL = './aluno/';
     const listaURL = './aluno/';
 
+	$('#telefone').mask('(99) 9999-9999?9');
+	
     function verifyErrors(err) {
         const errors = err || {};
 

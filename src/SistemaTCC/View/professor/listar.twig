@@ -26,7 +26,7 @@
             <tr>
               <td>{{ professor.getPessoa().getNome() }}</td>
               <td>{{ professor.getPessoa().getEmail() }}</td>
-              <td>{{ professor.getPessoa().getTelefone() }}</td>
+              <td>{{ professor.getPessoa().getTelefone()|fone_format }}</td>
               <td>
                 <div class="pull-right">
                   <a href="./professor/editar/{{ professor.getId() }}" class="btn btn-primary btn-xs">
