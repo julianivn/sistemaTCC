@@ -14,7 +14,7 @@ class AlunoController {
             'nome' => [
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
                 new Assert\Regex([
-                    'pattern' => '/^[a-zA-ZÀ-ú ]+$/i',
+                    'pattern' => '/^[a-zA-ZÀ-ú]+?[a-zA-ZÀ-ú ]+$/i',
                     'message' => 'Seu nome deve possuir apenas letras'
                 ]),
                 new Assert\Length([
