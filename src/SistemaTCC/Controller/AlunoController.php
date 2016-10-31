@@ -62,7 +62,7 @@ class AlunoController {
                      'max' => 10,
                      'minMessage' => 'Seu CGU precisa possuir pelo menos {{ limit }} caracteres',
                      'maxMessage' => 'Seu CGU não deve possuir mais que {{ limit }} caracteres'
-                ])    
+                ])
             ]
 
         ];
@@ -195,7 +195,8 @@ class AlunoController {
         }
 
 		$dadosParaView = [
-			'id' => $id,
+            'titulo' => 'Editando Aluno ' . $id,
+			'id'     => $id,
 			'values' => [
 			'nome'		=> $aluno->getPessoa()->getNome(),
 			'telefone'	=> $aluno->getPessoa()->getTelefone(),
@@ -206,7 +207,7 @@ class AlunoController {
 		    ],
 		];
 
-		return $app['twig']->render('aluno/editar.twig', $dadosParaView);
+		return $app['twig']->render('aluno/formulario.twig', $dadosParaView);
     }
 
     public function excluirAction() {
