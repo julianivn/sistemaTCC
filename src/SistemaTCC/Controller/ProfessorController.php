@@ -59,7 +59,6 @@ class ProfessorController {
         return $retorno;
     }
 
-
     public function add(Application $app, Request $request) {
 
         $dados = [
