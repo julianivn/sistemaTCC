@@ -14,7 +14,7 @@ class AlunoController {
             'nome' => [
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
                 new Assert\Regex([
-                    'pattern' => '/^[a-zA-ZÀ-ú ]+$/i',
+                    'pattern' => '/^[a-zA-ZÀ-ú]+?[a-zA-ZÀ-ú ]+$/i',
                     'message' => 'Seu nome deve possuir apenas letras'
                 ]),
                 new Assert\Length([
@@ -49,7 +49,7 @@ class AlunoController {
 			'cgu' => [
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
                 new Assert\Length([
-                     'min' => 0,
+                     'min' => 9,
                      'max' => 10,
                      'minMessage' => 'Seu CGU precisa possuir pelo menos {{ limit }} caracteres',
                      'maxMessage' => 'Seu CGU não deve possuir mais que {{ limit }} caracteres'
@@ -58,11 +58,11 @@ class AlunoController {
 			'matricula' => [
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
                 new Assert\Length([
-                     'min' => 0,
+                     'min' => 9,
                      'max' => 10,
                      'minMessage' => 'Seu CGU precisa possuir pelo menos {{ limit }} caracteres',
                      'maxMessage' => 'Seu CGU não deve possuir mais que {{ limit }} caracteres'
-                ])    
+                ])
             ]
 
         ];
@@ -96,13 +96,13 @@ class AlunoController {
         $pessoa = new \SistemaTCC\Model\Pessoa();
         $aluno = new \SistemaTCC\Model\Aluno();
 
-        $pessoa->setNome($request->get('nome'))
-               ->setEmail($request->get('email'))
-               ->setTelefone(str_replace(array('(',')',' ','-'),'',$request->get('telefone')))
-               ->setSexo($request->get('sexo'));
+        $pessoa->setNome($dados['nome'])
+               ->setEmail($dados['email'])
+               ->setTelefone($dados['telefone'])
+               ->setSexo($dados['sexo']);
 
-        $aluno->setMatricula($request->get('matricula'))
-              ->setCgu($request->get('cgu'))
+        $aluno->setMatricula($dados['matricula'])
+              ->setCgu($dados['cgu'])
               ->setPessoa($pessoa);
 
         try {
@@ -125,43 +125,57 @@ class AlunoController {
 
     public function edit(Application $app, Request $request, $id) {
 
-        if (null === $aluno = $app['orm']->find('\SistemaTCC\Model\Aluno', (int) $id))
-            return new Response('O aluno não existe.', Response::HTTP_NOT_FOUND);
+        $aluno = $app['orm']->find('\SistemaTCC\Model\Aluno', (int) $id);
+        if (null === $aluno) {
+            return $app->json(['error' => 'O aluno não existe.'], 400);
+        }
 
         $pessoa = $aluno->getPessoa();
+        $dados = [
+            'nome'      => $request->get('nome', $pessoa->getNome()),
+            'email'     => $request->get('email', $pessoa->getEmail()),
+            'telefone'  => str_replace(array('(',')',' ','-'),'',$request->get('telefone', $pessoa->getTelefone())),
+            'sexo'      => $request->get('sexo', $pessoa->getSexo()),
+            'cgu'       => $request->get('cgu', $aluno->getCgu()),
+            'matricula' => $request->get('matricula', $aluno->getMatricula())
+        ];
 
-        $pessoa->setNome($request->get('nome', $pessoa->getNome()))
-               ->setEmail($request->get('email', $pessoa->getEmail()))
-               ->setTelefone(str_replace(array('(',')',' ','-'),'',$request->get('telefone', $pessoa->getTelefone())))
-               ->setSexo($request->get('sexo', $pessoa->getSexo()));
+        $errors = $this->validacao($app, $dados);
+        if (count($errors) > 0) {
+            return $app->json($errors, 400);
+        }
 
-        $aluno->setMatricula($request->get('matricula', $aluno->getMatricula()))
-              ->setCgu($request->get('cgu', $aluno->getCgu()));
+        $pessoa->setNome($dados['nome'])
+               ->setEmail($dados['email'])
+               ->setTelefone($dados['telefone'])
+               ->setSexo($dados['sexo']);
+
+        $aluno->setMatricula($dados['matricula'])
+              ->setCgu($dados['cgu']);
 
         try {
             $app['orm']->flush();
         }
         catch (\Exception $e) {
-            return new Response($e->getMessage(), Response::HTTP_BAD_REQUEST);
+            return $app->json($e->getMessage(), 400);
         }
-
-         return new Response(json_encode(['success' => 'Aluno cadastrado com sucesso.']), Response::HTTP_OK);
+        return $app->json(['success' => 'Aluno alterado com sucesso.']);
     }
 
     public function del(Application $app, Request $request, $id) {
 
-        if (null === $aluno = $app['orm']->find('\SistemaTCC\Model\Aluno', (int) $id))
-            return new Response('O aluno não existe.', Response::HTTP_NOT_FOUND);
+        if (null === $aluno = $app['orm']->find('\SistemaTCC\Model\Aluno', (int) $id)) {
+            return $app->json(['error' => 'O aluno não existe.'], 400);
+        }
 
         try {
             $app['orm']->remove($aluno);
             $app['orm']->flush();
         }
         catch (\Exception $e) {
-            return new Response($e->getMessage(), Response::HTTP_BAD_REQUEST);
+            return $app->json($e->getMessage(), 400);
         }
-
-		return new Response(json_encode(array('Aluno excluído com sucesso.')), Response::HTTP_OK);
+        return $app->json(['success' => 'Aluno excluido com sucesso.']);
 	}
 
     public function indexAction(Application $app, Request $request) {
@@ -195,7 +209,8 @@ class AlunoController {
         }
 
 		$dadosParaView = [
-			'id' => $id,
+            'titulo' => 'Editando Aluno ' . $id,
+			'id'     => $id,
 			'values' => [
 			'nome'		=> $aluno->getPessoa()->getNome(),
 			'telefone'	=> $aluno->getPessoa()->getTelefone(),
@@ -206,7 +221,7 @@ class AlunoController {
 		    ],
 		];
 
-		return $app['twig']->render('aluno/editar.twig', $dadosParaView);
+		return $app['twig']->render('aluno/formulario.twig', $dadosParaView);
     }
 
     public function excluirAction() {

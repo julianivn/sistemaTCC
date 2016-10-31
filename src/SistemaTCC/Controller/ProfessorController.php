@@ -14,7 +14,7 @@ class ProfessorController {
             'nome' => [
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
                 new Assert\Regex([
-                    'pattern' => '/^[a-zA-ZÀ-ú ]+$/i',
+                    'pattern' => '/^[a-zA-ZÀ-ú]+?[a-zA-ZÀ-ú ]+$/i',
                     'message' => 'Seu nome deve possuir apenas letras'
                 ]),
                 new Assert\Length([
@@ -58,7 +58,6 @@ class ProfessorController {
         }
         return $retorno;
     }
-
 
     public function add(Application $app, Request $request) {
 
