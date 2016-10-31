@@ -11,7 +11,32 @@ class tccController {
 
     private function validacao($app, $dados) {
         $asserts = [
-           
+            'titulo' => [
+                new Assert\NotBlank(['message' => 'Preencha esse campo']),
+                new Assert\Regex([
+                    'pattern' => '/^[a-zA-ZÀ-ú ]+$/i',
+                    'message' => 'O titulo deve possuir apenas letras'
+                ]),
+                new Assert\Length([
+                    'min' => 3,
+                    'max' => 255,
+                    'minMessage' => 'O titulo precisa possuir pelo menos {{ limit }} caracteres',
+                    'maxMessage' => 'O titulo não deve possuir mais que {{ limit }} caracteres',
+                ])
+            ],
+			'aluno' => [
+                new Assert\NotBlank(['message' => 'Preencha esse campo']),
+                new Assert\Regex([
+                    'pattern' => '/^[a-zA-ZÀ-ú ]+$/i',
+                    'message' => 'O titulo deve possuir apenas letras'
+                ]),
+                new Assert\Length([
+                    'min' => 3,
+                    'max' => 255,
+                    'minMessage' => 'O titulo precisa possuir pelo menos {{ limit }} caracteres',
+                    'maxMessage' => 'O titulo não deve possuir mais que {{ limit }} caracteres',
+                ])
+            ],
         ];
         $constraint = new Assert\Collection($asserts);
         $errors = $app['validator']->validate($dados, $constraint);
@@ -29,7 +54,9 @@ class tccController {
     public function add(Application $app, Request $request) {
 
         $dados = [
-            'nome'      => $request->get('nome'),
+            'titulo'      => $request->get('titulo'),
+			'aluno'      => $request->get('aluno'),
+			'semestre'      => $request->get('semestre')
         ];
 
         $errors = $this->validacao($app, $dados);
@@ -40,8 +67,8 @@ class tccController {
         $tcc = new \SistemaTCC\Model\Tcc();
 
         $tcc->setTitulo($request->get('titulo'))
-               ->setAluno($request->get('aluno'))
-               ->setSemestre($request->get('semestre'));
+			->setAluno($request->get('aluno'))
+            ->setSemestre($request->get('semestre'));
 
         try {
             $app['orm']->persist($tcc);
@@ -129,7 +156,7 @@ class tccController {
             return $app->redirect('../tcc/listar');
         }
         $dadosParaView = [
-            'titulo' => 'Alterando tcc: ' . $tcc->getPessoa()->getNome(),
+            'titulo' => 'Alterando tcc: ' . $tcc->getTcc()->getTitulo(),
             'id' => $id,
             'values' => [
                 'titulo'      => $tcc->getTitulo()->getTitulo(),

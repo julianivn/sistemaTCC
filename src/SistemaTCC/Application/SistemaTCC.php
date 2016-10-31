@@ -90,6 +90,11 @@ class SistemaTCC extends Application {
 		$app->put('/semestre/{id}/', "\\SistemaTCC\\Controller\\SemestreController::edit");
 		$app->delete('/semestre/{id}/', "\\SistemaTCC\\Controller\\SemestreController::del");
 		
+		// REST tcc
+		$app->post('/tcc/', "\\SistemaTCC\\Controller\\TccController::add");
+		$app->put('/tcc/{id}/', "\\SistemaTCC\\Controller\\TccController::edit");
+		$app->delete('/tcc/{id}/', "\\SistemaTCC\\Controller\\TccController::del");
+		
 		// Twig Extensions
 
         $app['twig'] = $app->extend('twig', function ($twig, $app) {
