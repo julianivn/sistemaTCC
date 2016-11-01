@@ -64,8 +64,8 @@ class SemestreController {
     public function add(Application $app, Request $request) {
         $dados = [
             'nome'       => $request->get('nome'),
-            'dataInicio' => $request->get('dataInicio'),
-            'dataFim'    => $request->get('dataFim'),
+            'dataInicio' => $request->get(''),
+            'dataFim'    => $request->get(''),
             'tipo'       => $request->get('tipo'),
             'campus'     => $request->get('campus'),
         ];
