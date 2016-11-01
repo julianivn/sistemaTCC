@@ -1,14 +1,18 @@
 $(function() {
 
+    "use strict";
+
     const $form = $('#form-js');
     const itemID = $form.find('#id').val();
     const restURL = './aluno/';
-    const listaURL = './aluno/listar';
+    const listaURL = './aluno/';
 
+	$('#telefone').mask('(99) 9999-9999?9');
+	
     function verifyErrors(err) {
         const errors = err || {};
 
-        $.each(['nome', 'email', 'telefone', 'cgu', 'matricula', 'sexo'], function(key, value) {
+        $.each(['nome', 'email', 'telefone', 'cgu', 'matricula'], function(key, value) {
             const message = errors[value] || false;
             const element = $form.find('#' + value);
             if (message) {
@@ -27,7 +31,7 @@ $(function() {
           	matricula: $form.find('#matricula').val(),
             telefone: $form.find('#telefone').val(),
             email: $form.find('#email').val(),
-            sexo: $form.find('#sexo option:selected').val(),
+            sexo: $form.find('[name=sexo]').val(),
           	cgu:  $form.find('#cgu').val(),
         };
 

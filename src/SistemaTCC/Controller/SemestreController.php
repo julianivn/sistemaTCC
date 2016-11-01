@@ -5,6 +5,7 @@ namespace SistemaTCC\Controller;
 use DateTime;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use SistemaTCC\Model\Campus;
 use SistemaTCC\Model\Semestre;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -63,8 +64,8 @@ class SemestreController {
     public function add(Application $app, Request $request) {
         $dados = [
             'nome'       => $request->get('nome'),
-            'dataInicio' => $request->get('dataInicio'),
-            'dataFim'    => $request->get('dataFim'),
+            'dataInicio' => $request->get(''),
+            'dataFim'    => $request->get(''),
             'tipo'       => $request->get('tipo'),
             'campus'     => $request->get('campus'),
         ];
@@ -158,14 +159,14 @@ class SemestreController {
 
     public function find(Application $app, Request $request, $id) {
 
-        if (null === $semestre = $app['orm']->find('\SistemaTCC\Model\Semestre', (int) $id))
+        if (null === $semestre = $app['orm']->find('\SistemaTCC\Model\semestre', (int) $id))
             return new Response('O semestre não existe.', Response::HTTP_NOT_FOUND);
 
         return new Response($semestre->getNome());
     }
 
-    public function indexAction() {
-        return 'Index Semestre';
+    public function indexAction(Application $app, Request $request) {
+        return $app->redirect('../semestre/listar');
     }
 
     public function cadastrarAction(Application $app) {
@@ -181,7 +182,8 @@ class SemestreController {
         ];
         return $app['twig']->render('semestre/formulario.twig', $dadosParaView);
     }
-    public function editarAction() {
+
+    public function editarAction(Application $app) {
       $dadosParaView = [
             'titulo' => 'Editar Semestre',
             'id'     => '111',
@@ -192,7 +194,8 @@ class SemestreController {
             'etapa_tcc1'  => [
                 ['id' => '1', 'nome' => 'Etapa11'],
                 ['id' => '2', 'nome' => 'Etapa22'],
-                ['id' => '3', 'nome' => 'Etapa33']
+                ['id' => '3', 'nome' => 'Etapa33'],
+                ['id' => '4', 'nome' => 'Etapa44']
             ],
             'etapa_tcc2'  => [
                 ['id' => '4', 'nome' => 'Etapa44'],
@@ -208,8 +211,15 @@ class SemestreController {
         return 'Excluir Semestre';
     }
 
-    public function listarAction() {
-        return 'Listar Semestre';
+    public function listarAction(Application $app) {
+     $db = $app['orm']->getRepository('\SistemaTCC\Model\Semestre');
+      $query = $app['orm']->createQuery($sql);
+       $semestres = $db->findAll();
+        $dadosParaView = [
+            'titulo' => 'Semestre Listar',
+            'semestres' => $semestres,
+        ];
+        return $app['twig']->render('semestre/listar.twig', $dadosParaView);
     }
 
 }

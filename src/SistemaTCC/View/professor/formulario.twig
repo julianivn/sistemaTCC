@@ -24,7 +24,7 @@
         <div class="row">
             <div class="col-xs-4">
                 <div class="form-group">
-                    <label class="control-label" for="telefone">Telefone</label>
+                    <label class="control-label" for="telefone">Telefone <small>(com DDD)</small></label>
                     <input type="text" class="form-control" name="telefone" id="telefone" value="{{ values.telefone }}">
                     <span class="help-block"></span>
                 </div>
@@ -40,13 +40,39 @@
                             <input type="radio" name="sexo" value="0" id="sexof" {{ values.sexo == 0 ? 'checked' : '' }}> <strong>F</strong>
                         </label>
                     </div>
-
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary btn-lg">Salvar</button>
+        <div clas="row">
+        	<div class="col-xs-12">
+        		<h4>Áreas de interesse:</h4>
+        	</div>
+        </div>
+        <div class="row">
+			<div class="col-xs-4">
+				<div class="form-group"><label class="control-label"><input type="checkbox" name="interesse" value="redesi" >Redes de Computadores I</label></div>
+				<div class="form-group"><label class="control-label"><input type="checkbox" name="interesse" value="redesii" >Redes de Computadores II</label></div>
+				<div class="form-group"><label class="control-label"><input type="checkbox" name="interesse" value="Algoritmosi" >Algoritmos de programação I</label></div>
+			</div>
+			<div class="col-xs-4">
+				<div class="form-group"><label class="control-label"><input type="checkbox" name="interesse" value="Algoritmosii" >Algoritmos de programação II</label></div>
+				<div class="form-group"><label class="control-label"><input type="checkbox" name="interesse" value="Algoritmosiii" >Algoritmos de programação III</label></div>
+				<div class="form-group"><label class="control-label"><input type="checkbox" name="interesse" value="Outros" >Outros</label></div>
+			</div>
+        </div>
+        <hr>
+        <div class="row">
+        	<div class="col-xs-3">
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Salvar</button>
+        	</div>
+            <div class="col-xs-2">
+                <a href="./professor/" class="btn btn-default btn-lg btn-block">Cancelar</a>
+            </div>
+        </div>
+
     </form>
 {% endblock %}
 {% block scripts %}
-<script src="/app/professor/formulario.js"></script>
+<script src="./app/shared/maskedinputplugin.js"></script>
+<script src="./app/professor/formulario.js"></script>
 {% endblock %}

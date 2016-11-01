@@ -14,12 +14,12 @@ class ProfessorController {
             'nome' => [
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
                 new Assert\Regex([
-                    'pattern' => '/^[a-zA-ZÀ-ú ]+$/i',
+                    'pattern' => '/^[a-zA-ZÀ-ú]+?[a-zA-ZÀ-ú ]+$/i',
                     'message' => 'Seu nome deve possuir apenas letras'
                 ]),
                 new Assert\Length([
                     'min' => 3,
-                    'max' => 50,
+                    'max' => 255,
                     'minMessage' => 'Seu nome precisa possuir pelo menos {{ limit }} caracteres',
                     'maxMessage' => 'Seu nome não deve possuir mais que {{ limit }} caracteres',
                 ])
@@ -32,6 +32,16 @@ class ProfessorController {
             ],
             'telefone' => [
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
+				new Assert\Regex([
+					'pattern' => '/^[0-9]+$/i',
+					'message' => 'Seu telefone deve possuir apenas números'
+				]),
+                new Assert\Length([
+                    'min' => 10,
+                    'max' => 12,
+                    'minMessage' => 'Informe no mínimo {{ limit }} números',
+                    'maxMessage' => 'Informe no máximo {{ limit }} números',
+                ])
             ],
             'sexo' => [
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
@@ -49,13 +59,12 @@ class ProfessorController {
         return $retorno;
     }
 
-
     public function add(Application $app, Request $request) {
 
         $dados = [
             'nome'      => $request->get('nome'),
             'email'     => $request->get('email'),
-            'telefone'  => $request->get('telefone'),
+            'telefone'  => str_replace(array('(',')',' ','-'),'',$request->get('telefone')),
             'sexo'      => $request->get('sexo')
         ];
 
@@ -69,7 +78,7 @@ class ProfessorController {
 
         $pessoa->setNome($request->get('nome'))
                ->setEmail($request->get('email'))
-               ->setTelefone($request->get('telefone'))
+               ->setTelefone(str_replace(array('(',')',' ','-'),'',$request->get('telefone')))
                ->setSexo($request->get('sexo'));
 
         $professor->setPessoa($pessoa);
@@ -100,7 +109,7 @@ class ProfessorController {
         $dados = [
             'nome'      => $request->get('nome'),
             'email'     => $request->get('email'),
-            'telefone'  => $request->get('telefone'),
+            'telefone'  => str_replace(array('(',')',' ','-'),'',$request->get('telefone')),
             'sexo'      => $request->get('sexo')
         ];
         $errors = $this->validacao($app, $dados);
@@ -112,7 +121,7 @@ class ProfessorController {
 
         $pessoa->setNome($request->get('nome', $pessoa->getNome()))
                ->setEmail($request->get('email', $pessoa->getEmail()))
-               ->setTelefone($request->get('telefone', $pessoa->getTelefone()))
+               ->setTelefone(str_replace(array('(',')',' ','-'),'',$request->get('telefone', $pessoa->getTelefone())))
                ->setSexo($request->get('sexo', $pessoa->getSexo()));
 
         try {
@@ -139,7 +148,7 @@ class ProfessorController {
     }
 
     public function indexAction(Application $app, Request $request) {
-        return $app->redirect('/professor/listar');
+        return $app->redirect('../professor/listar');
     }
 
     public function cadastrarAction(Application $app, Request $request) {
@@ -159,7 +168,7 @@ class ProfessorController {
         $db = $app['orm']->getRepository('\SistemaTCC\Model\Professor');
         $professor = $db->find($id);
         if (!$professor) {
-            return $app->redirect('/professor/listar');
+            return $app->redirect('../professor/listar');
         }
         $dadosParaView = [
             'titulo' => 'Alterando Professor: ' . $professor->getPessoa()->getNome(),

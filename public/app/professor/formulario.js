@@ -3,8 +3,10 @@ $(function() {
     const $form = $('#form-js');
     const itemID = $form.find('#id').val();
     const restURL = './professor/';
-    const listaURL = './professor/listar';
+    const listaURL = './professor/';
 
+	$('#telefone').mask('(99) 9999-9999?9');
+	
     function verifyErrors(err) {
         const errors = err || {};
         $.each(['nome', 'email', 'telefone'], function(key, value) {
