@@ -16,19 +16,17 @@
 	</div>
         <thead>
             <tr>
-              <th>Campus</th>
-              <th>Ano</th>
-              <th>Semestre</th>
-              <th>Editar</th>
-              <th>Excluir</th>
+			   <th>Ano</th>
+               <th>Campus</th> 
+               <th>Semestre</th>
             </tr>
         </thead>
         <tbody id="lista-js">
             {% for semestre in semestres %}
             <tr>
-                <td>{{ semestre.getPessoa().getNome() }}</td>
-                <td>{{ semestre.getPessoa().getEmail() }}</td>
-                <td>{{ semestre.getPessoa().getTelefone() }}</td>
+                <td>{{ semestre.getPessoa().geAno() }}</td>
+                <td>{{ semestre.getPessoa().getCampus() }}</td>
+                <td>{{ semestre.getPessoa().getSemestre() }}</td>
                 <td>
 					<div class="pull-right">
 						<a href="/semestre/editar/{{ semestre.getId() }}" class="btn btn-primary">
