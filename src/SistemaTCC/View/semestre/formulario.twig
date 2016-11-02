@@ -18,7 +18,11 @@
 		</div>
 		<div class="form-group">
 			<label for="Campus">Campus</label>
-			<input type="text" class="form-control" id="campus" placeholder="Ex.: Gravataí" value="{{ values.campus }}">
+			<select class="form-control" id="campus">
+				{% for campus in values.campus %}
+					<option value="{{campus.id}}">{{campus.nome}}</option>
+				{% endfor %}
+			</select>
 		</div>
 		<div class="form-group">
 			<label for="semestre">Semestre</label>

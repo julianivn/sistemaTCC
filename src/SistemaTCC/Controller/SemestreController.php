@@ -169,11 +169,14 @@ class SemestreController {
         return $app->redirect('../semestre/listar');
     }
 
-    public function cadastrarAction(Application $app) {
+    public function cadastrarAction(Application $app, Request $request) {
+        $db = $app['orm']->getRepository('\SistemaTCC\Model\Campus');
+        $campus = $db->findAll();
+
         $dadosParaView = [
              'titulo' => 'Cadastrar Semestre',
              'values' => [
-                 'campus'   => '',
+                 'campus'   => $campus,
                  'ano'      => '',
                  'semestre'  => '',
             'etapa_tcc1'  => [],
