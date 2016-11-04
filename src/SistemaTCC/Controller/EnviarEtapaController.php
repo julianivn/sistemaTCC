@@ -71,11 +71,22 @@ class EnviarEtapaController {
 
 	public function listarAction(Application $app, Request $request) {
 		$semestre = 1; //$request->getSession()->get('semestreId'); //Id Semestre das etapas a serem listadas (Verificar como será armazenado as informações de sessão)
+		$tcc = 1;
 		$db = $app['orm']->getRepository('\SistemaTCC\Model\Etapa');
-		$etapas = $db->findBy(array('semestre' => $semestre));
+		$etapas = $db->findBy(array('semestre' => $semestre,'tcc' => $tcc));
+		
+		$etapas_status = array();
+		foreach($etapas as $etapa){
+			$etapa_entrega = $app['orm']->getRepository('\SistemaTCC\Model\EtapaEntrega')->findOneByEtapa($etapa->getId());
+			if($etapa_entrega!=''){
+				$etapas_status[$etapa->getId()] = $etapa_entrega->getEtapaStatus();
+			}
+		}
+		
 		$dadosParaView = [
 			'titulo' => 'Etapas',
 			'etapas' => $etapas,
+			'etapas_status' => $etapas_status,
 			'data_atual' => (new DateTime())
 		];
 		return $app['twig']->render('enviaretapa/listar.twig', $dadosParaView);
