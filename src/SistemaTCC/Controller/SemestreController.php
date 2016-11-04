@@ -173,8 +173,9 @@ class SemestreController {
         $dadosParaView = [
              'titulo' => 'Cadastrar Semestre',
              'values' => [
-                 'campus'   => '',
-                 'ano'      => '',
+                 'campus'    => '',
+                 'dataini'   => '',
+				 'datafim'   => '',
                  'semestre'  => '',
             'etapa_tcc1'  => [],
             'etapa_tcc2'  => [],

@@ -16,7 +16,8 @@
 	</div>
         <thead>
             <tr>
-			   <th>Ano</th>
+			   <th>Data inicio</th>
+			   <th>Data fim</th>
                <th>Campus</th> 
                <th>Semestre</th>
             </tr>
@@ -24,9 +25,10 @@
         <tbody id="lista-js">
             {% for semestre in semestres %}
             <tr>
-                <td>{{ semestre.getPessoa().geAno() }}</td>
-                <td>{{ semestre.getPessoa().getCampus() }}</td>
-                <td>{{ semestre.getPessoa().getSemestre() }}</td>
+                <td>{{ semestre.geDataInicio() }}</td>
+				<td>{{ semestre.geDataInicio() }}</td>
+                <td>{{ semestre.getCampus() }}</td>
+                <td>{{ semestre.getSemestre() }}</td>
                 <td>
 					<div class="pull-right">
 						<a href="/semestre/editar/{{ semestre.getId() }}" class="btn btn-primary">
