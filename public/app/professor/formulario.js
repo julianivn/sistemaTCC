@@ -30,7 +30,8 @@ $(function() {
 
         const url = restURL + (itemID ? itemID + '/' : '' );
         const method = itemID ? 'put' : 'post';
-        const text = itemID ? 'Alterado': 'Incluso';
+        const text = itemID ? 'Alterado': 'Incluído';
+
         const request = $.ajax({
                 url: url,
                 type: method,
