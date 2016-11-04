@@ -32,10 +32,10 @@ class AlunoController {
             ],
             'telefone' => [
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
-				new Assert\Regex([
-					'pattern' => '/^[0-9]+$/i',
-					'message' => 'Seu telefone deve possuir apenas números'
-				]),
+								new Assert\Regex([
+									'pattern' => '/^[0-9]+$/i',
+									'message' => 'Seu telefone deve possuir apenas números'
+								]),
                 new Assert\Length([
                     'min' => 10,
                     'max' => 12,
@@ -46,8 +46,12 @@ class AlunoController {
             'sexo' => [
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
             ],
-			'cgu' => [
+						'cgu' => [
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
+								new Assert\GreaterThan([
+										'value'   => 1,
+										'message' => 'Seu CGU não pode ser um número negativo',
+								]),
                 new Assert\Length([
                      'min' => 9,
                      'max' => 10,
@@ -55,16 +59,19 @@ class AlunoController {
                      'maxMessage' => 'Seu CGU não deve possuir mais que {{ limit }} caracteres'
                 ])
             ],
-			'matricula' => [
+						'matricula' => [
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
+								new Assert\GreaterThan([
+										'value'   => 1,
+										'message' => 'Sua Matrícula não pode ser um número negativo',
+								]),
                 new Assert\Length([
                      'min' => 9,
                      'max' => 10,
-                     'minMessage' => 'Seu CGU precisa possuir pelo menos {{ limit }} caracteres',
-                     'maxMessage' => 'Seu CGU não deve possuir mais que {{ limit }} caracteres'
+                     'minMessage' => 'Sua Matrícula precisa possuir pelo menos {{ limit }} caracteres',
+                     'maxMessage' => 'Sua Matrícula não deve possuir mais que {{ limit }} caracteres'
                 ])
             ]
-
         ];
         $constraint = new Assert\Collection($asserts);
         $errors     = $app['validator']->validate($dados, $constraint);
