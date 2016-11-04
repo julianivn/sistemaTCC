@@ -7,23 +7,6 @@ $(function() {
     const restURL = './aluno/';
     const listaURL = './aluno/';
 	
-	/*******************************************************************
-	 * Configuração de máscaras de campo
-	 *******************************************************************/
-	//Mascara para campo telefone
-	var maskTelefone = function (val) {
-		return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
-	},
-	options = {onKeyPress: function(val, e, field, options) {
-			field.mask(maskTelefone.apply({}, arguments), options);
-		}
-	};
-	
-	$('#telefone').mask(maskTelefone, options);
-	
-	/*****************************************************************
-	 * Função para verificação de erros no preenchimento dos campos
-	 *****************************************************************/
     function verifyErrors(err) {
         const errors = err || {};
 
