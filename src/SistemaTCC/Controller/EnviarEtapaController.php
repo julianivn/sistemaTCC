@@ -13,7 +13,10 @@ class EnviarEtapaController {
 	private function validacao($app, $dados) {
 		$asserts = [
 			'arquivo' => [
-				new Assert\NotBlank(['message' => 'Selecione um arquivo']),
+				new Assert\File([
+					'mimeTypes' => ['application/pdf','application/x-pdf'],
+					'disallowEmptyMessage' => 'Selecione um arquivo']
+				),
 			]
 		];
 		$constraint = new Assert\Collection($asserts);
