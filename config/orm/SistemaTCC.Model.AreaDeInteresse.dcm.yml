@@ -19,6 +19,7 @@ SistemaTCC\Model\AreaDeInteresse:
                 fixed: false
     manyToMany:
         professores:
+            cascade: ["all"]
             targetEntity: SistemaTCC\Model\Professor
             mappedBy: areasDeInteresse
 
