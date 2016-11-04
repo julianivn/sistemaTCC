@@ -30,7 +30,7 @@ $(function() {
 
         const url = restURL + (itemID ? itemID + '/' : '' );
         const method = itemID ? 'put' : 'post';
-
+        const text = itemID ? 'Alterado': 'Incluso';
         const request = $.ajax({
                 url: url,
                 type: method,
@@ -43,7 +43,7 @@ $(function() {
             verifyErrors();
             swal({
                 title: "OK",
-                text: "Alterado!",
+                text: text,
                 type: "success",
                 showCancelButton: false,
                 confirmButtonText: "Voltar para Lista",
