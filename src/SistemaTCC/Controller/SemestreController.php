@@ -35,13 +35,13 @@ class SemestreController {
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
                 new Assert\Date(['message' => 'Preencha a data']),
             ],
-            'tipo' => [
-                new Assert\NotBlank(['message' => 'Preencha esse campo']),
-                new Assert\Regex([
-                    'pattern' => '/^[1|2]$/',
-                    'message' => 'Não é um tipo válido'
-                ]),
-            ],
+            // 'tipo' => [
+            //     new Assert\NotBlank(['message' => 'Preencha esse campo']),
+            //     new Assert\Regex([
+            //         'pattern' => '/^[1|2]$/',
+            //         'message' => 'Não é um tipo válido'
+            //     ]),
+            // ],
             'campus' => [
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
                 new Assert\Type([
@@ -64,10 +64,10 @@ class SemestreController {
     public function add(Application $app, Request $request) {
         $dados = [
             'nome'       => $request->get('nome'),
-            'dataInicio' => $request->get(''),
-            'dataFim'    => $request->get(''),
-            'tipo'       => $request->get('tipo'),
-            'campus'     => $request->get('campus'),
+            'dataInicio' => $request->get('dataInicio'),
+            'dataFim'    => $request->get('dataFim'),
+            // 'tipo'       => $request->get('tipo'),
+            'campus'     => $request->get('campus')
         ];
 
         $errors = $this->validacao($app, $dados);
@@ -81,11 +81,11 @@ class SemestreController {
         if (!$campus) {
             return $app->json(['campus' => 'Não existe campus cadastrado'], 400);
         }
-
+        date_default_timezone_set('UTC');
         $semestre->setNome($request->get('nome'));
         $semestre->setDataInicio(new DateTime($request->get('dataInicio')));
         $semestre->setDataFim(new DateTime($request->get('dataFim')));
-        $semestre->setTipo($request->get('tipo'));
+        // $semestre->setTipo($request->get('tipo'));
         $semestre->setCampus($campus);
 
 
@@ -97,12 +97,12 @@ class SemestreController {
             return $app->json(['semestre' => $e->getMessage()], 400);
         }
 
-        return $app->json(['semestre' => 'Semestre criado com sucesso']);
+        return $app->json(['semestre' => 'Semestre criado com sucesso', 'id' => $semestre->getId()]);
     }
 
     public function edit(Application $app, Request $request, $id) {
 
-        $semestre = $app['orm']->find('\\SistemaTCC\\Model\\Semestre', $id);
+        $semestre = $app['orm']->find('\\SistemaTCC\\Model\\Semestre', (int) $id);
         if (!$semestre) {
           return $app->json(['semestre' => 'Não existe semestre cadastrado'], 400);
         }
@@ -128,7 +128,7 @@ class SemestreController {
         $semestre->setNome($request->get('nome'));
         $semestre->setDataInicio(new DateTime($request->get('dataInicio')));
         $semestre->setDataFim(new DateTime($request->get('dataFim')));
-        $semestre->setTipo($request->get('tipo'));
+        // $semestre->setTipo($request->get('tipo'));
         $semestre->setCampus($campus);
 
         try {
@@ -177,8 +177,9 @@ class SemestreController {
              'titulo' => 'Cadastrar Semestre',
              'values' => [
                  'campus'   => $campus,
-                 'ano'      => '',
-                 'semestre'  => '',
+                 'nome'      => '',
+                 'datainicio'  => '',
+                 'datafim'  => '',
             'etapa_tcc1'  => [],
             'etapa_tcc2'  => [],
              ],
@@ -186,26 +187,35 @@ class SemestreController {
         return $app['twig']->render('semestre/formulario.twig', $dadosParaView);
     }
 
-    public function editarAction(Application $app) {
-      $dadosParaView = [
-            'titulo' => 'Editar Semestre',
-            'id'     => '111',
+    public function editarAction(Application $app, Request $request, $id) {
+        $dbSem = $app['orm']->getRepository('\SistemaTCC\Model\Semestre');
+        $semestre = $dbSem->find($id);
+        if (!$semestre) {
+            return $app->redirect('../semestre/listar');
+        }
+
+        $dbCampus = $app['orm']->getRepository('\SistemaTCC\Model\Campus');
+        $campus = $dbCampus->findAll();
+
+        $dbTipo = $app['orm']->getRepository('\SistemaTCC\Model\EtapaTipo');
+        $tipos = $dbTipo->findAll();
+
+        $dbEtapaTcc1 = $app['orm']->getRepository('\SistemaTCC\Model\Etapa')->findBy(['semestre' => $id, 'tcc' => 1]);
+        $dbEtapaTcc2 = $app['orm']->getRepository('\SistemaTCC\Model\Etapa')->findBy(['semestre' => $id, 'tcc' => 2]);
+
+        $dadosParaView = [
+            'titulo' => 'Editar Semestre: ' .$semestre->getNome(),
+            'id'     => $id,
             'values' => [
-                'campus'    => 'Gravataí',
-                'ano'       => '2016',
-                'semestre'  => '2',
-            'etapa_tcc1'  => [
-                ['id' => '1', 'nome' => 'Etapa11'],
-                ['id' => '2', 'nome' => 'Etapa22'],
-                ['id' => '3', 'nome' => 'Etapa33'],
-                ['id' => '4', 'nome' => 'Etapa44']
-            ],
-            'etapa_tcc2'  => [
-                ['id' => '4', 'nome' => 'Etapa44'],
-                ['id' => '5', 'nome' => 'Etapa55'],
-                ['id' => '6', 'nome' => 'Etapa66']
-            ],
-          ],
+                'campus'        => $campus,
+                'campusid'      => $semestre->getCampus()->getId(),
+                'nome'          => $semestre->getNome(),
+                'datainicio'    => $semestre->getDataInicio()->format('Y-m-d'),
+                'datafim'       => $semestre->getDataFim()->format('Y-m-d'),
+                'tipos'         => $tipos,
+                'etapa_tcc1'    => $dbEtapaTcc1,
+                'etapa_tcc2'    => $dbEtapaTcc2
+            ]
         ];
         return $app['twig']->render('semestre/formulario.twig', $dadosParaView);
     }

@@ -13,23 +13,28 @@
 		{% endif %}
 
 		<div class="form-group">
-			<label for="ano">Ano</label>
-			<input type="text" class="form-control " id="ano" placeholder="Ex.: 2016" maxlength="4" value="{{ values.ano }}">
+			<label for="ano">Nome</label>
+			<input type="text" class="form-control " id="nome" value="{{ values.nome }}">
 		</div>
 		<div class="form-group">
 			<label for="Campus">Campus</label>
 			<select class="form-control" id="campus">
 				{% for campus in values.campus %}
-					<option value="{{campus.id}}">{{campus.nome}}</option>
+					{% if id is defined and values.campusid == campus.id %}
+						<option value="{{campus.id}}" selected="selected">{{campus.nome}}</option>
+					{% else %}
+						<option value="{{campus.id}}">{{campus.nome}}</option>
+					{% endif %}
 				{% endfor %}
 			</select>
 		</div>
 		<div class="form-group">
-			<label for="semestre">Semestre</label>
-			<select class="form-control" id="semestre">
-				<option value="1" {{ values.semestre == 1 ? 'selected' : '' }}>Primeiro</option>
-				<option value="2" {{ values.semestre == 2 ? 'selected' : '' }}>Segundo</option>
-			</select>
+			<label for="dataInicio">Data Inicial</label>
+			<input type="text" class="form-control datepicker" id="data-inicio" value="{{ values.datainicio }}">
+		</div>
+		<div class="form-group">
+			<label for="dataFim">Data Final</label>
+			<input type="text" class="form-control datepicker" id="data-final" value="{{ values.datafim }}">
 		</div>
 		<div id="container-etapas-js" class="form-group content-etapas">
 			<ul class="nav nav-tabs">
@@ -44,11 +49,11 @@
 				<div class="tab-content clearfix">
 					<div class="tab-pane active" id="tcc1">
 						<table class="table table-hover">
-							<thead>
+							<thead data-tcc="1">
 								<tr>
 									<th>
 										<h4 class="title-header-tabs">Número de etapas</h4>
-										<button type="button" name="adicionar etapas" class="btn-header-tabs pull-right" data-toggle="modal" data-target="#addEtapa">
+										<button type="button" name="adicionar etapas" class="btn-header-tabs pull-right btn-cadastrar-etapa">
 											<i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
 										</button>
 									</th>
@@ -62,9 +67,9 @@
 											<button type="button" name="excluir etapa" class="btn-header-tabs btn-excluir-etapa pull-right">
 												<i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
 											</button>
-											<button type="button" name="editar etapa" class="btn-header-tabs btn-editar-etapa pull-right" data
-											</button>-toggle="modal" data-target="#editEtapa">
+											<button type="button" name="editar etapa" class="btn-header-tabs btn-editar-etapa pull-right" data-toggle="modal" data-target="#editEtapa">
 												<i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
+											</button>
 										</td>
 									</tr>
 								{% endfor %}
@@ -73,11 +78,11 @@
 					</div>
 					<div class="tab-pane" id="tcc2">
 						<table class="table table-hover">
-							<thead>
+							<thead data-tcc="2">
 								<tr>
 									<th>
 										<h4 class="title-header-tabs">Número de etapas</h4>
-										<button type="button" name="adicionar etapas" class="btn-header-tabs pull-right" data-toggle="modal" data-target="#addEtapa">
+										<button type="button" name="adicionar etapas" class="btn-header-tabs pull-right btn-cadastrar-etapa">
 											<i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
 										</button>
 									</th>
@@ -110,6 +115,7 @@
 	<!-- Final do form -->
 
 	<!-- Modal criar etapa -->
+	<button style="display:none;" id="btn-open-etapa" data-toggle="modal" data-target="#addEtapa"></button>
 	<div class="modal fade" id="addEtapa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -121,6 +127,7 @@
 				</div>
 				<div class="modal-body">
 					<form id="adicionar-etapa-js">
+						<input type="hidden" name="tcc" id="add-tcc"/>
 						<div class="form-group">
 							<label for="Campus">Nome</label>
 							<input type="text" class="form-control" id="etapa-add-nome" placeholder="Ex.: Etapa 01">
@@ -128,8 +135,11 @@
 						<div class="form-group">
 							<label for="tipo">Tipo</label>
 							<select class="form-control" id="etapa-add-tipo">
-								<option value="1">1</option>
-								<option value="2">2</option>
+								{% if values.tipos is defined  %}
+									{% for tipo in values.tipos %}
+										<option value="{{tipo.id}}">{{tipo.nome}}</option>
+									{% endfor %}
+								{% endif %}
 							</select>
 						</div>
 						<div class="form-group">
@@ -158,6 +168,7 @@
 		</div>
 	</div>
 	<!-- Modal editar etapa -->
+	<button style="display:none;" id="btn-open-etapa" data-toggle="modal" data-target="#addEtapa"></button>
 	<div class="modal fade" id="editEtapa" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -170,6 +181,7 @@
 				<div class="modal-body">
 					<form id="editar-etapa-js">
 						<input type="hidden" name="id" id="id-etapa"/>
+						<input type="hidden" name="id" id="edit-tcc"/>
 						<div class="form-group">
 							<label for="Campus">Nome</label>
 							<input type="text" class="form-control" id="etapa-edit-nome" placeholder="Ex.: Etapa 01">
@@ -177,8 +189,11 @@
 						<div class="form-group">
 							<label for="tipo">Tipo</label>
 							<select class="form-control" id="etapa-edit-tipo">
-								<option value="1">1</option>
-								<option value="2">2</option>
+								{% if values.tipos is defined  %}
+									{% for tipo in values.tipos %}
+										<option value="{{tipo.id}}">{{tipo.nome}}</option>
+									{% endfor %}
+								{% endif %}
 							</select>
 						</div>
 						<div class="form-group">

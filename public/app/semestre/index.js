@@ -6,7 +6,7 @@
   const $btnSalvarEtapa = $('#btn-salvar-etapa-js');
   const $btnAlterarEtapa = $('#btn-alterar-etapa-js');
   const urlSemestre = './semestre/';
-  const urlEtapa = './etapa/';
+  const urlEtapa = './etapa-semestre/';
 
   function init(){
     const id = $('#id-semestre').val();
@@ -14,7 +14,10 @@
       $('#container-etapas-js').show();
       $('#btn-cadastrar-semestre').html('Cadastrar');
     }
-    $('.datepicker').datepicker();
+    $('.datepicker').datepicker({
+      format: 'yyyy-mm-dd',
+      autoclose: true
+    });
   }
   init();
 
@@ -56,10 +59,13 @@
     e.preventDefault();
 
     const body = {
+      nome: $formSemestre.find('#nome').val(),
+      dataInicio: $formSemestre.find('#data-inicio').val(),
+      dataFim: $formSemestre.find('#data-final').val(),
+      // tipo: $formSemestre.find('#campus').val(),
       campus: $formSemestre.find('#campus').val(),
-      ano: $formSemestre.find('#ano').val(),
-      semestre: $formSemestre.find('#semestre').val()
     };
+
     const id = $('#id-semestre').val();
 
     if(id) {
@@ -74,10 +80,10 @@
       });
       return arr;
     }
-
+    console.log(body);
     const url = urlSemestre + (id ? id + '/' : '');
     const method = id ? 'PUT' : 'POST';
-
+    console.log(method);
     var request = $.ajax({
         url: url,
         type: method,
@@ -87,15 +93,31 @@
 
     request.done(function(data){
       if(data.id) {
-        location.href = urlSemestre + 'editar/' + id;
-      }else {
-        swal("Cadastrado!", "O semestre foi cadastrado com sucesso!", "success");
+          swal({
+           title: "Cadastrado!",
+           text: "Continuar cadastrando o semestre!",
+           type: "success",
+           confirmButtonText: "OK"
+          },
+          function(isConfirm){
+           if (isConfirm) {
+             location.href = urlSemestre + 'editar/' + data.id;
+           }
+          });
       }
     });
 
     request.fail(function(data){
       swal("Erro!", "Erro ao cadastrar o semestre, tente novamente", "error");
     });
+  });
+
+
+  $('.table').on('click', '.btn-cadastrar-etapa', function(event){
+    event.preventDefault();
+    $('#btn-open-etapa').click();
+    var tccValue = $(this).parent().parent().parent().data('tcc');
+    $('#add-tcc').val(tccValue);
   });
 
 
@@ -109,7 +131,7 @@
     function(isConfirm){
       if (isConfirm) {
         var request = $.ajax({
-              url: urlEtapa +'/deletar/'+ etapaId + '/',
+              url: urlEtapa + etapaId + '/',
               type: 'DELETE',
               dataType: 'json'
         });
@@ -154,9 +176,10 @@
       $('#etapa-edit-nome').val(data.nome);
       $('#etapa-edit-tipo').val(data.tipo);
       $('#etapa-edit-peso').val(data.peso);
-      $('#etapa-edit-limite').val(data.data_limite);
-      $('#etapa-edit-descricao').val(data.descricao);
-      $('#etapa-edit-abertura').val(data.data_abertura);
+      $('#etapa-edit-limite').val(data.dataFim);
+      $('#etapa-edit-descricao').val(data.ordem);
+      $('#etapa-edit-abertura').val(data.dataInicio);
+      $('#edit-tcc').val(data.tcc);
     });
 
     request.fail(function(data){
@@ -177,16 +200,18 @@
       nome: $('#etapa-edit-nome').val(),
       tipo: $('#etapa-edit-tipo').val(),
       peso: $('#etapa-edit-peso').val(),
-      data_limite: $('#etapa-edit-limite').val(),
-      descricao: $('#etapa-edit-descricao').val(),
-      data_abertura: $('#etapa-edit-abertura').val()
+      dataFim: $('#etapa-edit-limite').val(),
+      ordem: $('#etapa-edit-descricao').val(),
+      dataInicio: $('#etapa-edit-abertura').val(),
+      semestre: $('#id-semestre').val(),
+      tcc: $('#edit-tcc').val()
     };
-
+    console.log(body);
     swal(swalEditar,
     function(isConfirm){
       if (isConfirm) {
         var request = $.ajax({
-              url: urlEtapa +'/editar/'+ etapaId + '/',
+              url: urlEtapa + etapaId + '/',
               type: 'PUT',
               dataType: 'json',
               data: body
@@ -221,17 +246,19 @@
     const body = {
       nome: $('#etapa-add-nome').val(),
       tipo: $('#etapa-add-tipo').val(),
+      semestre: $('#id-semestre').val(),
       peso: $('#etapa-add-peso').val(),
-      data_limite: $('#etapa-add-limite').val(),
-      descricao: $('#etapa-add-descricao').val(),
-      data_abertura: $('#etapa-addabertura').val()
+      dataInicio: $('#etapa-add-abertura').val(),
+      dataFim: $('#etapa-add-limite').val(),
+      ordem: $('#etapa-add-descricao').val(),
+      tcc: $('#add-tcc').val()
     };
-
+    console.log(JSON.stringify(body));
     swal(swalSalvar,
     function(isConfirm){
       if (isConfirm) {
         var request = $.ajax({
-              url: urlEtapa +'/cadastrar/',
+              url: urlEtapa,
               type: 'POST',
               dataType: 'json',
               data: body
