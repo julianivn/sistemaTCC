@@ -14,7 +14,8 @@ class EnviarEtapaController {
 		$asserts = [
 			'arquivo' => [
 				new Assert\File([
-					'mimeTypes' => ['application/pdf','application/x-pdf'],
+					'mimeTypes' => ['application/pdf','application/x-pdf','application/msword'],
+					'mimeTypesMessage' => 'Somente os formatos doc e pdf são aceitos.',
 					'disallowEmptyMessage' => 'Selecione um arquivo']
 				),
 			]
