@@ -24,9 +24,10 @@
         <div class="row">
             <div class="col-xs-4">
                 <div class="form-group">
-                    <label class="control-label" for="telefone">Semestre</label>
-                    <input type="text" class="form-control" name="semestre" id="semestre" value="{{ values.semestre }}">
-                    <span class="help-block"></span>
+					<select class="form-control" id="semestre">
+						<option value="1" {{ values.semestre == 1 ? 'selected' : '' }}>Primeiro</option>
+						<option value="2" {{ values.semestre == 2 ? 'selected' : '' }}>Segundo</option>
+					</select>
                 </div>
             </div>
 
