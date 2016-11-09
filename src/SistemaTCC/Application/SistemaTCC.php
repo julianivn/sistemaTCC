@@ -58,7 +58,10 @@ class SistemaTCC extends Application {
 		$app->get('/tcc/excluir/', "\\SistemaTCC\\Controller\\TccController::excluirAction");
 		$app->get('/tcc/listar/', "\\SistemaTCC\\Controller\\TccController::listarAction");
 
-
+		$app->get('/enviaretapa/', "\\SistemaTCC\\Controller\\EnviarEtapaController::indexAction");
+		$app->get('/enviaretapa/listar/', "\\SistemaTCC\\Controller\\EnviarEtapaController::listarAction");
+		$app->get('/enviaretapa/enviar/{id}/', "\\SistemaTCC\\Controller\\EnviarEtapaController::enviarAction");
+		$app->get('/enviaretapa/nota/{id}/', "\\SistemaTCC\\Controller\\EnviarEtapaController::notaAction");
 
 		// REST Aluno
 		$app->post('/aluno/', "\\SistemaTCC\\Controller\\AlunoController::add");
@@ -72,11 +75,8 @@ class SistemaTCC extends Application {
 		$app->put('/professor/{id}/', "\\SistemaTCC\\Controller\\ProfessorController::edit");
 		$app->delete('/professor/{id}/', "\\SistemaTCC\\Controller\\ProfessorController::del");
 
-
-		$app->get('/enviaretapa/', "\\SistemaTCC\\Controller\\EnviarEtapaController::indexAction");
-		$app->get('/enviaretapa/listar/', "\\SistemaTCC\\Controller\\EnviarEtapaController::listarAction");
-		$app->get('/enviaretapa/enviar/{id}/', "\\SistemaTCC\\Controller\\EnviarEtapaController::enviarAction");
-		$app->get('/enviaretapa/nota/{id}/', "\\SistemaTCC\\Controller\\EnviarEtapaController::notaAction");
+		$app->post('/enviaretapa/',"\\SistemaTCC\\Controller\\EnviarEtapaController::add");
+		
 
 		// REST Etapa Status
 		$app->post('/etapa-status/', "SistemaTCC\Controller\EtapaStatusController::add");
