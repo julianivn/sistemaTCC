@@ -54,7 +54,7 @@ class AlunoController {
 								]),
                 new Assert\Length([
                      'min' => 9,
-                     'max' => 10,
+                     'max' => 9,
                      'minMessage' => 'Seu CGU precisa possuir pelo menos {{ limit }} caracteres',
                      'maxMessage' => 'Seu CGU não deve possuir mais que {{ limit }} caracteres'
                 ])
@@ -66,7 +66,7 @@ class AlunoController {
 										'message' => 'Sua Matrícula não pode ser um número negativo',
 								]),
                 new Assert\Length([
-                     'min' => 9,
+                     'min' => 10,
                      'max' => 10,
                      'minMessage' => 'Sua Matrícula precisa possuir pelo menos {{ limit }} caracteres',
                      'maxMessage' => 'Sua Matrícula não deve possuir mais que {{ limit }} caracteres'
@@ -92,8 +92,8 @@ class AlunoController {
             'email'     => $request->get('email'),
             'telefone'  => str_replace(array('(',')',' ','-'),'',$request->get('telefone')),
             'sexo'      => $request->get('sexo'),
-						'cgu'				=> $request->get('cgu'),
-						'matricula'	=> $request->get('matricula')
+			'cgu'		=> $request->get('cgu'),
+			'matricula'	=> str_replace('-','',$request->get('matricula')),
         ];
 
         $errors = $this->validacao($app, $dados);
@@ -144,7 +144,7 @@ class AlunoController {
             'telefone'  => str_replace(array('(',')',' ','-'),'',$request->get('telefone', $pessoa->getTelefone())),
             'sexo'      => $request->get('sexo', $pessoa->getSexo()),
             'cgu'       => $request->get('cgu', $aluno->getCgu()),
-            'matricula' => $request->get('matricula', $aluno->getMatricula())
+            'matricula' => str_replace('-','',$request->get('matricula', $aluno->getMatricula()))
         ];
 
         $errors = $this->validacao($app, $dados);
