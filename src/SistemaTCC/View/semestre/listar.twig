@@ -1,24 +1,21 @@
 {% extends 'layout.twig' %}
-{% block styles %}
-  <link rel="stylesheet" href="./app/semestre/listar.css">
-{% endblock %}
 {% block content %}
 	<div class="row">
 		<div class="col-sm-6 col-xs-12">
 			<h3>{{ titulo }}</h3>
-		</div>		
+		</div>
 		<div class="col-sm-6 col-xs-12">
-			<a href="./semestre/cadastrar" class="btn btn-success btn-semestre-cadastrar"><span class="glyphicon glyphicon-plus"></span> Cadastrar semestre</a>
+			<a href="./semestre/cadastrar" class="btn btn-success btn-cadastrar"><span class="glyphicon glyphicon-plus"></span> Cadastrar semestre</a>
 		</div>
 	</div>
-	
+
 	<table class="table">
 	</div>
         <thead>
             <tr>
 			   <th>Data inicio</th>
 			   <th>Data fim</th>
-               <th>Campus</th> 
+               <th>Campus</th>
                <th>Semestre</th>
             </tr>
         </thead>
