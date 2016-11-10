@@ -92,8 +92,8 @@ class AlunoController {
             'email'     => $request->get('email'),
             'telefone'  => str_replace(array('(',')',' ','-'),'',$request->get('telefone')),
             'sexo'      => $request->get('sexo'),
-			'cgu'		=> $request->get('cgu'),
-			'matricula'	=> $request->get('matricula')
+						'cgu'				=> $request->get('cgu'),
+						'matricula'	=> $request->get('matricula')
         ];
 
         $errors = $this->validacao($app, $dados);
@@ -235,7 +235,7 @@ class AlunoController {
         return 'Excluir Aluno';
     }
 
-	public function listarAction(Application $app) {
+		public function listarAction(Application $app) {
         $db = $app['orm']->getRepository('\SistemaTCC\Model\Aluno');
         $alunos = $db->findAll();
         $dadosParaView = [
