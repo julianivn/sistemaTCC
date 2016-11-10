@@ -57,7 +57,7 @@
 
     const body = {
 	  dataini: $formSemestre.find('#dataini').val(),
-	  dataini: $formSemestre.find('#datafim').val(),
+	  dataifim: $formSemestre.find('#datafim').val(),
       campus: $formSemestre.find('#campus').val(),
       ano: $formSemestre.find('#ano').val(),
       semestre: $formSemestre.find('#semestre').val()
