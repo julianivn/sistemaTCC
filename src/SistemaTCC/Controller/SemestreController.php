@@ -141,15 +141,26 @@ class SemestreController {
     }
 
     public function del(Application $app, Request $request, $id) {
+		$dbSem = $app['orm']->getRepository('\\SistemaTCC\\Model\\Semestre');
+        $semestre = $dbSem->find($id);
 
-        $semestre = $app['orm']->find('\\SistemaTCC\\Model\\Semestre', $id);
+		$dbEtapas = $app['orm']->getRepository('\\SistemaTCC\\Model\\Etapa');
+		$etapas = $dbEtapas->findBy(['semestre' => $id]);
+
         if (!$semestre) {
-            return $app->json(['semestre' => 'Não existe semestre cadastrado'], 400);
+          return $app->json(['semestre' => 'Não existe semestre cadastrado'], 400);
         }
 
         try {
-            $app['orm']->remove($semestre);
-            $app['orm']->flush();
+		  if(count($etapas) > 0) {
+		    foreach ($etapas as $etapa) {
+          	  $app['orm']->remove($etapa);
+      		 }
+    		 $app['orm']->flush();
+		  }
+
+          $app['orm']->remove($semestre);
+          $app['orm']->flush();
         }
         catch (\Exception $e) {
           return $app->json(['semestre' => $e->getMessage()], 400);

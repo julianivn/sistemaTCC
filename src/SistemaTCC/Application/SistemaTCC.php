@@ -4,8 +4,11 @@ namespace SistemaTCC\Application;
 
 use Symfony\Component\HttpFoundation\Request;
 use Silex\Application;
+use Silex\Provider\SessionServiceProvider;
+use Silex\Provider\SecurityServiceProvider;
 use Silex\Provider\TwigServiceProvider;
 use SistemaTCC\Provider\DoctrineOrmServiceProvider;
+use SistemaTCC\Provider\UserProvider;
 use Silex\Provider\ValidatorServiceProvider;
 
 class SistemaTCC extends Application {
@@ -24,6 +27,17 @@ class SistemaTCC extends Application {
 
 		// Provider
 		$this->register(new DoctrineOrmServiceProvider());
+		$this->register(new SessionServiceProvider());
+		$this->register(new SecurityServiceProvider(), ['security.firewalls' => [
+			'admin' => [
+				'pattern' => '^/.+',
+				'form' => ['login_path' => '/', 'check_path' => '/login/'],
+				'logout' => ['logout_path' => '/logout/', 'invalidate_session' => true],
+				'users' => function () use ($app) {
+					return new UserProvider($app['orm']->getConnection());
+				}
+			]
+		]]);
 		$app->register(new TwigServiceProvider(), ['twig.path' => __DIR__ . '/../View/']);
 
 		// Validator
@@ -32,7 +46,6 @@ class SistemaTCC extends Application {
 		// Controller
 		$app->get('/', "\\SistemaTCC\\Controller\\IndexController::indexAction")->bind('/');
 		$app->get('/creditos/', "\\SistemaTCC\\Controller\\IndexController::creditosAction");
-		$app->get('/login/', "\\SistemaTCC\\Controller\\IndexController::creditosAction");
 
 		$app->get('/aluno/', "\\SistemaTCC\\Controller\\AlunoController::indexAction");
 		$app->get('/aluno/cadastrar/', "\\SistemaTCC\\Controller\\AlunoController::cadastrarAction");
@@ -104,11 +117,11 @@ class SistemaTCC extends Application {
 		$app->delete('/semestre/{id}/', "\\SistemaTCC\\Controller\\SemestreController::del");
 
 		// REST Etapa Semestre
-		$app->post('/etapa-semestre/', "SistemaTCC\Controller\EtapaSemestreController::add");
-		$app->get('/etapa-semestre/', "SistemaTCC\Controller\EtapaSemestreController::all");
-		$app->get('/etapa-semestre/{id}/', "SistemaTCC\Controller\EtapaSemestreController::find");
-		$app->put('/etapa-semestre/{id}/', "SistemaTCC\Controller\EtapaSemestreController::edit");
-		$app->delete('/etapa-semestre/{id}/', "SistemaTCC\Controller\EtapaSemestreController::del");
+		$app->post('/etapa-semestre/', "\\SistemaTCC\\Controller\\EtapaSemestreController::add");
+		$app->get('/etapa-semestre/', "\\SistemaTCC\\Controller\\EtapaSemestreController::all");
+		$app->get('/etapa-semestre/{id}/', "\\SistemaTCC\\Controller\\EtapaSemestreController::find");
+		$app->put('/etapa-semestre/{id}/', "\\SistemaTCC\\Controller\\EtapaSemestreController::edit");
+		$app->delete('/etapa-semestre/{id}/', "\\SistemaTCC\\Controller\\EtapaSemestreController::del");
 
 		// REST tcc
 		$app->post('/tcc/', "\\SistemaTCC\\Controller\\TccController::add");
