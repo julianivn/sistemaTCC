@@ -6,8 +6,6 @@ $(function() {
     const itemID = $form.find('#id').val();
     const restURL = './aluno/';
     const listaURL = './aluno/';
-
-	$('#telefone').mask('(99) 9999-9999?9');
 	
     function verifyErrors(err) {
         const errors = err || {};
@@ -31,13 +29,14 @@ $(function() {
           	matricula: $form.find('#matricula').val(),
             telefone: $form.find('#telefone').val(),
             email: $form.find('#email').val(),
-            sexo: $form.find('[name=sexo]').val(),
+            sexo: $form.find('input[name=sexo]:checked').val(),
           	cgu:  $form.find('#cgu').val(),
         };
 
 
         const url = restURL + (itemID ? itemID + '/' : '' );
         const method = itemID ? 'put' : 'post';
+        const text = itemID ? 'Alterado': 'Incluído';
 
         const request = $.ajax({
                 url: url,
@@ -51,7 +50,7 @@ $(function() {
             verifyErrors();
             swal({
                 title: "OK",
-                text: "Alterado!",
+                text: text,
                 type: "success",
                 showCancelButton: false,
                 confirmButtonText: "Voltar para Lista",

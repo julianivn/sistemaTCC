@@ -1,13 +1,16 @@
 $(function() {
 
+    "use strict";
+
     const $form = $('#form-js');
     const itemID = $form.find('#id').val();
-    const restURL = './professor/';
-    const listaURL = './professor/';
+    const restURL = './tcc/';
+    const listaURL = './tcc/';
 	
     function verifyErrors(err) {
         const errors = err || {};
-        $.each(['nome', 'email', 'telefone'], function(key, value) {
+
+        $.each(['titulo', 'aluno', 'semestre'], function(key, value) {
             const message = errors[value] || false;
             const element = $form.find('#' + value);
             if (message) {
@@ -22,11 +25,11 @@ $(function() {
         event.preventDefault();
 
         const values = {
-            nome: $form.find('#nome').val(),
-            telefone: $form.find('#telefone').val(),
-            email: $form.find('#email').val(),
-            sexo: $form.find('input[name=sexo]:checked').val()
+            titulo: $form.find('#titulo').val(),
+          	aluno: $form.find('#aluno').val(),
+            semestre: $form.find('#semestre').val(),
         };
+
 
         const url = restURL + (itemID ? itemID + '/' : '' );
         const method = itemID ? 'put' : 'post';

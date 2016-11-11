@@ -9,7 +9,7 @@
 		  <h3>{{ titulo }} <small>{{ subtitulo }}</small></h3>
 	  </div>
   </div>
-  <form id="form-js" class="form-default">
+  <form id="form-js" class="form-default" method="post" action="./enviaretapa/" enctype="multipart/form-data">
 	  {% if id is defined %}
 		<input type="hidden" name="etapa" value="{{ etapa }}" id="etapa-id" />
 	  {% endif %}

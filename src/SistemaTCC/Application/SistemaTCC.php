@@ -52,12 +52,12 @@ class SistemaTCC extends Application {
 		$app->get('/semestre/excluir/', "\\SistemaTCC\\Controller\\SemestreController::excluirAction");
 		$app->get('/semestre/listar/', "\\SistemaTCC\\Controller\\SemestreController::listarAction");
 
-
 		$app->get('/etapa-semestre/', "\\SistemaTCC\\Controller\\EtapaSemestreController::indexAction");
 		$app->get('/etapa-semestre/cadastrar/', "\\SistemaTCC\\Controller\\EtapaSemestreController::cadastrarAction");
 		$app->get('/etapa-semestre/editar/{id}/', "\\SistemaTCC\\Controller\\EtapaSemestreController::editarAction");
 		$app->get('/etapa-semestre/excluir/', "\\SistemaTCC\\Controller\\EtapaSemestreController::excluirAction");
 		$app->get('/etapa-semestre/listar/', "\\SistemaTCC\\Controller\\EtapaSemestreController::listarAction");
+
 
 		$app->get('/tcc/', "\\SistemaTCC\\Controller\\TccController::indexAction");
 		$app->get('/tcc/cadastrar/', "\\SistemaTCC\\Controller\\TccController::cadastrarAction");
@@ -65,7 +65,15 @@ class SistemaTCC extends Application {
 		$app->get('/tcc/excluir/', "\\SistemaTCC\\Controller\\TccController::excluirAction");
 		$app->get('/tcc/listar/', "\\SistemaTCC\\Controller\\TccController::listarAction");
 
+		$app->get('/campus/', "\\SistemaTCC\\Controller\\CampusController::indexAction");
+		$app->get('/campus/cadastrar/', "\\SistemaTCC\\Controller\\CampusController::cadastrarAction");
+		$app->get('/campus/editar/{id}/', "\\SistemaTCC\\Controller\\CampusController::editarAction");
+		$app->get('/campus/listar/', "\\SistemaTCC\\Controller\\CampusController::listarAction");
 
+		$app->get('/enviaretapa/', "\\SistemaTCC\\Controller\\EnviarEtapaController::indexAction");
+		$app->get('/enviaretapa/listar/', "\\SistemaTCC\\Controller\\EnviarEtapaController::listarAction");
+		$app->get('/enviaretapa/enviar/{id}/', "\\SistemaTCC\\Controller\\EnviarEtapaController::enviarAction");
+		$app->get('/enviaretapa/nota/{id}/', "\\SistemaTCC\\Controller\\EnviarEtapaController::notaAction");
 
 		// REST Aluno
 		$app->post('/aluno/', "\\SistemaTCC\\Controller\\AlunoController::add");
@@ -79,11 +87,8 @@ class SistemaTCC extends Application {
 		$app->put('/professor/{id}/', "\\SistemaTCC\\Controller\\ProfessorController::edit");
 		$app->delete('/professor/{id}/', "\\SistemaTCC\\Controller\\ProfessorController::del");
 
+		$app->post('/enviaretapa/',"\\SistemaTCC\\Controller\\EnviarEtapaController::add");
 
-		$app->get('/enviaretapa/', "\\SistemaTCC\\Controller\\EnviarEtapaController::indexAction");
-		$app->get('/enviaretapa/listar/', "\\SistemaTCC\\Controller\\EnviarEtapaController::listarAction");
-		$app->get('/enviaretapa/enviar/{id}/', "\\SistemaTCC\\Controller\\EnviarEtapaController::enviarAction");
-		$app->get('/enviaretapa/nota/{id}/', "\\SistemaTCC\\Controller\\EnviarEtapaController::notaAction");
 
 		// REST Etapa Status
 		$app->post('/etapa-status/', "SistemaTCC\Controller\EtapaStatusController::add");
@@ -110,9 +115,13 @@ class SistemaTCC extends Application {
 		$app->put('/tcc/{id}/', "\\SistemaTCC\\Controller\\TccController::edit");
 		$app->delete('/tcc/{id}/', "\\SistemaTCC\\Controller\\TccController::del");
 
-		// Twig Extensions
+		// REST Campus
+		$app->post('/campus/', "\\SistemaTCC\\Controller\\CampusController::add");
+		$app->put('/campus/{id}/', "\\SistemaTCC\\Controller\\CampusController::edit");
+		$app->delete('/campus/{id}/', "\\SistemaTCC\\Controller\\CampusController::del");
 
-        $app['twig'] = $app->extend('twig', function ($twig, $app) {
+		// Twig Extensions
+    $app['twig'] = $app->extend('twig', function ($twig, $app) {
 			/**
 			 * Função de extensão do Twig para formatar números de telefone para exibição.
 			 */
