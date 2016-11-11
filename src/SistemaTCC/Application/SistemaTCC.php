@@ -48,9 +48,16 @@ class SistemaTCC extends Application {
 
 		$app->get('/semestre/', "\\SistemaTCC\\Controller\\SemestreController::indexAction");
 		$app->get('/semestre/cadastrar/', "\\SistemaTCC\\Controller\\SemestreController::cadastrarAction");
-		$app->get('/semestre/editar/', "\\SistemaTCC\\Controller\\SemestreController::editarAction");
+		$app->get('/semestre/editar/{id}/', "\\SistemaTCC\\Controller\\SemestreController::editarAction");
 		$app->get('/semestre/excluir/', "\\SistemaTCC\\Controller\\SemestreController::excluirAction");
 		$app->get('/semestre/listar/', "\\SistemaTCC\\Controller\\SemestreController::listarAction");
+
+		$app->get('/etapa-semestre/', "\\SistemaTCC\\Controller\\EtapaSemestreController::indexAction");
+		$app->get('/etapa-semestre/cadastrar/', "\\SistemaTCC\\Controller\\EtapaSemestreController::cadastrarAction");
+		$app->get('/etapa-semestre/editar/{id}/', "\\SistemaTCC\\Controller\\EtapaSemestreController::editarAction");
+		$app->get('/etapa-semestre/excluir/', "\\SistemaTCC\\Controller\\EtapaSemestreController::excluirAction");
+		$app->get('/etapa-semestre/listar/', "\\SistemaTCC\\Controller\\EtapaSemestreController::listarAction");
+
 
 		$app->get('/tcc/', "\\SistemaTCC\\Controller\\TccController::indexAction");
 		$app->get('/tcc/cadastrar/', "\\SistemaTCC\\Controller\\TccController::cadastrarAction");
@@ -92,8 +99,16 @@ class SistemaTCC extends Application {
 
 		// REST semestre
 		$app->post('/semestre/', "\\SistemaTCC\\Controller\\SemestreController::add");
+		$app->get('/semestre/{id}/', "\\SistemaTCC\\Controller\\SemestreController::find");
 		$app->put('/semestre/{id}/', "\\SistemaTCC\\Controller\\SemestreController::edit");
 		$app->delete('/semestre/{id}/', "\\SistemaTCC\\Controller\\SemestreController::del");
+
+		// REST Etapa Semestre
+		$app->post('/etapa-semestre/', "SistemaTCC\Controller\EtapaSemestreController::add");
+		$app->get('/etapa-semestre/', "SistemaTCC\Controller\EtapaSemestreController::all");
+		$app->get('/etapa-semestre/{id}/', "SistemaTCC\Controller\EtapaSemestreController::find");
+		$app->put('/etapa-semestre/{id}/', "SistemaTCC\Controller\EtapaSemestreController::edit");
+		$app->delete('/etapa-semestre/{id}/', "SistemaTCC\Controller\EtapaSemestreController::del");
 
 		// REST tcc
 		$app->post('/tcc/', "\\SistemaTCC\\Controller\\TccController::add");
