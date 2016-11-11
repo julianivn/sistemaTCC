@@ -8,6 +8,7 @@ use Silex\Provider\SessionServiceProvider;
 use Silex\Provider\SecurityServiceProvider;
 use Silex\Provider\TwigServiceProvider;
 use SistemaTCC\Provider\DoctrineOrmServiceProvider;
+use SistemaTCC\Provider\UserProvider;
 use Silex\Provider\ValidatorServiceProvider;
 
 class SistemaTCC extends Application {
@@ -29,12 +30,12 @@ class SistemaTCC extends Application {
 		$this->register(new SessionServiceProvider());
 		$this->register(new SecurityServiceProvider(), ['security.firewalls' => [
 			'admin' => [
-				'pattern' => '^/creditos/',
-				'http' => true,
-				'form' => ['login_path' => '/login', 'check_path' => '/login/check/'],
-				'users' => [
-					'admin' => ['ROLE_ADMIN', '$2y$10$3i9/lVd8UOFIJ6PAMFt8gu3/r5g0qeCJvoSlLCsvMTythye19F77a']
-				]
+				'pattern' => '^/.+',
+				'form' => ['login_path' => '/', 'check_path' => '/login/'],
+				'logout' => ['logout_path' => '/logout/', 'invalidate_session' => true],
+				'users' => function () use ($app) {
+					return new UserProvider($app['orm']->getConnection());
+				}
 			]
 		]]);
 		$app->register(new TwigServiceProvider(), ['twig.path' => __DIR__ . '/../View/']);
@@ -45,7 +46,6 @@ class SistemaTCC extends Application {
 		// Controller
 		$app->get('/', "\\SistemaTCC\\Controller\\IndexController::indexAction")->bind('/');
 		$app->get('/creditos/', "\\SistemaTCC\\Controller\\IndexController::creditosAction");
-		$app->get('/login/', "\\SistemaTCC\\Controller\\IndexController::loginAction");
 
 		$app->get('/aluno/', "\\SistemaTCC\\Controller\\AlunoController::indexAction");
 		$app->get('/aluno/cadastrar/', "\\SistemaTCC\\Controller\\AlunoController::cadastrarAction");
