@@ -14,6 +14,7 @@ use Silex\Provider\ValidatorServiceProvider;
 class SistemaTCC extends Application {
 
 	use Application\UrlGeneratorTrait;
+	use Application\SecurityTrait;
 
 	public function __construct() {
 
