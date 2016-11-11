@@ -18,7 +18,7 @@ class DoctrineOrmServiceProvider implements ServiceProviderInterface {
 
             $conn = [
                 'driver'   => 'pdo_mysql',
-                'host'     => '127.0.0.1',
+                'host'     => 'localhost',
                 'dbname'   => 'sistema_tcc',
                 'user'     => 'root',
                 'password' => 'root',
