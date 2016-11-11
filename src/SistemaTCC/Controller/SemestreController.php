@@ -75,9 +75,7 @@ class SemestreController {
             return $app->json($errors, 400);
         }
 
-        $semestre = new \SistemaTCC\Model\Semestre();
-		$campus = new \SistemaTCC\Model\Campus();
-
+        $semestre = new Semestre();
         $campus = $app['orm']->find('\\SistemaTCC\\Model\\Campus', $request->get('campus'));
 
         if (!$campus) {
@@ -178,10 +176,10 @@ class SemestreController {
         $dadosParaView = [
              'titulo' => 'Cadastrar Semestre',
              'values' => [
-                 'campus'       => $campus,
-                 'nome'         => '',
-                 'datainicio'   => '',
-                 'datafim'      => '',
+                 'campus'   => $campus,
+                 'nome'      => '',
+                 'datainicio'  => '',
+                 'datafim'  => '',
                  'etapa_tcc1'  => [],
                  'etapa_tcc2'  => [],
              ],
