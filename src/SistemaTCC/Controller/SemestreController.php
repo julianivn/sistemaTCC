@@ -210,8 +210,8 @@ class SemestreController {
                 'campus'        => $campus,
                 'campusid'      => $semestre->getCampus()->getId(),
                 'nome'          => $semestre->getNome(),
-                'datainicio'    => $semestre->getDataInicio()->format('Y-m-d'),
-                'datafim'       => $semestre->getDataFim()->format('Y-m-d'),
+                'datainicio'    => $semestre->getDataInicio()->format('d/m/Y'),
+                'datafim'       => $semestre->getDataFim()->format('d/m/Y'),
                 'tipos'         => $tipos,
                 'etapa_tcc1'    => $dbEtapaTcc1,
                 'etapa_tcc2'    => $dbEtapaTcc2

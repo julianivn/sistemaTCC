@@ -15,8 +15,8 @@
       $('#btn-cadastrar-semestre').html('Cadastrar');
     }
     $('.datepicker').datepicker({
-      format: 'yyyy-mm-dd',
-      // format: 'dd/mm/yyyy',
+      // format: 'yyyy-mm-dd',
+      format: 'dd/mm/yyyy',
       autoclose: true
     });
   }
@@ -77,10 +77,10 @@
 
     const body = {
       nome: $formSemestre.find('#nome').val(),
-      // dataInicio: moment(dataStart, 'DD/MM/YYYY').format('YYYY-MM-DD'),
-      // dataFim: moment(dataEnd, 'DD/MM/YYYY').format('YYYY-MM-DD'),
-      dataInicio: dataStart,
-      dataFim: dataEnd,
+      dataInicio: moment(dataStart, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+      dataFim: moment(dataEnd, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+      // dataInicio: dataStart,
+      // dataFim: dataEnd,
       campus: $formSemestre.find('#campus').val()
     };
 
