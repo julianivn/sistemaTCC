@@ -104,11 +104,11 @@ class SistemaTCC extends Application {
 		$app->delete('/semestre/{id}/', "\\SistemaTCC\\Controller\\SemestreController::del");
 
 		// REST Etapa Semestre
-		$app->post('/etapa-semestre/', "SistemaTCC\Controller\EtapaSemestreController::add");
-		$app->get('/etapa-semestre/', "SistemaTCC\Controller\EtapaSemestreController::all");
-		$app->get('/etapa-semestre/{id}/', "SistemaTCC\Controller\EtapaSemestreController::find");
-		$app->put('/etapa-semestre/{id}/', "SistemaTCC\Controller\EtapaSemestreController::edit");
-		$app->delete('/etapa-semestre/{id}/', "SistemaTCC\Controller\EtapaSemestreController::del");
+		$app->post('/etapa-semestre/', "\\SistemaTCC\\Controller\\EtapaSemestreController::add");
+		$app->get('/etapa-semestre/', "\\SistemaTCC\\Controller\\EtapaSemestreController::all");
+		$app->get('/etapa-semestre/{id}/', "\\SistemaTCC\\Controller\\EtapaSemestreController::find");
+		$app->put('/etapa-semestre/{id}/', "\\SistemaTCC\\Controller\\EtapaSemestreController::edit");
+		$app->delete('/etapa-semestre/{id}/', "\\SistemaTCC\\Controller\\EtapaSemestreController::del");
 
 		// REST tcc
 		$app->post('/tcc/', "\\SistemaTCC\\Controller\\TccController::add");
