@@ -48,15 +48,27 @@ class SistemaTCC extends Application {
 
 		$app->get('/semestre/', "\\SistemaTCC\\Controller\\SemestreController::indexAction");
 		$app->get('/semestre/cadastrar/', "\\SistemaTCC\\Controller\\SemestreController::cadastrarAction");
-		$app->get('/semestre/editar/', "\\SistemaTCC\\Controller\\SemestreController::editarAction");
+		$app->get('/semestre/editar/{id}/', "\\SistemaTCC\\Controller\\SemestreController::editarAction");
 		$app->get('/semestre/excluir/', "\\SistemaTCC\\Controller\\SemestreController::excluirAction");
 		$app->get('/semestre/listar/', "\\SistemaTCC\\Controller\\SemestreController::listarAction");
-		
+
+		$app->get('/etapa-semestre/', "\\SistemaTCC\\Controller\\EtapaSemestreController::indexAction");
+		$app->get('/etapa-semestre/cadastrar/', "\\SistemaTCC\\Controller\\EtapaSemestreController::cadastrarAction");
+		$app->get('/etapa-semestre/editar/{id}/', "\\SistemaTCC\\Controller\\EtapaSemestreController::editarAction");
+		$app->get('/etapa-semestre/excluir/', "\\SistemaTCC\\Controller\\EtapaSemestreController::excluirAction");
+		$app->get('/etapa-semestre/listar/', "\\SistemaTCC\\Controller\\EtapaSemestreController::listarAction");
+
+
 		$app->get('/tcc/', "\\SistemaTCC\\Controller\\TccController::indexAction");
 		$app->get('/tcc/cadastrar/', "\\SistemaTCC\\Controller\\TccController::cadastrarAction");
 		$app->get('/tcc/editar/', "\\SistemaTCC\\Controller\\TccController::editarAction");
 		$app->get('/tcc/excluir/', "\\SistemaTCC\\Controller\\TccController::excluirAction");
 		$app->get('/tcc/listar/', "\\SistemaTCC\\Controller\\TccController::listarAction");
+
+		$app->get('/campus/', "\\SistemaTCC\\Controller\\CampusController::indexAction");
+		$app->get('/campus/cadastrar/', "\\SistemaTCC\\Controller\\CampusController::cadastrarAction");
+		$app->get('/campus/editar/{id}/', "\\SistemaTCC\\Controller\\CampusController::editarAction");
+		$app->get('/campus/listar/', "\\SistemaTCC\\Controller\\CampusController::listarAction");
 
 		$app->get('/enviaretapa/', "\\SistemaTCC\\Controller\\EnviarEtapaController::indexAction");
 		$app->get('/enviaretapa/listar/', "\\SistemaTCC\\Controller\\EnviarEtapaController::listarAction");
@@ -76,7 +88,7 @@ class SistemaTCC extends Application {
 		$app->delete('/professor/{id}/', "\\SistemaTCC\\Controller\\ProfessorController::del");
 
 		$app->post('/enviaretapa/',"\\SistemaTCC\\Controller\\EnviarEtapaController::add");
-		
+
 
 		// REST Etapa Status
 		$app->post('/etapa-status/', "SistemaTCC\Controller\EtapaStatusController::add");
@@ -87,17 +99,29 @@ class SistemaTCC extends Application {
 
 		// REST semestre
 		$app->post('/semestre/', "\\SistemaTCC\\Controller\\SemestreController::add");
+		$app->get('/semestre/{id}/', "\\SistemaTCC\\Controller\\SemestreController::find");
 		$app->put('/semestre/{id}/', "\\SistemaTCC\\Controller\\SemestreController::edit");
 		$app->delete('/semestre/{id}/', "\\SistemaTCC\\Controller\\SemestreController::del");
-		
+
+		// REST Etapa Semestre
+		$app->post('/etapa-semestre/', "SistemaTCC\Controller\EtapaSemestreController::add");
+		$app->get('/etapa-semestre/', "SistemaTCC\Controller\EtapaSemestreController::all");
+		$app->get('/etapa-semestre/{id}/', "SistemaTCC\Controller\EtapaSemestreController::find");
+		$app->put('/etapa-semestre/{id}/', "SistemaTCC\Controller\EtapaSemestreController::edit");
+		$app->delete('/etapa-semestre/{id}/', "SistemaTCC\Controller\EtapaSemestreController::del");
+
 		// REST tcc
 		$app->post('/tcc/', "\\SistemaTCC\\Controller\\TccController::add");
 		$app->put('/tcc/{id}/', "\\SistemaTCC\\Controller\\TccController::edit");
 		$app->delete('/tcc/{id}/', "\\SistemaTCC\\Controller\\TccController::del");
-		
-		// Twig Extensions
 
-        $app['twig'] = $app->extend('twig', function ($twig, $app) {
+		// REST Campus
+		$app->post('/campus/', "\\SistemaTCC\\Controller\\CampusController::add");
+		$app->put('/campus/{id}/', "\\SistemaTCC\\Controller\\CampusController::edit");
+		$app->delete('/campus/{id}/', "\\SistemaTCC\\Controller\\CampusController::del");
+
+		// Twig Extensions
+    $app['twig'] = $app->extend('twig', function ($twig, $app) {
 			/**
 			 * Função de extensão do Twig para formatar números de telefone para exibição.
 			 */
