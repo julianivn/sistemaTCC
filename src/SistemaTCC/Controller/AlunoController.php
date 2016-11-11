@@ -32,10 +32,10 @@ class AlunoController {
             ],
             'telefone' => [
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
-								new Assert\Regex([
-									'pattern' => '/^[0-9]+$/i',
-									'message' => 'Seu telefone deve possuir apenas números'
-								]),
+				new Assert\Regex([
+					'pattern' => '/^[0-9]+$/i',
+					'message' => 'Seu telefone deve possuir apenas números'
+				]),
                 new Assert\Length([
                     'min' => 10,
                     'max' => 12,
@@ -46,30 +46,30 @@ class AlunoController {
             'sexo' => [
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
             ],
-						'cgu' => [
-                new Assert\NotBlank(['message' => 'Preencha esse campo']),
-								new Assert\GreaterThan([
-										'value'   => 1,
-										'message' => 'Seu CGU não pode ser um número negativo',
-								]),
+			'cgu' => [
+                
+				new Assert\GreaterThan([
+						'value'   => 1,
+						'message' => 'Seu CGU não pode ser um número negativo',
+				]),
+				new Assert\NotBlank(['message' => 'Preencha esse campo']),
                 new Assert\Length([
-                     'min' => 9,
+                     'min' => 3,
                      'max' => 9,
                      'minMessage' => 'Seu CGU precisa possuir pelo menos {{ limit }} caracteres',
                      'maxMessage' => 'Seu CGU não deve possuir mais que {{ limit }} caracteres'
                 ])
             ],
-						'matricula' => [
-                new Assert\NotBlank(['message' => 'Preencha esse campo']),
-								new Assert\GreaterThan([
-										'value'   => 1,
-										'message' => 'Sua Matrícula não pode ser um número negativo',
-								]),
+			'matricula' => [
+				new Assert\GreaterThan([
+						'value'   => 1,
+						'message' => 'Sua Matrícula não pode ser um número negativo',
+				]),
+				new Assert\NotBlank(['message' => 'Preencha esse campo']),
                 new Assert\Length([
                      'min' => 10,
                      'max' => 10,
-                     'minMessage' => 'Sua Matrícula precisa possuir pelo menos {{ limit }} caracteres',
-                     'maxMessage' => 'Sua Matrícula não deve possuir mais que {{ limit }} caracteres'
+                     'exactMessage' => 'Sua Matrícula deve possuir exatamente {{ limit }} caracteres'
                 ])
             ]
         ];
