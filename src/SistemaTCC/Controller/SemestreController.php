@@ -102,7 +102,7 @@ class SemestreController {
 
     public function edit(Application $app, Request $request, $id) {
 
-        $semestre = $app['orm']->find('\\SistemaTCC\\Model\\Semestre', (int) $id);
+        $semestre = $app['orm']->find('\SistemaTCC\Model\Semestre', (int) $id);
         if (!$semestre) {
           return $app->json(['semestre' => 'Não existe semestre cadastrado'], 400);
         }
@@ -111,8 +111,8 @@ class SemestreController {
             'nome'       => $request->get('nome'),
             'dataInicio' => $request->get('dataInicio'),
             'dataFim'    => $request->get('dataFim'),
-            'tipo'       => $request->get('tipo'),
-            'campus'     => $request->get('campus'),
+            // 'tipo'       => $request->get('tipo'),
+            'campus'     => $request->get('campus')
         ];
 
         $errors = $this->validacao($app, $dados);
@@ -120,7 +120,7 @@ class SemestreController {
             return $app->json($errors, 400);
         }
 
-        $campus = $app['orm']->find('\\SistemaTCC\\Model\\Campus', $request->get('campus'));
+        $campus = $app['orm']->find('\SistemaTCC\Model\Campus', $request->get('campus'));
         if (!$campus) {
             return $app->json(['campus' => 'Não existe campus cadastrado'], 400);
         }
@@ -180,8 +180,8 @@ class SemestreController {
                  'nome'      => '',
                  'datainicio'  => '',
                  'datafim'  => '',
-            'etapa_tcc1'  => [],
-            'etapa_tcc2'  => [],
+                 'etapa_tcc1'  => [],
+                 'etapa_tcc2'  => [],
              ],
         ];
         return $app['twig']->render('semestre/formulario.twig', $dadosParaView);

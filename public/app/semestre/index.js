@@ -3,8 +3,8 @@
 
   const $lista = $('.lista-etapa-js');
   const $formSemestre = $('#form-js');
+  const $formEtapa = $('#etapa-js');
   const $btnSalvarEtapa = $('#btn-salvar-etapa-js');
-  const $btnAlterarEtapa = $('#btn-alterar-etapa-js');
   const urlSemestre = './semestre/';
   const urlEtapa = './etapa-semestre/';
 
@@ -16,6 +16,7 @@
     }
     $('.datepicker').datepicker({
       format: 'yyyy-mm-dd',
+      // format: 'dd/mm/yyyy',
       autoclose: true
     });
   }
@@ -55,23 +56,35 @@
     closeOnCancel: false
   };
 
+  function verifyErrors(elem, arr, err) {
+      const errors = err || {};
+      $.each(arr, function(key, value) {
+          const message = errors[value] || false;
+          const element = elem.find('#' + value);
+          if (message) {
+              element.parent().addClass('has-error').find('.help-block').html(message);
+          } else {
+              element.parent().removeClass('has-error').find('.help-block').html('');
+          }
+      });
+  }
+
   $formSemestre.on('submit', function(e){
     e.preventDefault();
 
+    var dataStart = $formSemestre.find('#dataInicio').val();
+    var dataEnd = $formSemestre.find('#dataFim').val();
+
     const body = {
       nome: $formSemestre.find('#nome').val(),
-      dataInicio: $formSemestre.find('#data-inicio').val(),
-      dataFim: $formSemestre.find('#data-final').val(),
-      // tipo: $formSemestre.find('#campus').val(),
-      campus: $formSemestre.find('#campus').val(),
+      // dataInicio: moment(dataStart, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+      // dataFim: moment(dataEnd, 'DD/MM/YYYY').format('YYYY-MM-DD'),
+      dataInicio: dataStart,
+      dataFim: dataEnd,
+      campus: $formSemestre.find('#campus').val()
     };
 
     const id = $('#id-semestre').val();
-
-    if(id) {
-      body.etapa_tcc1 = pushEtapa($('#etapa-tcc1-js').children());
-      body.etapa_tcc2 = pushEtapa($('#etapa-tcc2-js').children());
-    }
 
     function pushEtapa(elem){
       let arr = [];
@@ -80,14 +93,14 @@
       });
       return arr;
     }
-    console.log(body);
+
     const url = urlSemestre + (id ? id + '/' : '');
     const method = id ? 'PUT' : 'POST';
-    console.log(method);
-    var request = $.ajax({
+    const request = $.ajax({
         url: url,
         type: method,
         dataType: 'json',
+        // contentType: 'application/json',
         data: body
     });
 
@@ -107,7 +120,10 @@
       }
     });
 
-    request.fail(function(data){
+    request.fail(function(err){
+      const errors = err.responseJSON;
+      const verify = ['nome','campus', 'dataInicio', 'dataFim'];
+      verifyErrors($formSemestre,verify , errors);
       swal("Erro!", "Erro ao cadastrar o semestre, tente novamente", "error");
     });
   });
@@ -115,9 +131,16 @@
 
   $('.table').on('click', '.btn-cadastrar-etapa', function(event){
     event.preventDefault();
+    var $inputEtapa = $('#etapa-js .clean');
+    $inputEtapa.val('');
+    $inputEtapa.parent().removeClass('has-error').find('.help-block').html('');
     $('#btn-open-etapa').click();
-    var tccValue = $(this).parent().parent().parent().data('tcc');
-    $('#add-tcc').val(tccValue);
+
+    const tccValue = ($(this).parent().parent().parent().data('tcc') || null);
+    (tccValue) ? $('#add-tcc').val(tccValue) : $('#add-tcc').val('');
+
+    const etapaId = $(this).parent().parent().data('id');
+    if (etapaId) getEtapa(etapaId);
   });
 
 
@@ -150,7 +173,7 @@
           });
         });
 
-        request.fail(function(data){
+        request.fail(function(err){
           swal("Erro!", "Erro ao deletar a etapa, tente novamente", "error");
         });
       } else {
@@ -159,115 +182,70 @@
     });
   });
 
-  $lista.on('click', '.btn-editar-etapa', function(e){
-    e.preventDefault();
-
-    const etapaId = $(this).parent().parent().data('id');
-
-    // GET - busca os dados da etapa e popula no modal
+  function getEtapa(id) { // GET - busca os dados da etapa e popula no modal
     var request = $.ajax({
-        url: urlEtapa + etapaId + '/',
+        url: urlEtapa + id + '/',
         type: 'GET',
         dataType: 'json',
     });
 
     request.done(function(data){
       $('#id-etapa').val(data.id);
-      $('#etapa-edit-nome').val(data.nome);
-      $('#etapa-edit-tipo').val(data.tipo);
-      $('#etapa-edit-peso').val(data.peso);
-      $('#etapa-edit-limite').val(data.dataFim);
-      $('#etapa-edit-descricao').val(data.ordem);
-      $('#etapa-edit-abertura').val(data.dataInicio);
-      $('#edit-tcc').val(data.tcc);
+      $('#etapa-nome').val(data.nome);
+      $('#etapa-tipo').val(data.tipo);
+      $('#etapa-peso').val(data.peso);
+      $('#etapa-dataFim').val(moment(data.dataFim, "YYYY-MM-DD").format('DD/MM/YYYY'));
+      $('#etapa-dataInicio').val(moment(data.dataInicio, "YYYY-MM-DD").format('DD/MM/YYYY'));
+      $('#add-tcc').val(data.tcc);
     });
 
     request.fail(function(data){
-      $('#editar-etapa-js').find('.form-group').hide();
-      $('#editar-etapa-js').html('Houve um problema');
+      $('#etapa-js').find('.form-group').hide();
+      $('#etapa-js').html('Houve um problema');
     });
-  });
-
-
-  $btnAlterarEtapa.on('click', function(e){ // função alterar etapa
-    e.preventDefault();
-
-    const etapaId = $('#id-etapa').val();
-    if(!etapaId) return false;
-
-    const body = {
-      id: etapaId,
-      nome: $('#etapa-edit-nome').val(),
-      tipo: $('#etapa-edit-tipo').val(),
-      peso: $('#etapa-edit-peso').val(),
-      dataFim: $('#etapa-edit-limite').val(),
-      ordem: $('#etapa-edit-descricao').val(),
-      dataInicio: $('#etapa-edit-abertura').val(),
-      semestre: $('#id-semestre').val(),
-      tcc: $('#edit-tcc').val()
-    };
-    console.log(body);
-    swal(swalEditar,
-    function(isConfirm){
-      if (isConfirm) {
-        var request = $.ajax({
-              url: urlEtapa + etapaId + '/',
-              type: 'PUT',
-              dataType: 'json',
-              data: body
-        });
-
-        request.done(function(data){
-          swal({
-           title: "Alterado!",
-           text: "A etapa foi alterada com sucesso!",
-           type: "success",
-           confirmButtonText: "OK"
-          },
-          function(isConfirm){
-           if (isConfirm) {
-             location.reload();
-           }
-          });
-        });
-
-        request.fail(function(data){
-          swal("Erro!", "Erro ao alterar a etapa, tente novamente", "error");
-        });
-      } else {
-        swal("Cancelado", "A etapa não foi alterada!", "error");
-      }
-    });
-  });
+  }
 
   $btnSalvarEtapa.on('click', function(e){ // função cadastrar etapa
     e.preventDefault();
+    const etapaId = $('#id-etapa').val();
+    const url = urlEtapa + (etapaId ? etapaId + '/' : '');
+    const method = etapaId ? 'PUT' : 'POST';
+
+
+    var dataStart = moment($('#etapa-dataInicio').val(), 'DD/MM/YYYY').format('YYYY-MM-DD');
+    console.log(dataStart);
+    var dataEnd = moment($('#etapa-dataFim').val(), 'DD/MM/YYYY').format('YYYY-MM-DD');
+    console.log(dataEnd);
 
     const body = {
-      nome: $('#etapa-add-nome').val(),
-      tipo: $('#etapa-add-tipo').val(),
+      nome: $('#etapa-nome').val(),
+      tipo: $('#etapa-tipo').val(),
       semestre: $('#id-semestre').val(),
-      peso: $('#etapa-add-peso').val(),
-      dataInicio: $('#etapa-add-abertura').val(),
-      dataFim: $('#etapa-add-limite').val(),
-      ordem: $('#etapa-add-descricao').val(),
+      peso: $('#etapa-peso').val(),
+      dataInicio: dataStart,
+      dataFim: dataEnd,
+      ordem: 2,
       tcc: $('#add-tcc').val()
     };
-    console.log(JSON.stringify(body));
+
+    if(etapaId) {
+      body.id = etapaId;
+    }
+
     swal(swalSalvar,
     function(isConfirm){
       if (isConfirm) {
         var request = $.ajax({
-              url: urlEtapa,
-              type: 'POST',
+              url: url,
+              type: method,
               dataType: 'json',
               data: body
         });
 
         request.done(function(data){
           swal({
-           title: "Alterado!",
-           text: "A etapa foi alterada com sucesso!",
+           title: "Cadastrada!",
+           text: "A etapa foi cadastrada com sucesso!",
            type: "success",
            confirmButtonText: "OK"
           },
@@ -278,7 +256,10 @@
           });
         });
 
-        request.fail(function(data){
+        request.fail(function(err){
+          const errors = err.responseJSON;
+          const verify = ['etapa-nome','etapa-tipo','etapa-peso', 'etapa-dataInicio', 'etapa-dataFim'];
+          verifyErrors($formEtapa, verify, errors);
           swal("Erro!", "Erro ao alterar a etapa, tente novamente", "error");
         });
       } else {

@@ -14,7 +14,7 @@ class EtapaSemestreController {
 
     private function validacao($app, $dados) {
         $asserts = [
-            'nome' => [
+            'etapa-nome' => [
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
                 new Assert\Regex([
                     'pattern' => '/^[a-zA-ZÀ-ú ]+$/i',
@@ -27,43 +27,43 @@ class EtapaSemestreController {
                     'maxMessage' => 'Seu nome não deve possuir mais que {{ limit }} caracteres',
                 ])
             ],
-			'tipo' => [
+			'etapa-tipo' => [
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
                 new Assert\Type([
                         'type'    => 'numeric',
                         'message' => 'O valor {{ value }} não é um {{ type }} válido.',
                     ]),
             ],
-			'semestre' => [
+			'etapa-semestre' => [
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
                 new Assert\Type([
                         'type'    => 'numeric',
                         'message' => 'O valor {{ value }} não é um {{ type }} válido.',
                     ]),
             ],
-			'peso' => [
+			'etapa-peso' => [
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
                 new Assert\Type([
                         'type'    => 'numeric',
                         'message' => 'O valor {{ value }} não é um {{ type }} válido.',
                     ]),
             ],
-            'dataInicio' => [
+            'etapa-dataInicio' => [
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
                 new Assert\Date(['message' => 'Preencha a data']),
             ],
-            'dataFim' => [
+            'etapa-dataFim' => [
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
                 new Assert\Date(['message' => 'Preencha a data']),
             ],
-			'ordem' => [
+			'etapa-ordem' => [
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
                 new Assert\Type([
                         'type'    => 'numeric',
                         'message' => 'O valor {{ value }} não é um {{ type }} válido.',
                     ]),
             ],
-			'tcc' => [
+			'etapa-tcc' => [
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
                 new Assert\Type([
                         'type'    => 'numeric',
@@ -83,16 +83,16 @@ class EtapaSemestreController {
         return $retorno;
     }
     public function add(Application $app, Request $request) {
-		    $dados = [
-            'nome'       => $request->get('nome'),
-			      'semestre'	 => $request->get('semestre'),
-			      'tipo'       => $request->get('tipo'),
-            'dataInicio' => $request->get('dataInicio'),
-            'dataFim'    => $request->get('dataFim'),
-            'peso'     	 => $request->get('peso'),
-			      'ordem'		 => $request->get('ordem'),
-			      'tcc'		 => $request->get('tcc')
-        ];
+	    $dados = [
+            'etapa-nome'		=> $request->get('nome'),
+			'etapa-semestre'	=> $request->get('semestre'),
+			'etapa-tipo'       	=> $request->get('tipo'),
+            'etapa-dataInicio' 	=> $request->get('dataInicio'),
+            'etapa-dataFim'     => $request->get('dataFim'),
+            'etapa-peso'     	=> $request->get('peso'),
+			'etapa-ordem'		=> $request->get('ordem'),
+			'etapa-tcc'		 	=> $request->get('tcc')
+    	];
 
         $errors = $this->validacao($app, $dados);
         if (count($errors) > 0) {
@@ -141,16 +141,16 @@ class EtapaSemestreController {
           return $app->json(['etapa' => 'Não existe etapa cadastrada'], 400);
         }
 
-        $dados = [
-            'nome'       => $request->get('nome'),
-			      'semestre'	 => $request->get('semestre'),
-			      'tipo'       => $request->get('tipo'),
-            'dataInicio' => $request->get('dataInicio'),
-            'dataFim'    => $request->get('dataFim'),
-            'peso'     	 => $request->get('peso'),
-			      'ordem'		 => $request->get('ordem'),
-			      'tcc'		 => $request->get('tcc')
-        ];
+		$dados = [
+            'etapa-nome'		=> $request->get('nome'),
+			'etapa-semestre'	=> $request->get('semestre'),
+			'etapa-tipo'       	=> $request->get('tipo'),
+            'etapa-dataInicio' 	=> $request->get('dataInicio'),
+            'etapa-dataFim'     => $request->get('dataFim'),
+            'etapa-peso'     	=> $request->get('peso'),
+			'etapa-ordem'		=> $request->get('ordem'),
+			'etapa-tcc'		 	=> $request->get('tcc')
+    	];
 
         $errors = $this->validacao($app, $dados);
         if (count($errors) > 0) {
@@ -226,59 +226,6 @@ class EtapaSemestreController {
 
     public function indexAction(Application $app, Request $request) {
         return $app->redirect('../etapa/listar');
-    }
-
-    public function cadastrarAction(Application $app, Request $request) {
-        // $db = $app['orm']->getRepository('\SistemaTCC\Model\Campus');
-        // $campus = $db->findAll();
-		//
-        // $dadosParaView = [
-        //      'titulo' => 'Cadastrar Semestre',
-        //      'values' => [
-        //          'campus'   => $campus,
-        //          'nome'      => '',
-        //          'datainicio'  => '',
-        //          'datafim'  => '',
-        //     'etapa_tcc1'  => [],
-        //     'etapa_tcc2'  => [],
-        //      ],
-        // ];
-        // return $app['twig']->render('semestre/formulario.twig', $dadosParaView);
-    }
-
-    public function editarAction(Application $app, Request $request, $id) {
-        $dbSem = $app['orm']->getRepository('\SistemaTCC\Model\Semestre');
-        $semestre = $dbSem->find($id);
-
-        $dbCampus = $app['orm']->getRepository('\SistemaTCC\Model\Campus');
-        $campus = $dbCampus->findAll();
-
-        $dbTipo = $app['orm']->getRepository('\SistemaTCC\Model\EtapaTipo');
-        $tipos = $dbTipo->findAll();
-
-        if (!$semestre) {
-            return $app->redirect('../semestre/listar');
-        }
-
-        $dadosParaView = [
-            'titulo' => 'Editar Semestre: ' .$semestre->getNome(),
-            'id'     => $id,
-            'values' => [
-                'campus'        => $campus,
-                'campusid'      => $semestre->getCampus()->getId(),
-                'nome'          => $semestre->getNome(),
-                'datainicio'    => $semestre->getDataInicio()->format('Y-m-d'),
-                'datafim'       => $semestre->getDataFim()->format('Y-m-d'),
-                'tipos'         => $tipos,
-                'etapa_tcc1'    => [],
-                'etapa_tcc2'    => []
-            ]
-        ];
-        return $app['twig']->render('semestre/formulario.twig', $dadosParaView);
-    }
-
-    public function excluirAction() {
-        return 'Excluir Etapa';
     }
 
     public function listarAction(Application $app) {
