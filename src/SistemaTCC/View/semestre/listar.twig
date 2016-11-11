@@ -27,8 +27,8 @@
             <tr>
                 <td>{{ semestre.getNome() }}</td>
                 <td>{{ semestre.getCampus().getNome() }}</td>
-                <td>{{ semestre.getDataInicio().format('Y-m-d') }}</td>
-				<td>{{ semestre.getDataFim().format('Y-m-d') }}</td>
+                <td>{{ semestre.getDataInicio().format('d/m/Y') }}</td>
+				<td>{{ semestre.getDataFim().format('d/m/Y') }}</td>
                 <td>
 					<div class="pull-right">
 						<a href="/semestre/editar/{{ semestre.getId() }}" class="btn btn-primary">
