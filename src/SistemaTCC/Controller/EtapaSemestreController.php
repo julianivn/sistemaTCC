@@ -187,8 +187,8 @@ class EtapaSemestreController {
     }
 
     public function del(Application $app, Request $request, $id) {
+        $etapa = $app['orm']->find('\\SistemaTCC\\Model\\Etapa', (int) $id);
 
-        $etapa = $app['orm']->find('\\SistemaTCC\\Model\\Etapa', $id);
         if (!$etapa) {
             return $app->json(['etapa' => 'Não existe etapa cadastrada'], 400);
         }
@@ -200,7 +200,7 @@ class EtapaSemestreController {
         catch (\Exception $e) {
           return $app->json(['etapa' => $e->getMessage()], 400);
         }
-        return $app->json(['etapa' => 'Etapa excluido com sucesso']);
+		return $app->json(['etapa' => 'Etapa excluida com sucesso']);
     }
 
     public function find(Application $app, Request $request, $id) {
