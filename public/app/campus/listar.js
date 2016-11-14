@@ -18,7 +18,8 @@ $(function() {
 
         // Caiu aqui, tem erro
         request.fail(function(err) {
-            console.log(err);
+            swal("OPS!","O Campus possui algum vínculo como por exemplo em SEMESTRE, portanto não pode ser removido!" , "error");
+            console.log(err.responseText);
             return false;
         });
     }
