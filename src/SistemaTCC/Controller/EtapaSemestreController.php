@@ -31,21 +31,21 @@ class EtapaSemestreController {
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
                 new Assert\Type([
                         'type'    => 'numeric',
-                        'message' => 'O valor {{ value }} não é um tipo válido para o campo.',
+                        'message' => 'O valor {{ value }} não é numérico.',
                     ]),
             ],
 			'etapa-semestre' => [
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
                 new Assert\Type([
                         'type'    => 'numeric',
-                        'message' => 'O valor {{ value }} não é um tipo válido para o campo.',
+                        'message' => 'O valor {{ value }} não é numérico.',
                     ]),
             ],
 			'etapa-peso' => [
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
                 new Assert\Type([
                         'type'    => 'numeric',
-                        'message' => 'O valor {{ value }} não é um tipo válido para o campo.',
+                        'message' => 'O valor {{ value }} não é numérico.',
                     ]),
             ],
             'etapa-dataInicio' => [
@@ -60,14 +60,14 @@ class EtapaSemestreController {
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
                 new Assert\Type([
                         'type'    => 'numeric',
-                        'message' => 'O valor {{ value }} não é um tipo válido para o campo.',
+                        'message' => 'O valor {{ value }} não é numérico.',
                     ]),
             ],
 			'etapa-tcc' => [
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
                 new Assert\Type([
                         'type'    => 'numeric',
-                        'message' => 'O valor {{ value }} não é um tipo válido para o campo.',
+                        'message' => 'O valor {{ value }} não é numérico.',
                     ]),
             ],
         ];
