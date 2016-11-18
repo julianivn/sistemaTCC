@@ -17,6 +17,7 @@ class EtapaSemestreController {
             'etapa-nome' => [
                 new Assert\NotBlank(['message' => 'Preencha esse campo']),
                 new Assert\Regex([
+                    'pattern' => '/^[a-zA-ZÀ-ú0-9 ]+$/i',
                     'message' => 'Seu nome deve possuir apenas letras'
                 ]),
                 new Assert\Length([
