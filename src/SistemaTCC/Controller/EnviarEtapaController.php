@@ -13,7 +13,12 @@ class EnviarEtapaController {
 	private function validacao($app, $dados) {
 		$asserts = [
 			'arquivo' => [
-				new Assert\NotBlank(['message' => 'Selecione um arquivo']),
+				new Assert\File([
+					'mimeTypes' => ['application/pdf','application/x-pdf','application/msword'],
+					'mimeTypesMessage' => 'Somente os formatos doc e pdf são aceitos.',
+					'disallowEmptyMessage' => 'Selecione um arquivo',
+					'uploadErrorMessage' => 'Não foi possível realizar o upload dos arquivos, tente novamente mais tarde.']
+				),
 			]
 		];
 		$constraint = new Assert\Collection($asserts);
@@ -29,29 +34,34 @@ class EnviarEtapaController {
 	}
 
 	public function add(Application $app, Request $request) {
-
+		$file = $request->files->get('arquivo');
+		
+		
 		$dados = [
-			'arquivo' => $request->get('arquivo')
+			'arquivo' => $file
 		];
-
-		$errors = $this->validacao($app, $dados);
-		if (count($errors) > 0) {
-			return $app->json($errors, 400);
-		}
+		
+		//$errors = $this->validacao($app, $dados);
+		//if (count($errors) > 0) {
+		//	return $app->json($errors, 400);
+		//}
+		$caminho = 'files/semestre';
+		$tipo = $file->getClientOriginalExtension(); 
+		$nome = md5(uniqid()) . '.' . $tipo;
+		$file->move(__DIR__ . '/../../../' . $caminho, $nome);
+		
 		$etapaEntrega = new \SistemaTCC\Model\EtapaEntrega();
 		$etapaEntregaArquivo = new \SistemaTCC\Model\EtapaEntregaArquivo();
 		$etapa = $app['orm']->find('\SistemaTCC\Model\Etapa', $request->get('etapa'));
-		$aluno = $app['orm']->find('\SistemaTCC\Model\Aluno', $request->getSession()->get('alunoId')); //Verificar como será armazenado as informações do usuário na sessão
+		$aluno = $app['orm']->find('\SistemaTCC\Model\Aluno', 1);//$request->getSession()->get('alunoId')); //Verificar como será armazenado as informações do usuário na sessão
 		$etapaStatus = $app['orm']->find('\SistemaTCC\Model\EtapaStatus', 1); //Verificar qual será o status padrão
-		$tipo = ''; //IMPLEMENTAR - Não implementado upload de arquivos
-		$caminho = ''; //IMPLEMENTAR - Não implementado upload de arquivos
-
-		$etapaEntrega->setData(new DateTime(time()))
+		
+		$etapaEntrega->setData(new DateTime())
 				->setAluno($aluno)
 				->setEtapa($etapa)
 				->setEtapaStatus($etapaStatus);
 
-		$etapaEntregaArquivo->setNome($request->get('nome'))
+		$etapaEntregaArquivo->setNome($nome)
 				->setTipo($tipo)
 				->setCaminho($caminho)
 				->setEtapaEntrega($etapaEntrega);
@@ -71,11 +81,22 @@ class EnviarEtapaController {
 
 	public function listarAction(Application $app, Request $request) {
 		$semestre = 1; //$request->getSession()->get('semestreId'); //Id Semestre das etapas a serem listadas (Verificar como será armazenado as informações de sessão)
+		$tcc = 1;
 		$db = $app['orm']->getRepository('\SistemaTCC\Model\Etapa');
-		$etapas = $db->findBy(array('semestre' => $semestre));
+		$etapas = $db->findBy(array('semestre' => $semestre,'tcc' => $tcc));
+		
+		$etapas_status = array();
+		foreach($etapas as $etapa){
+			$etapa_entrega = $app['orm']->getRepository('\SistemaTCC\Model\EtapaEntrega')->findOneByEtapa($etapa->getId());
+			if($etapa_entrega!=''){
+				$etapas_status[$etapa->getId()] = $etapa_entrega->getEtapaStatus();
+			}
+		}
+		
 		$dadosParaView = [
 			'titulo' => 'Etapas',
 			'etapas' => $etapas,
+			'etapas_status' => $etapas_status,
 			'data_atual' => (new DateTime())
 		];
 		return $app['twig']->render('enviaretapa/listar.twig', $dadosParaView);
